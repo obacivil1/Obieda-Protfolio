@@ -16,19 +16,13 @@ node_modules/
 Protofolio/Projects/
 Protofolio/Reports/
 
-# Old root-level portfolio binaries
+# Portfolio binaries
 /Protofolio/*.pdf
 /Protofolio/*.pbix
 /Protofolio/*.png
 /Protofolio/*.jpg
 
-# Personal photos
-My Picture/
-
-# Notes
-cv_projects.txt
-
-# Old CV PDFs (except the current one)
+# Old CV PDFs (track only the current ones)
 /CV/*.pdf
 !/CV/Obieda_Omari_CV_ATS.pdf
 !/CV/Obieda_Omari_Senior_Planning_Lead_CV.pdf
