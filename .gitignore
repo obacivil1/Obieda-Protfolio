@@ -31,3 +31,4 @@ cv_projects.txt
 # Old CV PDFs (except the current one)
 /CV/*.pdf
 !/CV/Obieda_Omari_CV_ATS.pdf
+!/CV/Obieda_Omari_Senior_Planning_Lead_CV.pdf
