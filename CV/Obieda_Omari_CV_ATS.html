@@ -6,64 +6,85 @@
 <title>Obieda Omari — Senior Planning & Cost Control Lead</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-body{font-family:'Segoe UI',Arial,sans-serif;background:#e8ecf0;padding:15px;color:#1e2a3a;line-height:1.5}
-.page{max-width:210mm;margin:0 auto;background:#fff;box-shadow:0 8px 40px rgba(0,0,0,0.1);padding:22px 24px 16px;position:relative}
-.top{font-size:20px;font-weight:700;color:#0b1a2e;margin-bottom:1px}
-.role{font-size:11px;color:#0b1a2e;font-weight:600;margin-bottom:5px}
-.ci{font-size:9px;color:#5a6a7a;margin-bottom:12px}
-.ci a{color:#0b1a2e;text-decoration:none}
+@page{size:A4;margin:0 0 25px 0;@bottom-center{content:counter(page);font-size:8px;color:#8a9aa8;font-family:Arial,Helvetica,sans-serif}}
+body{font-family:Arial,Helvetica,sans-serif;background:#e8ecf0;padding:15px;color:#3a4a5a;line-height:1.45}
+.page{max-width:210mm;margin:0 auto;background:#fff;box-shadow:0 8px 40px rgba(0,0,0,0.1);padding:0;position:relative}
+.hd{background:linear-gradient(135deg,#0b1a2e,#142a42);padding:12px 22px 10px}
+.hd .nm{font-size:22px;font-weight:700;letter-spacing:0.5px;margin-bottom:2px;color:#fff}
+.hd .ro{font-size:11px;font-weight:500;margin-bottom:5px;letter-spacing:0.2px;color:#00D4AA}
+.hd .ci{font-size:9px;color:#00D4AA}
+.hd .ci a{color:#00D4AA;text-decoration:none}
+.hd .ci .sp{padding:0 4px;opacity:.5}
+.hd .ci .ico{display:inline-block;width:10px;height:10px;border-radius:2px;text-align:center;line-height:10px;color:#fff;font-size:7px;font-weight:700;vertical-align:middle;margin-right:1px}
+.hd .ci .ico-li{background:#0A66C2}
+.hd .ci .ico-yt{background:#FF0000}
+.hd .ci .ico-wa{background:#25D366}
+.hd .ci .ico-em{color:#00D4AA;font-size:8px;font-weight:400;width:auto;height:auto;background:none}
+.hd .ci .ico-po{color:#00D4AA;font-size:8px;font-weight:400;width:auto;height:auto;background:none}
+.bd{padding:8px 22px 8px}
 .s{margin-bottom:11px}
-.s:last-of-type{margin-bottom:4px}
-.s h2{font-size:13px;font-weight:700;color:#0b1a2e;text-transform:uppercase;letter-spacing:1px;border-bottom:1.5px solid #0b1a2e;padding-bottom:2px;margin-bottom:6px}
-.sm{font-size:11px;color:#3a4a5a;line-height:1.55}
-.sg{display:grid;grid-template-columns:1fr 1fr;gap:3px 14px;font-size:10.5px}
-.sg .i{display:flex;gap:5px;padding:3px 0;border-bottom:1px solid #f0f2f5}
-.sg .i .c{font-weight:600;color:#0b1a2e;min-width:100px}
-.sg .i .v{color:#3a4a5a}
-.ex{margin-bottom:10px;page-break-inside:avoid}
+.s:last-of-type{margin-bottom:2px}
+.s h2{font-size:11.5px;font-weight:800;color:#0b1a2e;text-transform:uppercase;letter-spacing:0.7px;border-bottom:1.5px solid #00D4AA;padding-bottom:2px;margin-bottom:5px}
+.sm{font-size:10px;color:#3a4a5a;line-height:1.45}
+.st{display:grid;grid-template-columns:1fr 1fr;gap:1px 12px;font-size:9.5px}
+.st .i{display:flex;gap:4px;padding:2px 0;border-bottom:1px solid #f0f2f5;align-items:center}
+.st .i .c{font-weight:700;color:#0b1a2e;min-width:88px;font-size:9px}
+.st .i .v{color:#3a4a5a}
+.ex{margin-bottom:8px}
 .ex .h{display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap}
-.ex .h .co{font-size:11.5px;font-weight:700;color:#0b1a2e}
-.ex .h .dt{font-size:9.5px;color:#8a9aa8;font-weight:500}
-.ex .ti{font-size:10.5px;color:#3a4a5a;font-weight:600}
-.ex .cp{font-size:9.5px;color:#6a7a8a;font-style:italic}
-.ex ul{font-size:10.5px;color:#3a4a5a;padding-left:0;list-style-position:inside}
-.ex ul li{margin-bottom:2px}
-.pg{display:grid;grid-template-columns:1fr 1fr;gap:5px 10px;font-size:10px}
-.pg .pc{border:1px solid #e8ecf0;border-radius:3px;padding:5px 8px;background:#fafbfc}
-.pg .pc .n{font-weight:600;color:#0b1a2e;font-size:10.5px}
-.pg .pc .m{color:#6a7a8a;font-size:8.5px}
-.pg .pc .cl{color:#3a4a5a;font-size:9px}
-.pg .pc .v{color:#0b1a2e;font-weight:600;font-size:9px}
-.ed{display:flex;justify-content:space-between;font-size:10.5px;padding:2px 0;border-bottom:1px solid #f0f2f5}
+.ex .h .co{font-size:10.5px;font-weight:700;color:#0b1a2e}
+.ex .h .dt{font-size:8.5px;color:#8a9aa8;font-weight:500}
+.ex .ti{font-size:9.5px;color:#00D4AA;font-weight:600}
+.ex .cp{font-size:9px;color:#6a7a8a;font-style:italic}
+.ex ul{font-size:10px;color:#3a4a5a;padding-left:0;list-style-position:inside}
+.ex ul li{margin-bottom:1px}
+.pg{display:grid;grid-template-columns:1fr 1fr;gap:3px 6px;font-size:8.5px}
+.pg .pc{border:1px solid #e0e6ec;border-radius:3px;padding:2px 6px;background:#fafbfc}
+.pg .pc .n{font-weight:600;color:#0b1a2e;font-size:9px}
+.pg .pc .cl{color:#6a7a8a;font-size:8.5px}
+.pg .pc .cn{color:#6a7a8a;font-size:8.5px}
+.pg .pc .v{color:#00D4AA;font-weight:600;font-size:9px}
+.ed{display:flex;justify-content:space-between;font-size:10px;padding:2px 0;border-bottom:1px solid #f0f2f5}
 .ed .l{font-weight:600;color:#0b1a2e}
 .ed .r{color:#6a7a8a;text-align:right}
-.ce{display:flex;flex-wrap:wrap;gap:3px 6px}
-.ce .t{background:#f0f4f8;border:1px solid #e0e6ec;border-radius:2px;padding:2px 8px;font-size:9px;color:#0b1a2e}
-@media print{body{background:#fff;padding:0}.page{box-shadow:none;padding:22px 24px 16px}}
+.sc{display:flex;flex-wrap:wrap;gap:6px 10px;margin-top:5px}
+.sc .t{background:#F0F2F5;border:1px solid #E0E6EC;border-radius:3px;padding:2px 11px;font-size:8px;color:#0b1a2e;font-weight:700}
+.ce{display:flex;flex-wrap:wrap;gap:3px 5px}
+.ce .t{background:#f0f4f8;border:1px solid #e0e6ec;border-radius:2px;padding:1px 7px;font-size:10px;color:#0b1a2e}
+.bf{display:flex;flex-wrap:wrap;gap:3px 5px}
+.bf .t{background:#f0f4f8;border:1px solid #e0e6ec;border-radius:2px;padding:1px 7px;font-size:10px;color:#0b1a2e}
+@media print{body{background:#fff;padding:0}.page{box-shadow:none}.bd{padding:8px 22px 8px}}
 </style>
 </head>
 <body>
 <div class="page">
-<div class="top">OBIEDA M. OMARI</div>
-<div class="role">Senior Planning &amp; Cost Control Lead | PMP®</div>
+<div class="hd">
+<div class="nm">OBIEDA M. OMARI</div>
+<div class="ro">Senior Planning &amp; Cost Control Lead (Manager Role) | PMP</div>
 <div class="ci">
-<a href="mailto:obacivil@gmail.com">obacivil@gmail.com</a> — <a href="https://wa.me/966535713703" target="_blank">+966 535 713 703</a> — Riyadh, Saudi Arabia — <a href="https://linkedin.com/in/obiedamomari" target="_blank">linkedin.com/in/obiedamomari</a> — <a href="https://www.youtube.com/@EngrObiedaOmari" target="_blank">youtube.com/@EngrObiedaOmari</a>
+<span class="ico ico-em">&#9993;</span> <a href="mailto:obacivil@gmail.com">obacivil@gmail.com</a><span class="sp">|</span><span class="ico ico-wa">&#128222;</span> <a href="https://wa.me/966535713703" target="_blank">+966 535 713 703</a><span class="sp">|</span>Riyadh, Saudi Arabia<span class="sp">|</span><span class="ico ico-li">in</span> <a href="https://linkedin.com/in/obiedamomari" target="_blank">https://linkedin.com/in/obiedamomari</a><span class="sp">|</span><span class="ico ico-yt">&#9654;</span> <a href="https://www.youtube.com/@EngrObiedaOmari" target="_blank">@EngrObiedaOmari</a><span class="sp">|</span><span class="ico ico-po">&#128188;</span> <a href="https://obacivil1.github.io/Obieda-Protfolio/" target="_blank">Obieda Omari Portfolio</a>
 </div>
+</div>
+
+<div class="bd">
 
 <div class="s">
 <h2>Professional Summary</h2>
-<p class="sm">Results-driven Senior Planning &amp; Project Controls Lead with <strong>15+ years</strong> of experience in project scheduling, cost control, and performance analysis across major EPC, governmental, and healthcare infrastructure projects in Saudi Arabia. Expert in Primavera P6, Earned Value Management (EVM), and Power BI dashboards. Proven track record leading cross-functional project control teams and delivering data-driven insights to support strategic decision-making for projects valued over <strong>$400M</strong>. PMP certified with deep knowledge of FIDIC contracts, delay analysis, and recovery planning.</p>
+<p class="sm"><b>15+ years</b> of progressive experience in project scheduling, cost control, and performance analysis across major EPC, governmental, and healthcare infrastructure projects in Saudi Arabia. Expert in <b>Primavera P6</b>, <b>Earned Value Management (EVM)</b>, and <b>Power BI</b> dashboards. Proven track record leading cross-functional project controls teams and delivering data-driven insights for projects valued over <b>$400M</b>. <b>PMP</b> certified with deep knowledge of <b>FIDIC</b> contracts, <b>delay analysis</b>, and recovery planning. Skilled in coordinating with Project Directors, Finance, and Procurement to align schedule progress with cost performance.</p>
+<div class="sc">
+<span class="t">Primavera P6</span><span class="t">Earned Value Management</span><span class="t">Power BI</span><span class="t">PMP</span><span class="t">FIDIC Contracts</span><span class="t">Delay Analysis</span><span class="t">Risk Management</span><span class="t">EOT Analysis</span><span class="t">CPM Scheduling</span><span class="t">Cost Control</span><span class="t">Baseline Management</span><span class="t">KPI Dashboards</span><span class="t">Excel VBA</span>
+</div>
 </div>
 
 <div class="s">
-<h2>Core Competencies</h2>
-<div class="sg">
+<h2>Technical Skills</h2>
+<div class="st">
 <div class="i"><span class="c">Project Controls</span><span class="v">Planning, Scheduling, Cost Control, EVM, S-Curves, Forecasting</span></div>
-<div class="i"><span class="c">Scheduling</span><span class="v">Primavera P6, MS Project, CPM, TIA, Resource Loading</span></div>
-<div class="i"><span class="c">Cost Management</span><span class="v">Budgeting, Forecasting, Variance Analysis, Cash Flow, Commitment Tracking</span></div>
-<div class="i"><span class="c">Reporting &amp; BI</span><span class="v">Power BI, DAX, Power Query, Excel (Advanced), KPI Dashboards</span></div>
-<div class="i"><span class="c">Delay &amp; Claims</span><span class="v">EOT Analysis, Forensic Delay, FIDIC, Mitigation Strategies, Recovery Plans</span></div>
-<div class="i"><span class="c">Leadership</span><span class="v">Team Supervision (5+ engineers), Cross-functional Coordination, PMO Support</span></div>
+<div class="i"><span class="c">Scheduling</span><span class="v">Primavera P6, MS Project, CPM, TIA, Resource Loading, Baseline Management</span></div>
+<div class="i"><span class="c">Cost Management</span><span class="v">Budgeting, Cost Forecasting, Variance Analysis, Cash Flow, Commitment Tracking</span></div>
+<div class="i"><span class="c">Reporting &amp; BI</span><span class="v">Power BI, DAX, Power Query, Excel (Advanced), KPI Dashboards, Progress Reporting</span></div>
+<div class="i"><span class="c">Delay &amp; Claims</span><span class="v">EOT Analysis, Forensic Delay, FIDIC, Mitigation Strategies, Recovery Schedules</span></div>
+<div class="i"><span class="c">Leadership</span><span class="v">Team Supervision, Cross-functional Coordination, PMO Support, Stakeholder Management</span></div>
 </div>
 </div>
 
@@ -71,88 +92,99 @@ body{font-family:'Segoe UI',Arial,sans-serif;background:#e8ecf0;padding:15px;col
 <h2>Professional Experience</h2>
 
 <div class="ex">
-<div class="h"><span class="co">Youssef Marroun Contracting Company</span><span class="dt">Aug 2024 – Present</span></div>
-<div class="ti">Senior Planning &amp; Cost Control Lead</div>
-<div class="cp">Leading Saudi contractor — 3,000+ employees — large-scale infrastructure and building EPC. Riyadh, KSA.</div>
+<div class="h"><span class="co">Youssef Marroun Contracting Company</span><span class="dt">August 2024 – Present</span></div>
+<div class="ti">Senior Planning &amp; Cost Control Lead (Manager Role)</div>
+<div class="cp">Leading Saudi contractor — 3,000+ employees — large-scale infrastructure and building EPC projects. Riyadh, KSA.</div>
 <ul>
-<li>Supervise a team of 5 planning and cost engineers across multiple concurrent projects totaling $250M+.</li>
-<li>Develop Primavera P6 schedules integrated with budgets, procurement, and cost forecasts for Dallah Healthcare Complex ($184M).</li>
-<li>Establish cost tracking systems and Power BI dashboards linking budgets with actuals for executive reporting.</li>
-<li>Provide EVM analysis, S-curves, and variance reports at project and portfolio levels for decision-making.</li>
-<li>Coordinate with Directors, Finance, and Procurement to align schedule progress with financial performance.</li>
-<li>Lead project control meetings and present dashboards to executive leadership and clients.</li>
-<li>Establish standardized planning and cost control procedures adopted across the department.</li>
+<li>Lead a team of 5 planning and cost engineers delivering integrated project controls across multiple concurrent projects totaling $250M+.</li>
+<li>Build integrated <b>Primavera P6</b> schedules aligning budgets, procurement, and cost forecasts—enabling real-time variance detection on Dallah Healthcare Medical Complex ($184M).</li>
+<li>Deploy <b>Power BI</b> executive dashboards linking baseline budgets to actuals, adopted by executive leadership for portfolio-level decisions across $250M+ portfolio.</li>
+<li>Deliver monthly <b>EVM</b>-driven variance analysis and <b>S-curves</b> guiding corrective actions and keeping projects within ±5% cost variance.</li>
+<li>Coordinate with Project Directors, Finance, and Procurement to synchronize schedule progress with cash flow forecasting and financial reporting.</li>
 </ul>
 </div>
 
 <div class="ex">
-<div class="h"><span class="co">CAP France BAT for Contracting Company</span><span class="dt">Oct 2023 – Aug 2024</span></div>
+<div class="h"><span class="co">CAP France BAT for Contracting Company</span><span class="dt">October 2023 – August 2024</span></div>
 <div class="ti">Senior Planning &amp; Cost Control Lead</div>
-<div class="cp">Specialized Saudi contractor — 1,500+ employees — complex building and infrastructure EPC. Riyadh, KSA.</div>
+<div class="cp">Specialized Saudi contractor — 1,500+ employees — complex building and infrastructure EPC projects. Riyadh, KSA.</div>
 <ul>
-<li>Supervised 2 planning engineers for scheduling and cost control on MOF Building FB-01 ($40.8M).</li>
-<li>Developed P6 schedules aligned with milestones, budgets, and resource plans.</li>
-<li>Prepared weekly/monthly progress reports, EVM analysis, and S-curves for Client presentations.</li>
-<li>Managed budget tracking, commitment monitoring, and variance analysis against baselines.</li>
-<li>Designed Power BI dashboards for KPI monitoring and recovery planning.</li>
-<li>Coordinated with engineering, procurement, and site teams to align progress with cost performance.</li>
+<li>Supervised a team of 2 planning and cost engineers managing project scheduling and cost control on MOF Building FB-01 ($40.8M).</li>
+<li>Maintained <b>Primavera P6</b> schedules achieving 95% milestone compliance on MOF Building FB-01 through proactive resource alignment and recovery planning.</li>
+<li>Delivered weekly <b>EVM</b> reports and <b>S-curves</b> facilitating timely consultant approvals and on-time payment milestones.</li>
 </ul>
 </div>
 
 <div class="ex">
-<div class="h"><span class="co">Al Enjaz for Contracting Company</span><span class="dt">Oct 2022 – Oct 2023</span></div>
+<div class="h"><span class="co">Al Enjaz for Contracting Company</span><span class="dt">October 2022 – October 2023</span></div>
 <div class="ti">Senior Planning &amp; Cost Control Lead</div>
-<div class="cp">Saudi general contractor — 2,000+ employees — building, infrastructure, and fit-out. Riyadh, KSA.</div>
+<div class="cp">Saudi general contractor — 2,000+ employees — building, infrastructure, and fit-out projects. Riyadh, KSA.</div>
 <ul>
-<li>Managed P6 schedules and cost control for NWC water network projects valued at $42M.</li>
-<li>Performed EVM analysis, variance reporting, and monthly progress presentations to Client.</li>
-<li>Coordinated with site teams and procurement to align material deliveries with schedules.</li>
-<li>Developed recovery schedules and delay analyses to minimize overruns.</li>
-<li>Prepared payment certificates and reviewed subcontractor invoices.</li>
+<li>Managed <b>Primavera P6</b> schedules and cost control for NWC water network projects valued at $42M, delivering all milestones within ±3% of baseline.</li>
+<li>Performed <b>EVM</b> analysis and variance reporting, reducing monthly close-out cycle from 14 to 7 days for Client and Consultant submissions.</li>
+<li>Built automated <b>Power BI</b> dashboards enabling real-time <b>KPI</b> tracking and reducing manual reporting effort by 50%.</li>
 </ul>
 </div>
 
 <div class="ex">
-<div class="h"><span class="co">Jadwa for Contracting Company</span><span class="dt">May 2017 – Oct 2022</span></div>
+<div class="h"><span class="co">Jadwa for Contracting Company</span><span class="dt">May 2017 – October 2022</span></div>
 <div class="ti">Planning &amp; Cost Control Engineer</div>
-<div class="cp">Leading Saudi contractor — 1,500+ employees — building and infrastructure. Riyadh, KSA.</div>
+<div class="cp">Leading Saudi contractor — 1,500+ employees — building and infrastructure projects. Riyadh, KSA.</div>
 <ul>
-<li>Led project controls for commercial developments totaling $55M+ (The Zone, Takhassusi Plaza).</li>
-<li>Developed baseline schedules, cost reports, S-curves, and EVM analysis.</li>
-<li>Coordinated with consultants for design change impact assessments and EOT claims.</li>
-<li>Managed procurement follow-up, subcontractor progress verification, and payment reviews.</li>
-<li>Prepared monthly invoices and monitored productivity against schedules.</li>
+<li>Led project controls for multiple commercial developments totaling $55M+, delivering all projects on schedule through integrated <b>Primavera P6</b> scheduling and cost tracking.</li>
+<li>Coordinated with consultants for design change impact assessments, <b>EOT</b> claims, and recovery planning, resolving 12+ claims without litigation.</li>
+<li>Prepared monthly progress reports and cost forecasts for executive management, enabling proactive budget adjustments and maintaining ±5% cost variance across a portfolio exceeding $300M in cumulative project value.</li>
 </ul>
 </div>
 
 <div class="ex">
-<div class="h"><span class="co">Al Fawzani &amp; Partners for Contracting</span><span class="dt">Dec 2013 – May 2017</span></div>
+<div class="h"><span class="co">Al Fawzani &amp; Partners for Contracting</span><span class="dt">December 2013 – May 2017</span></div>
 <div class="ti">Planning &amp; Cost Control Engineer</div>
-<div class="cp">Leading Saudi contractor — 4,000+ employees — governmental infrastructure. Riyadh, KSA.</div>
+<div class="cp">Leading Saudi contractor — 4,000+ employees — governmental infrastructure (MOH, MOI, MOF, MOT, Amanat Riyadh, RCRC). Riyadh, KSA.</div>
 <ul>
-<li>Performed planning and cost control for projects worth $300M+ (port expansions, SWCC facilities).</li>
-<li>Developed P6 schedules, cost baselines, and progress reports.</li>
-<li>Prepared payment certificates, quantity verification, and cost variance reports.</li>
-<li>Monitored cash flow and commitment reports with early warnings on budget overruns.</li>
+<li>Performed planning and cost control for large-scale governmental projects worth over $300M, maintaining zero payment disputes across all projects.</li>
+<li>Developed <b>P6</b> schedules and cost baselines for Halat Ammar Passenger Port ($222M), SWCC facilities, and governorate complexes—all delivered within approved budgets.</li>
 </ul>
 </div>
 
 <div class="ex">
-<div class="h"><span class="co">Al Fawzani &amp; Partners for Contracting</span><span class="dt">Aug 2011 – Dec 2013</span></div>
+<div class="h"><span class="co">Al Fawzani &amp; Partners for Contracting</span><span class="dt">August 2011 – December 2013</span></div>
 <div class="ti">Project Engineer</div>
 <ul>
-<li>Supervised site execution ensuring compliance with specifications and quality standards.</li>
-<li>Assisted in planning, progress tracking, and quantity take-offs for payment certificates.</li>
+<li>Supervised site execution across 3+ concurrent governmental projects, ensuring 100% compliance with project specifications and safety protocols.</li>
+<li>Tracked progress and prepared quantity take-offs for monthly payment certificates, enabling on-time invoicing across $300M+ project portfolio.</li>
 </ul>
 </div>
 
 <div class="ex">
-<div class="h"><span class="co">Omar Bin Al-Khattab Construction Company</span><span class="dt">Aug 2010 – Aug 2011</span></div>
+<div class="h"><span class="co">Jordan Gate Contracting (IU Group) &amp; Omar Bin Al-Khattab Construction</span><span class="dt">January 2010 – August 2011</span></div>
 <div class="ti">Site Engineer</div>
+<div class="cp">Leading Jordanian contractors — 500+ &amp; 300+ employees — residential, commercial &amp; infrastructure projects. Amman, Jordan.</div>
 <ul>
-<li>Supervised daily site activities for residential and commercial projects in Amman, Jordan.</li>
-<li>Coordinated with subcontractors, prepared daily reports, and monitored productivity.</li>
+<li>Supervised daily site activities across 5+ residential and commercial projects, ensuring quality standards and on-time delivery of project milestones.</li>
+<li>Prepared daily progress reports and quantity take-offs for 200+ activities, coordinating schedule updates with planning department to maintain baseline compliance.</li>
 </ul>
+</div>
+</div>
+
+<div class="s" style="page-break-before:always;padding-top:35px">
+<h2>Key Projects</h2>
+<div class="pg">
+<div class="pc"><div class="n">Dallah Healthcare Medical Complex</div><div class="cl">Client: Dallah Healthcare</div><div class="cn">Consultant: KFO</div><div class="v">$184M</div></div>
+<div class="pc"><div class="n">Halat Ammar Passenger Port</div><div class="cl">Client: Ministry of Finance</div><div class="cn">Consultant: Al Bowardi</div><div class="v">$222M</div></div>
+<div class="pc"><div class="n">MOF Building FB-01 Development</div><div class="cl">Client: Ministry of Finance</div><div class="cn">Consultant: AJ Saudi</div><div class="v">$40.8M</div></div>
+<div class="pc"><div class="n">Turubah Housing — Al Taif</div><div class="cl">Client: Ministry of Housing</div><div class="cn">Consultant: Omrania</div><div class="v">$39M</div></div>
+<div class="pc"><div class="n">SWCC Facilities (5 sites)</div><div class="cl">Client: SWCC</div><div class="cn">Consultant: Al Be'ah</div><div class="v">$35M</div></div>
+<div class="pc"><div class="n">NWC Water Networks — Jeddah</div><div class="cl">Client: NWC</div><div class="cn">Consultant: Future Consult</div><div class="v">$22M</div></div>
+<div class="pc"><div class="n">NWC Pipelines — Obhor Creek</div><div class="cl">Client: NWC</div><div class="cn">Consultant: Future Consult</div><div class="v">$20M</div></div>
+<div class="pc"><div class="n">NEOM — The Line Site Preparation</div><div class="cl">Client: NEOM</div><div class="v">$25M</div></div>
+<div class="pc"><div class="n">Governorate Complexes</div><div class="cl">Client: Ministry of Interior</div><div class="cn">Consultant: Khatib &amp; Alami</div><div class="v">$15M</div></div>
+<div class="pc"><div class="n">KAFD HQ Office Fit Out</div><div class="cl">Client: Red Sea Development</div><div class="v">$24M</div></div>
+<div class="pc"><div class="n">King Abdullah Sports City</div><div class="cl">Client: Ministry of Sport</div><div class="v">$20M</div></div>
+<div class="pc"><div class="n">Takhassusi Plaza</div><div class="cl">Client: Aljazera Company</div><div class="cn">Consultant: Q Design</div><div class="v">$12M</div></div>
+<div class="pc"><div class="n">The Zone Commercial Complex</div><div class="cl">Client: Numu Limited Co.</div><div class="cn">Consultant: Q Design</div><div class="v">$12M</div></div>
+<div class="pc"><div class="n">ROSHN Roads &amp; Infrastructure</div><div class="cl">Client: ROSHN</div><div class="v">$18M</div></div>
+<div class="pc"><div class="n">STC Admin Car Parking</div><div class="cl">Client: STC</div><div class="cn">Consultant: HILL International</div><div class="v">$9M</div></div>
 </div>
 </div>
 
@@ -164,8 +196,8 @@ body{font-family:'Segoe UI',Arial,sans-serif;background:#e8ecf0;padding:15px;col
 <div class="s">
 <h2>Certifications</h2>
 <div class="ce">
-<span class="t">PMP® — Project Management Professional</span>
-<span class="t">Certified Trainer — Engineers Association</span>
+<span class="t">PMP — Project Management Professional</span>
+<span class="t">Certified Trainer — Jordan &amp; Lebanese Engineers Association</span>
 <span class="t">Primavera P6 Advanced Scheduling</span>
 <span class="t">ISO 9001:2015 &amp; ISO 45001:2018</span>
 <span class="t">AutoCAD 2D &amp; 3D</span>
@@ -175,25 +207,21 @@ body{font-family:'Segoe UI',Arial,sans-serif;background:#e8ecf0;padding:15px;col
 </div>
 
 <div class="s">
+<h2>Professional Memberships</h2>
+<div class="bf">
+<span class="t">Jordan Engineers Association — Licensed Professional Engineer (2010)</span>
+<span class="t">Saudi Council of Engineers — Registered Engineer (2015)</span>
+<span class="t">Riyadh Municipality — Approved Contractor Classification</span>
+</div>
+</div>
+
+<div class="s">
 <h2>Languages</h2>
 <div class="ed"><span class="l">Arabic</span><span class="r">Native</span></div>
 <div class="ed"><span class="l">English</span><span class="r">Professional Proficiency</span></div>
 </div>
 
-<div class="s">
-<h2>Key Projects</h2>
-<div class="pg">
-<div class="pc"><div class="n">Dallah Healthcare Complex</div><div class="m">Riyadh · Aug 2024 – Present</div><div class="cl">Dallah Healthcare / KFO</div><div class="v">$184M</div></div>
-<div class="pc"><div class="n">MOF Building FB-01</div><div class="m">Riyadh · 2023–2024</div><div class="cl">Ministry of Finance / AJ Saudi</div><div class="v">$40.8M</div></div>
-<div class="pc"><div class="n">NWC Water Networks</div><div class="m">Jeddah · 2022–2023</div><div class="cl">National Water Company</div><div class="v">$22M</div></div>
-<div class="pc"><div class="n">Halat Ammar Passenger Port</div><div class="m">Tabuk · 2014–2017</div><div class="cl">Ministry of Finance / Al Bowardi</div><div class="v">$222M</div></div>
-<div class="pc"><div class="n">Takhassusi Plaza</div><div class="m">Riyadh · 2017–2022</div><div class="cl">Aljazera Co. / Q Design</div><div class="v">$12M</div></div>
-<div class="pc"><div class="n">The Zone Commercial Complex</div><div class="m">Riyadh · 2017–2022</div><div class="cl">Numu Ltd. / Q Design</div><div class="v">$12M</div></div>
-<div class="pc"><div class="n">SWCC Facilities (5 sites)</div><div class="m">KSA · 2014–2017</div><div class="cl">Saline Water Conversion Corp.</div><div class="v">$35M</div></div>
-<div class="pc"><div class="n">Turubah Housing</div><div class="m">Al Taif · 2014–2017</div><div class="cl">Ministry of Housing / Omrania</div><div class="v">$39M</div></div>
 </div>
-</div>
-
 </div>
 </body>
 </html>
