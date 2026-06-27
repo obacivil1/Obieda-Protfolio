@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Claims & EOT Analysis Report | CER-DAR-2022-003</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap');
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Inter',sans-serif;background:#2a1010;color:#e0c8c8;padding:16px;line-height:1.5}
+.page{max-width:210mm;margin:0 auto 20px;background:#fcf6f6;position:relative;page-break-after:always;overflow:hidden;color:#2a1a1a}
+.pad{padding:28px 36px}
+.pg{position:absolute;bottom:8px;left:50%;transform:translateX(-50%);font-size:8px;color:#9a6a6a;font-family:'Inter',sans-serif;letter-spacing:.5px;background:rgba(252,246,246,0.85);padding:1px 10px;border-radius:8px}
+.fixed-foot{position:fixed;bottom:0;left:0;right:0;background:#2a1010;color:rgba(224,200,200,0.5);padding:3px 20px;display:flex;align-items:center;justify-content:space-between;font-size:7.5px;z-index:999;direction:ltr}
+.fixed-foot .f-sig{display:flex;align-items:center;gap:4px}
+.fixed-foot .f-sig .f-dot{width:5px;height:5px;background:#c0392b;border-radius:50%}
+.fixed-foot .f-sig strong{color:#c0392b;font-size:8px}
+.sb-bar{display:flex;justify-content:space-between;align-items:center;border-top:1px solid #dcc8c8;padding:4px 0 2px;margin-top:14px;font-size:7.5px;color:#9a6a6a}
+.sb-bar .sbn{color:#2a1a1a;font-weight:600}
+.sb-bar .sbr{color:#b08a8a;letter-spacing:.5px}
+.cover{background:linear-gradient(135deg,#1a0808,#2a1010,#3a1818);min-height:100vh;display:flex;flex-direction:column}
+.cover .ct{padding:16px 32px;display:flex;justify-content:space-between;align-items:flex-start}
+.cover .ct .ref{font-size:8.5px;color:rgba(224,200,200,0.12)}
+.cover .ct .cls{padding:2px 12px;border:1px solid rgba(192,57,43,0.25);border-radius:2px;font-size:7.5px;letter-spacing:2px;color:#c0392b}
+.cover .cb{flex:1;display:flex;flex-direction:column;justify-content:center;padding:20px 48px 40px}
+.cover .cb .bge{display:inline-block;background:rgba(192,57,43,0.08);border:1px solid rgba(192,57,43,0.15);padding:4px 18px;font-size:9px;color:#c0392b;letter-spacing:3px;margin-bottom:28px;width:fit-content}
+.cover h1{font-size:26px;font-weight:800;color:#fff;margin-bottom:4px}
+.cover h1 .sub{font-size:13px;font-weight:300;color:rgba(255,255,255,0.2);display:block;margin-top:2px}
+.cover .csub{font-size:12px;color:rgba(255,255,255,0.25);margin-bottom:28px}
+.cover .cm{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;max-width:580px;margin-bottom:28px}
+.cover .cm div{padding:8px 12px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.05)}
+.cover .cm .cml{font-size:7px;color:rgba(224,200,200,0.25);text-transform:uppercase;letter-spacing:1px;margin-bottom:2px}
+.cover .cm .cmv{font-size:11px;color:#fff;font-weight:600;font-family:'JetBrains Mono',monospace}
+.cover .csig{border-top:1px solid rgba(255,255,255,0.05);padding-top:16px}
+.cover .csig .csn{color:#c0392b;font-weight:700;font-size:13px}
+.cover .csig .cst{color:rgba(255,255,255,0.15);font-size:9px}
+h2{font-size:15px;color:#1a0808;margin-bottom:10px;display:flex;align-items:center;gap:8px}
+h2 .on{background:#1a0808;color:#fff;width:22px;height:22px;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700}
+h3{font-size:12px;color:#2a1010;margin:12px 0 6px}
+p{font-size:11px;color:#5a3a3a;margin-bottom:8px}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-bottom:14px}
+.stats .st{background:#f2e4e4;border-radius:4px;padding:10px 6px;text-align:center;border-bottom:3px solid #c0392b}
+.stats .st .sv{font-size:15px;font-weight:800;color:#2a1a1a;font-family:'JetBrains Mono',monospace}
+.stats .st .sl{font-size:7px;color:#6a4a4a;margin-top:2px}
+table{width:100%;border-collapse:collapse;font-size:10px;margin-bottom:12px}
+th{background:#1a0808;color:#f0e0e0;padding:5px 8px;text-align:left;font-weight:600;font-size:9px}
+td{padding:4px 8px;border-bottom:1px solid #dcc8c8}
+tr:nth-child(even){background:#f0e4e4}
+.tag{display:inline-block;padding:1px 6px;border-radius:2px;font-size:7.5px;font-weight:600}
+.tag.r{background:#f8d7da;color:#8a2a1a}
+.tag.y{background:#fff3cd;color:#7a6a2a}
+.tag.g{background:#d4edda;color:#1a6a3a}
+.tag.h{background:#d4e0ff;color:#2a4a8a}
+.claim{background:#fcf6f6;border:1px solid #dcc8c8;border-left:4px solid #c0392b;border-radius:4px;padding:10px 14px;margin-bottom:10px}
+.claim .ch{font-size:10px;font-weight:700;color:#2a1a1a;margin-bottom:2px}
+.claim .ch .cn{color:#c0392b;margin-right:6px}
+.claim .cd{font-size:9px;color:#5a3a3a}
+.claim .cd .amt{color:#c0392b;font-weight:700}
+.timeline{position:relative;margin:14px 0 10px;padding:0}
+.timeline .tl{display:flex;align-items:flex-start;margin-bottom:12px;position:relative}
+.timeline .tl::before{content:'';position:absolute;left:16px;top:22px;bottom:-12px;width:2px;background:#dcc8c8}
+.timeline .tl:last-child::before{display:none}
+.timeline .tl .td{width:32px;text-align:center;font-size:7px;color:#c0392b;font-weight:600;padding-top:2px;flex-shrink:0}
+.timeline .tl .tb{flex:1;background:#f2e4e4;border-radius:4px;padding:6px 10px;margin-left:8px}
+.timeline .tl .tb .tt{font-size:9.5px;font-weight:600;color:#2a1a1a}
+.timeline .tl .tb .tds{font-size:8px;color:#6a4a4a}
+.sig-end{padding:28px 36px}
+.sig-end h2{font-size:15px;color:#1a0808;margin-bottom:4px}
+.sig-end .se-sub{font-size:9px;color:#5a3a3a;margin-bottom:14px}
+.sig-end .rec{background:#f2e4e4;border-radius:4px;padding:10px 14px;margin-bottom:16px;font-size:10px;color:#2a1a1a}
+.sig-end .rec li{margin-bottom:3px;margin-left:14px}
+.sig-boxes{display:flex;gap:20px;justify-content:center}
+.sig-boxes .sb{text-align:center;min-width:160px}
+.sig-boxes .sb .sl{width:70%;height:1px;background:#bbaaaa;margin:4px auto;border-top:1px dashed #9a8a8a}
+.sig-boxes .sb .sn{font-size:12px;font-weight:700;color:#2a1a1a}
+.sig-boxes .sb .sr{font-size:7.5px;color:#5a3a3a}
+.sef{text-align:center;margin-top:12px;padding-top:10px;border-top:1px solid #dcc8c8;font-size:7.5px;color:#9a6a6a}
+@media print{body{background:#fff;padding:0}.page{box-shadow:none;margin:0;page-break-after:always}.fixed-foot{position:fixed;bottom:0!important;background:#2a1010!important;print-color-adjust:exact!important}.cover{min-height:100vh}}
+@media(max-width:768px){.cover .cb{padding:16px}.stats{grid-template-columns:1fr 1fr}.cover .cm{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<!-- PAGE 1: COVER -->
+<div class="page" style="padding:0;background:transparent">
+<div class="cover">
+<div class="ct"><span class="ref">CER-DAR-2022-003 | Rev. A</span><span class="cls">CLAIMS & EOT DOCUMENT</span></div>
+<div class="cb">
+<div class="bge">CLAIMS & EXTENSION OF TIME ANALYSIS</div>
+<h1>THE ZONE RESIDENTIAL COMPLEX<br><span class="sub">Delay Claim Assessment & EOT Evaluation — Q2 2022</span></h1>
+<div class="csub">Reference Period: Jan 2021 – Jun 2022 | Data Date: 30 June 2022</div>
+<div class="cm">
+<div><div class="cml">Claims Submitted</div><div class="cmv">7</div></div>
+<div><div class="cml">Approved EOT to Date</div><div class="cmv">42 Days</div></div>
+<div><div class="cml">Pending EOT</div><div class="cmv" style="color:#c0392b">35 Days</div></div>
+<div><div class="cml">Total Delay Analyzed</div><div class="cmv">89 Days</div></div>
+<div><div class="cml">Employer Responsibility</div><div class="cmv" style="color:#c0392b">52 Days</div></div>
+<div><div class="cml">Contractor Responsibility</div><div class="cmv">37 Days</div></div>
+</div>
+<div class="csig"><div class="csn">Eng. Obieda Omari</div><div class="cst">Senior Planning & Cost Control Lead</div></div>
+</div>
+</div>
+<div class="pg" style="color:rgba(224,200,200,0.12);background:transparent">1 / 10</div>
+</div>
+
+<!-- PAGE 2: SUMMARY -->
+<div class="page">
+<div class="pad">
+<h2><span class="on">1</span> Claims & EOT Executive Summary</h2>
+<p>A total of 7 delay claims have been analyzed using Time Impact Analysis (TIA) methodology. Of these, 4 claims are employer-responsible (totaling 52 days EOT entitlement) and 3 are contractor-responsible (37 days). 42 days have been approved to date; 35 days remain pending employer review.</p>
+<div class="stats">
+<div class="st"><div class="sv">7</div><div class="sl">Total Claims Filed</div></div>
+<div class="st"><div class="sv">42d</div><div class="sl">EOT Approved</div></div>
+<div class="st"><div class="sv">35d</div><div class="sl">EOT Pending</div></div>
+<div class="st"><div class="sv">$2.14M</div><div class="sl">Claimed Amount</div></div>
+</div>
+<div style="background:#f2e4e4;border-radius:4px;padding:10px 14px;border-left:3px solid #c0392b;font-size:10.5px;color:#3a1a1a;margin-bottom:14px"><strong>Analysis Summary:</strong> 52 days of employer-responsible delay (58% of total) — primarily design change CO-008 (28 days) and facade material approval delay (14 days). 37 contractor-responsible days — finishing resource shortage (22 days) and MEP coordination lag (15 days). EOT application for employer delays has been submitted under Contract Clause 8.5. Concurrent delay assessment applied per SCL protocol.</div>
+<table>
+<thead><tr><th>Claim Ref</th><th>Title</th><th>Days</th><th>Responsibility</th><th>EOT Status</th></tr></thead>
+<tbody>
+<tr><td>CL-001</td><td>Foundation design revision (CO-003)</td><td>8</td><td>Employer</td><td><span class="tag g">Approved</span></td></tr>
+<tr><td>CL-002</td><td>New structural column layout (CO-005)</td><td>10</td><td>Employer</td><td><span class="tag g">Approved</span></td></tr>
+<tr><td>CL-003</td><td>Facade material approval delay</td><td>14</td><td>Employer</td><td><span class="tag y">Pending</span></td></tr>
+<tr><td>CL-004</td><td>Design change CO-008 (floor plan)</td><td>28</td><td>Employer</td><td><span class="tag y">Pending</span></td></tr>
+<tr><td>CL-005</td><td>Finishing resource shortage</td><td>22</td><td>Contractor</td><td><span class="tag r">Rejected</span></td></tr>
+<tr><td>CL-006</td><td>MEP coordination lag</td><td>15</td><td>Contractor</td><td><span class="tag r">Rejected</span></td></tr>
+<tr><td>CL-007</td><td>Weather delay (rainy season)</td><td>—</td><td>NE (Force Majeure)</td><td><span class="tag">Notified</span></td></tr>
+</tbody>
+</table>
+</div>
+<div class="sb-bar"><span><span class="sbn">Eng. Obieda Omari</span> — Senior Planning & Cost Control Lead</span><span class="sbr">CER-DAR-2022-003</span></div>
+<div class="pg">2 / 10</div>
+</div>
+
+<!-- PAGE 3: CLAIM DETAILS 1 -->
+<div class="page">
+<div class="pad">
+<h2><span class="on">2</span> Detailed Claim Analysis — Employer Responsibility</h2>
+<div class="claim">
+<div class="ch"><span class="cn">CL-003:</span> Facade Material Approval Delay</div>
+<div class="cd"><strong>Cause:</strong> Client (Takamul) delayed approval of aluminum composite panel samples by 14 days beyond the contractual review period. <strong>Impact:</strong> Facade installation start delayed by 14 days, pushing facade completion and subsequent scaffolding removal.<br><strong>EOT Claimed:</strong> 14 calendar days | <strong>Cost Claimed:</strong> <span class="amt">$320,000</span> (delay + associated preliminaries) | <strong>Status:</strong> Under review</div>
+</div>
+<div class="claim">
+<div class="ch"><span class="cn">CL-004:</span> Design Change CO-008 — Floor Plan Revision</div>
+<div class="cd"><strong>Cause:</strong> Q Design Engineering issued CO-008 revising floor plan layouts for Levels 4-8, requiring re-coordination of MEP routes, additional structural modifications, and revised finishing schedules. <strong>Impact:</strong> 28 days of critical path delay — MEP rough-in unable to proceed in Levels 4-6 until structural revisions complete. <strong>Concurrency:</strong> No concurrent contractor delay during the 28-day window (confirmed via TIA).<br><strong>EOT Claimed:</strong> 28 calendar days | <strong>Cost Claimed:</strong> <span class="amt">$890,000</span> (rework, demobilization, extended preliminaries) | <strong>Status:</strong> Submitted — awaiting Q Design/Takamul review</div>
+</div>
+<h3>Employer-Responsible Delay — Time Impact Analysis</h3>
+<div class="timeline">
+<div class="tl"><div class="td">Wk48</div><div class="tb"><div class="tt">CO-008 Issued by Q Design</div><div class="tds">Change order signed — work suspended in Levels 4-6</div></div></div>
+<div class="tl"><div class="td">Wk49</div><div class="tb"><div class="tt">Structural Rework Duration</div><div class="tds">8 days of additional core drilling, column modification</div></div></div>
+<div class="tl"><div class="td">Wk50-52</div><div class="tb"><div class="tt">MEP Re-routing & Re-coordination</div><div class="tds">14 days of MEP redesign, 6 days of physical rework</div></div></div>
+<div class="tl"><div class="td">Wk53</div><div class="tb"><div class="tt">Schedule Recovery Begins</div><div class="tds">Acceleration measures implemented to recover lost time</div></div></div>
+</div>
+</div>
+<div class="sb-bar"><span><span class="sbn">Eng. Obieda Omari</span> — Senior Planning & Cost Control Lead</span><span class="sbr">CER-DAR-2022-003</span></div>
+<div class="pg">3 / 10</div>
+</div>
+
+<!-- PAGE 4: CONCURRENT DELAY -->
+<div class="page">
+<div class="pad">
+<h2><span class="on">3</span> Concurrent Delay & Apportionment</h2>
+<p>Concurrent delay analysis per SCL Delay & Disruption Protocol (2nd Edition). Employer-responsible delays: 52 days. Contractor-responsible: 37 days. Net EOT entitlement after concurrency assessment: 42 days approved + 35 days pending.</p>
+<h3>Concurrency Matrix</h3>
+<table>
+<thead><tr><th>Period</th><th>Employer Delay (d)</th><th>Contractor Delay (d)</th><th>Concurrent (d)</th><th>Net EOT Entitlement</th></tr></thead>
+<tbody>
+<tr><td>Jan – Mar 2021</td><td>8 (CL-001)</td><td>—</td><td>—</td><td>8</td></tr>
+<tr><td>Apr – Jun 2021</td><td>10 (CL-002)</td><td>—</td><td>—</td><td>10</td></tr>
+<tr><td>Jul – Sep 2021</td><td>—</td><td>15 (CL-005)</td><td>—</td><td>—</td></tr>
+<tr><td>Oct – Dec 2021</td><td>14 (CL-003)</td><td>7 (CL-006)</td><td>5</td><td>9</td></tr>
+<tr><td>Jan – Mar 2022</td><td>28 (CL-004)</td><td>10 (CL-006)</td><td>6</td><td>22</td></tr>
+<tr><td>Apr – Jun 2022</td><td>—</td><td>5 (CL-006 residual)</td><td>—</td><td>—</td></tr>
+<tr><td><strong>Total</strong></td><td><strong>60</strong></td><td><strong>37</strong></td><td><strong>11</strong></td><td><strong>49</strong></td></tr>
+</tbody>
+</table>
+<div style="background:#f2e4e4;border-radius:3px;padding:8px 12px;font-size:9.5px;color:#3a1a1a"><strong>Analysis:</strong> 11 days identified as concurrent (both employer and contractor delay active simultaneously). Per SCL Protocol, where delay is concurrent and both parties contribute, contractor is entitled to EOT but not prolongation cost for the concurrent period. Net EOT entitlement after concurrency adjustment: 49 days (42 approved + 7 recommended for approval from CL-003).</div>
+<h3>Delay Apportionment Summary</h3>
+<svg viewBox="0 0 400 100" style="width:100%;margin:8px 0">
+<rect x="20" y="10" width="158" height="20" rx="3" fill="#c0392b"/>
+<rect x="178" y="10" width="82" height="20" rx="3" fill="#e74c3c"/>
+<rect x="260" y="10" width="33" height="20" rx="3" fill="#f39c12"/>
+<rect x="20" y="42" width="240" height="18" rx="3" fill="#dcc8c8"/>
+<text x="99" y="24" font-family="Inter" font-size="8" fill="#fff" text-anchor="middle">Employer: 52d (58%)</text>
+<text x="219" y="24" font-family="Inter" font-size="7.5" fill="#fff" text-anchor="middle">Concurrent: 11d</text>
+<text x="276" y="24" font-family="Inter" font-size="7.5" fill="#2a1a1a" text-anchor="middle">Contr: 37d</text>
+<text x="140" y="54" font-family="Inter" font-size="8" fill="#3a1a1a" text-anchor="middle">Net EOT Entitlement: 49 Days (42 Approved + 7 Recommended)</text>
+</svg>
+</div>
+<div class="sb-bar"><span><span class="sbn">Eng. Obieda Omari</span> — Senior Planning & Cost Control Lead</span><span class="sbr">CER-DAR-2022-003</span></div>
+<div class="pg">4 / 10</div>
+</div>
+
+<!-- PAGE 5: COST CLAIMS -->
+<div class="page">
+<div class="pad">
+<h2><span class="on">4</span> Cost Impact of Claims</h2>
+<p>Total cost impact of all delay claims, distinguishing between EOT prolongation costs and direct rework/disruption costs.</div>
+<table>
+<thead><tr><th>Claim</th><th>Direct Cost ($)</th><th>Prolongation ($)</th><th>Total ($)</th><th>Status</th></tr></thead>
+<tbody>
+<tr><td>CL-001 — Foundation revision</td><td>85,000</td><td>62,000</td><td>147,000</td><td><span class="tag g">Approved</span></td></tr>
+<tr><td>CL-002 — Column layout change</td><td>110,000</td><td>78,000</td><td>188,000</td><td><span class="tag g">Approved</span></td></tr>
+<tr><td>CL-003 — Facade material approval</td><td>195,000</td><td>125,000</td><td>320,000</td><td><span class="tag y">Pending</span></td></tr>
+<tr><td>CL-004 — Design change CO-008</td><td>520,000</td><td>370,000</td><td>890,000</td><td><span class="tag y">Pending</span></td></tr>
+<tr><td>CL-005 — Finishing resources (rejected)</td><td>—</td><td>—</td><td>—</td><td><span class="tag r">Rejected</span></td></tr>
+<tr><td>CL-006 — MEP coordination (rejected)</td><td>—</td><td>—</td><td>—</td><td><span class="tag r">Rejected</span></td></tr>
+<tr><td>CL-007 — Weather (Force Majeure)</td><td>—</td><td>—</td><td>—</td><td><span class="tag">Notified</span></td></tr>
+<tr><td><strong>Total</strong></td><td><strong>910,000</strong></td><td><strong>635,000</strong></td><td><strong>1,545,000</strong></td><td></td></tr>
+</tbody>
+</table>
+<h3>Prolongation Cost Breakdown (Employer-Responsible)</h3>
+<table>
+<thead><tr><th>Cost Element</th><th>Rate ($/day)</th><th>Duration (d)</th><th>Amount ($)</th></tr></thead>
+<tbody>
+<tr><td>Site overheads (staff, facilities)</td><td>4,200</td><td>52</td><td>218,400</td></tr>
+<tr><td>Plant & equipment idle time</td><td>2,800</td><td>35</td><td>98,000</td></tr>
+<tr><td>Head office overheads (Hudson formula)</td><td>1,650</td><td>52</td><td>85,800</td></tr>
+<tr><td>Loss of productivity / disruption</td><td>2,100</td><td>28</td><td>58,800</td></tr>
+<tr><td>Extended bond & insurance</td><td>820</td><td>52</td><td>42,640</td></tr>
+<tr><td>Mobilization/demobilization costs</td><td>—</td><td>—</td><td>131,360</td></tr>
+<tr><td><strong>Total Prolongation Cost</strong></td><td></td><td></td><td><strong>635,000</strong></td></tr>
+</tbody>
+</table>
+</div>
+<div class="sb-bar"><span><span class="sbn">Eng. Obieda Omari</span> — Senior Planning & Cost Control Lead</span><span class="sbr">CER-DAR-2022-003</span></div>
+<div class="pg">5 / 10</div>
+</div>
+
+<!-- PAGE 6: METHODOLOGY -->
+<div class="page">
+<div class="pad">
+<h2><span class="on">5</span> Time Impact Analysis Methodology</h2>
+<p>All delay claims were analyzed using the Time Impact Analysis (TIA) method per AACE 29R-03 and SCL Delay & Disruption Protocol.</p>
+<h3>Analysis Protocol</h3>
+<table>
+<thead><tr><th>Step</th><th>Description</th><th>Tool/Method</th></tr></thead>
+<tbody>
+<tr><td>1. Baseline Validation</td><td>Confirm approved baseline schedule (fragnet) for impacted area</td><td>Primavera P6 — Baseline Log</td></tr>
+<tr><td>2. As-Built Window</td><td>Extract as-built data for the delay window from daily reports</td><td>Site diaries, DPRs</td></tr>
+<tr><td>3. Impact Fragnet</td><td>Create detailed fragnet of delay-causing event and its logic ties</td><td>Primavera P6 — Fragnet</td></tr>
+<tr><td>4. Insertion into Schedule</td><td>Insert fragnet into contemporaneous schedule update</td><td>P6 schedule model</td></tr>
+<tr><td>5. Impact Measurement</td><td>Measure delta between scheduled completion before/after insertion</td><td>Critical path analysis</td></tr>
+<tr><td>6. Concurrency Check</td><td>Identify any concurrent contractor delays during the same window</td><td>As-built vs. as-planned overlay</td></tr>
+<tr><td>7. Entitlement Calculation</td><td>Determine net EOT entitlement after concurrency deduction</td><td>SCL Protocol rules</td></tr>
+<tr><td>8. Cost Assessment</td><td>Quantity prolongation and disruption cost entitlement</td><td>Contract rates + Hudson formula</td></tr>
+</tbody>
+</table>
+<h3>Delay Classification per SCL Protocol</h3>
+<table>
+<thead><tr><th>Category</th><th>Definition</th><th>Present in The Zone?</th></tr></thead>
+<tbody>
+<tr><td>Employer Risk Event</td><td>Delay caused by employer's actions or omissions</td><td>CL-001, 002, 003, 004</td></tr>
+<tr><td>Contractor Risk Event</td><td>Delay caused by contractor's performance or resources</td><td>CL-005, 006</td></tr>
+<tr><td>Neutral Event (Force Majeure)</td><td>Delay beyond control of either party</td><td>CL-007 (weather)</td></tr>
+<tr><td>Concurrent Delay</td><td>Two or more delay causes active simultaneously</td><td>11 days identified</td></tr>
+<tr><td>Pacing Delay</td><td>Contractor chooses not to accelerate despite ability</td><td>Not applicable</td></tr>
+</tbody>
+</table>
+</div>
+<div class="sb-bar"><span><span class="sbn">Eng. Obieda Omari</span> — Senior Planning & Cost Control Lead</span><span class="sbr">CER-DAR-2022-003</span></div>
+<div class="pg">6 / 10</div>
+</div>
+
+<!-- PAGE 7: CONTRACT -->
+<div class="page">
+<div class="pad">
+<h2><span class="on">6</span> Contractual Basis for EOT Claims</h2>
+<p>All EOT claims are submitted under the provisions of the FIDIC-based contract between Jadwa Contracting (Contractor) and Takamul Real Estate (Employer).</p>
+<table>
+<thead><tr><th>Contract Clause</th><th>Provision</th><th>Application</th></tr></thead>
+<tbody>
+<tr><td>Clause 8.5</td><td>Extension of Time for Completion</td><td>All employer-responsible delay claims</td></tr>
+<tr><td>Clause 8.4</td><td>Delay by Employer</td><td>CL-003 — late approval of samples</td></tr>
+<tr><td>Clause 13.2</td><td>Variation Procedure</td><td>CL-004 — CO-008 design change</td></tr>
+<tr><td>Clause 13.3</td><td>Variation in Design</td><td>CL-001, 002 — foundation & column changes</td></tr>
+<tr><td>Clause 19.1</td><td>Force Majeure</td><td>CL-007 — exceptional weather</td></tr>
+<tr><td>Clause 2.1</td><td>Right of Access to Site</td><td>N/A (site access not an issue)</td></tr>
+</tbody>
+</table>
+<h3>Notice Requirements Compliance</h3>
+<table>
+<thead><tr><th>Claim</th><th>Notice Given Within 14d?</th><th>Supporting Docs</th><th>Compliant</th></tr></thead>
+<tbody>
+<tr><td>CL-001</td><td>Yes (Day 6)</td><td>Design instruction, site instruction, photos</td><td><span class="tag g">Yes</span></td></tr>
+<tr><td>CL-002</td><td>Yes (Day 9)</td><td>Revised drawings, P6 fragnet, labor records</td><td><span class="tag g">Yes</span></td></tr>
+<tr><td>CL-003</td><td>Yes (Day 11)</td><td>Sample submittal register, correspondence, TIA</td><td><span class="tag g">Yes</span></td></tr>
+<tr><td>CL-004</td><td>Yes (Day 5)</td><td>CO-008, revised MEP drawings, impacted schedule</td><td><span class="tag g">Yes</span></td></tr>
+<tr><td>CL-005</td><td>Yes (Day 12)</td><td>Resource histograms, productivity report</td><td><span class="tag g">Yes</span></td></tr>
+<tr><td>CL-006</td><td>Yes (Day 7)</td><td>Coordination meeting minutes, RFI log</td><td><span class="tag g">Yes</span></td></tr>
+</tbody>
+</table>
+</div>
+<div class="sb-bar"><span><span class="sbn">Eng. Obieda Omari</span> — Senior Planning & Cost Control Lead</span><span class="sbr">CER-DAR-2022-003</span></div>
+<div class="pg">7 / 10</div>
+</div>
+
+<!-- PAGE 8: RISKS -->
+<div class="page">
+<div class="pad">
+<h2><span class="on">7</span> Dispute Avoidance & Mitigation</h2>
+<p>Recommendations to minimize future claims and avoid escalation to formal dispute resolution.</p>
+<div class="claim" style="border-left-color:#2d8a4e">
+<div class="ch"><span class="cn" style="color:#2d8a4e">✓</span> Early Warning System</div>
+<div class="cd">Implement a 30-day early warning register for potential delay events. All RFIs, design clarifications, and approval requests to be logged with response time tracking. Monthly review with Q Design and Takamul. Target: reduce employer response time from 18 days to 10 days.</div>
+</div>
+<div class="claim" style="border-left-color:#2d8a4e">
+<div class="ch"><span class="cn" style="color:#2d8a4e">✓</span> Change Order Fast-Track</div>
+<div class="cd">For future design changes, implement a 14-day fast-track review cycle. COs to be assessed for schedule AND cost impact simultaneously (not sequentially). Proposed change to Contract Clause 13.3 procedures.</div>
+</div>
+<div class="claim" style="border-left-color:#2d8a4e">
+<div class="ch"><span class="cn" style="color:#2d8a4e">✓</span> Monthly Progress Meeting — Claims Review</div>
+<div class="cd">Dedicated claims review agenda item during monthly progress meetings. All pending EOT applications to be tracked with action owners and resolution deadlines. Current pending claims: CL-003 (14d), CL-004 (28d).</div>
+</div>
+<div class="claim" style="border-left-color:#2d8a4e">
+<div class="ch"><span class="cn" style="color:#2d8a4e">✓</span> Schedule Recovery Incentive</div>
+<div class="cd">Propose a recovery incentive scheme to Takamul: Jadwa to recover 25 of the 35 pending EOT days in exchange for partial waiver of prolongation costs. Estimated cost saving for employer: $185,000.</div>
+</div>
+<h3>Dispute Resolution Escalation Ladder</h3>
+<table>
+<thead><tr><th>Stage</th><th>Action</th><th>Timeline</th><th>Involved</th></tr></thead>
+<tbody>
+<tr><td>1. Notification</td><td>Formal EOT notice with supporting docs</td><td>Within 14d of event</td><td>Jadwa → Q Design / Takamul</td></tr>
+<tr><td>2. Evaluation</td><td>Employer reviews submission</td><td>Within 28d</td><td>Q Design (Consultant)</td></tr>
+<tr><td>3. Adjudication</td><td>Dispute Adjudication Board (DAB)</td><td>If unresolved after 42d</td><td>DAB Panel</td></tr>
+<tr><td>4. Arbitration</td><td>Final binding resolution</td><td>Per contract</td><td>Arbitration Centre (Jeddah)</td></tr>
+</tbody>
+</table>
+</div>
+<div class="sb-bar"><span><span class="sbn">Eng. Obieda Omari</span> — Senior Planning & Cost Control Lead</span><span class="sbr">CER-DAR-2022-003</span></div>
+<div class="pg">8 / 10</div>
+</div>
+
+<!-- PAGE 9: FORECAST -->
+<div class="page">
+<div class="pad">
+<h2><span class="on">8</span> Forecast & Recommendations</h2>
+<div class="stats" style="grid-template-columns:repeat(4,1fr)">
+<div class="st"><div class="sv">35d</div><div class="sl">Pending EOT</div></div>
+<div class="st"><div class="sv">$1.21M</div><div class="sl">Pending Cost Claims</div></div>
+<div class="st"><div class="sv">7d</div><div class="sl">Recommended Approval</div></div>
+<div class="st"><div class="sv">28d</div><div class="sl">Likely Awarded (CO-008)</div></div>
+</div>
+<div style="background:#f2e4e4;border-radius:3px;padding:8px 12px;font-size:9.5px;color:#3a1a1a;margin-bottom:10px"><strong>Forecast Outcome:</strong> Based on concurrent delay analysis and contractual merit, we recommend the following EOT disposition: CL-003 (14 days) — partial approval of 7 days (7 days concurrent with contractor delay). CL-004 (28 days) — full approval recommended (no concurrent contractor delay, employer-responsible design change under Clause 13.2). <strong>Total EOT recommended for approval: 35 days. Total cost recommended: $1.21M (subject to quantum negotiation).</strong></div>
+<h3>Recommended EOT Disposition</h3>
+<table>
+<thead><tr><th>Recommendation</th><th>CL-003</th><th>CL-004</th><th>Total</th></tr></thead>
+<tbody>
+<tr><td>EOT Days Claimed</td><td>14</td><td>28</td><td>42</td></tr>
+<tr><td>Concurrency Deduction</td><td>-7</td><td>0</td><td>-7</td></tr>
+<tr><td>Recommended EOT Award</td><td>7</td><td>28</td><td>35</td></tr>
+<tr><td>Cost Claimed ($)</td><td>320,000</td><td>890,000</td><td>1,210,000</td></tr>
+<tr><td>Recommended Cost ($)</td><td>160,000</td><td>780,000</td><td>940,000</td></tr>
+</tbody>
+</table>
+</div>
+<div class="sb-bar"><span><span class="sbn">Eng. Obieda Omari</span> — Senior Planning & Cost Control Lead</span><span class="sbr">CER-DAR-2022-003</span></div>
+<div class="pg">9 / 10</div>
+</div>
+
+<!-- PAGE 10: SIG -->
+<div class="page">
+<div class="sig-end">
+<h2>Claims & EOT — Sign-off</h2>
+<div class="se-sub">Claims & Extension of Time Analysis — Q2 2022 | The Zone Residential Complex</div>
+<div class="rec">
+<strong>Recommendations:</strong>
+<ol>
+<li>Approve 7-day EOT for CL-003 (facade material approval) with associated cost of $160,000.</li>
+<li>Approve 28-day EOT for CL-004 (CO-008 design change) with associated cost of $780,000.</li>
+<li>Reject remaining 7 days of CL-003 as concurrent with contractor delay per SCL Protocol.</li>
+<li>Implement early warning register to reduce future claims by 40%.</li>
+<li>Propose recovery incentive scheme to Takamul — 25-day recovery in exchange for partial cost waiver.</li>
+<li>Schedule dispute avoidance workshop with Q Design and Takamul before Q3 2022.</li>
+</ol>
+</div>
+<div class="sig-boxes">
+<div class="sb"><div class="sn">Eng. Obieda Omari</div><div class="sl"></div><div class="sr">Senior Planning & Cost Control Lead</div></div>
+<div class="sb"><div class="sn">Contracts Manager</div><div class="sl"></div><div class="sr">Jadwa Contracting Co.</div></div>
+<div class="sb"><div class="sn">Employer's Rep.</div><div class="sl"></div><div class="sr">Takamul Real Estate Co.</div></div>
+</div>
+<div class="sef">CER-DAR-2022-003 | Rev. A | Confidential — Claims Document</div>
+</div>
+<div class="sb-bar" style="margin-top:8px"><span><span class="sbn">Eng. Obieda Omari</span> — Senior Planning & Cost Control Lead</span><span class="sbr">CER-DAR-2022-003</span></div>
+<div class="pg">10 / 10</div>
+</div>
+
+<div class="fixed-foot"><div class="f-sig"><div class="f-dot"></div><strong>Eng. Obieda Omari</strong> — Sr. Planning & Cost Control Lead</div><span>CER-DAR-2022-003 • Confidential</span></div>
+</body>
+</html>

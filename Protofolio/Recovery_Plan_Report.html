@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Project Recovery Plan Report | RPR-DAR-2022-001</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap');
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Inter',sans-serif;background:#1a1808;color:#d8d0a8;padding:16px;line-height:1.5}
+.page{max-width:210mm;margin:0 auto 20px;background:#fcfaf2;position:relative;page-break-after:always;overflow:hidden;color:#2a2818}
+.pad{padding:28px 36px}
+.pg{position:absolute;bottom:8px;left:50%;transform:translateX(-50%);font-size:8px;color:#9a906a;font-family:'Inter',sans-serif;letter-spacing:.5px;background:rgba(252,250,242,0.85);padding:1px 10px;border-radius:8px}
+.fixed-foot{position:fixed;bottom:0;left:0;right:0;background:#1a1808;color:rgba(216,208,168,0.5);padding:3px 20px;display:flex;align-items:center;justify-content:space-between;font-size:7.5px;z-index:999;direction:ltr}
+.fixed-foot .f-sig{display:flex;align-items:center;gap:4px}
+.fixed-foot .f-sig .f-dot{width:5px;height:5px;background:#d4a017;border-radius:50%}
+.fixed-foot .f-sig strong{color:#d4a017;font-size:8px}
+.sb-bar{display:flex;justify-content:space-between;align-items:center;border-top:1px solid #d8d0a8;padding:4px 0 2px;margin-top:14px;font-size:7.5px;color:#9a906a}
+.sb-bar .sbn{color:#2a2818;font-weight:600}
+.sb-bar .sbr{color:#b0a67a;letter-spacing:.5px}
+.cover{background:linear-gradient(135deg,#1a1808,#2a2810,#3a3418);min-height:100vh;display:flex;flex-direction:column}
+.cover .ct{padding:16px 32px;display:flex;justify-content:space-between;align-items:flex-start}
+.cover .ct .ref{font-size:8.5px;color:rgba(216,208,168,0.12)}
+.cover .ct .cls{padding:2px 12px;border:1px solid rgba(212,160,23,0.25);border-radius:2px;font-size:7.5px;letter-spacing:2px;color:#d4a017}
+.cover .cb{flex:1;display:flex;flex-direction:column;justify-content:center;padding:20px 48px 40px}
+.cover .cb .bge{display:inline-block;background:rgba(212,160,23,0.08);border:1px solid rgba(212,160,23,0.12);padding:4px 18px;font-size:9px;color:#d4a017;letter-spacing:3px;margin-bottom:28px;width:fit-content}
+.cover h1{font-size:26px;font-weight:800;color:#fff;margin-bottom:4px}
+.cover h1 .sub{font-size:13px;font-weight:300;color:rgba(255,255,255,0.2);display:block;margin-top:2px}
+.cover .csub{font-size:12px;color:rgba(255,255,255,0.25);margin-bottom:28px}
+.cover .cm{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;max-width:580px;margin-bottom:28px}
+.cover .cm div{padding:8px 12px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.05)}
+.cover .cm .cml{font-size:7px;color:rgba(216,208,168,0.25);text-transform:uppercase;letter-spacing:1px;margin-bottom:2px}
+.cover .cm .cmv{font-size:11px;color:#fff;font-weight:600;font-family:'JetBrains Mono',monospace}
+.cover .csig{border-top:1px solid rgba(255,255,255,0.05);padding-top:16px}
+.cover .csig .csn{color:#d4a017;font-weight:700;font-size:13px}
+.cover .csig .cst{color:rgba(255,255,255,0.15);font-size:9px}
+h2{font-size:15px;color:#1a1808;margin-bottom:10px;display:flex;align-items:center;gap:8px}
+h2 .on{background:#1a1808;color:#fcfaf2;width:22px;height:22px;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700}
+h3{font-size:12px;color:#2a2810;margin:12px 0 6px}
+p{font-size:11px;color:#5a5030;margin-bottom:8px}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-bottom:14px}
+.stats .st{background:#f2ecd4;border-radius:4px;padding:10px 6px;text-align:center;border-bottom:3px solid #d4a017}
+.stats .st .sv{font-size:15px;font-weight:800;color:#2a2818;font-family:'JetBrains Mono',monospace}
+.stats .st .sl{font-size:7px;color:#6a6030;margin-top:2px}
+.stats .st .sv.g{color:#2d8a4e}
+.stats .st .sv.r{color:#c0392b}
+table{width:100%;border-collapse:collapse;font-size:10px;margin-bottom:12px}
+th{background:#1a1808;color:#f0ecd8;padding:5px 8px;text-align:left;font-weight:600;font-size:9px}
+td{padding:4px 8px;border-bottom:1px solid #d8d0a8}
+tr:nth-child(even){background:#f2ecd4}
+.tag{display:inline-block;padding:1px 6px;border-radius:2px;font-size:7.5px;font-weight:600}
+.tag.g{background:#d4edda;color:#1a6a3a}
+.tag.y{background:#fff3cd;color:#7a6a2a}
+.tag.r{background:#f8d7da;color:#8a2a1a}
+.tag.o{background:#ffe0b0;color:#8a5a1a}
+.bar{display:flex;align-items:flex-end;gap:4px;height:60px;margin:8px 0;padding:6px 4px;background:#f2ecd4;border-radius:4px}
+.bar>div{flex:1;display:flex;flex-direction:column;align-items:center;height:100%}
+.bar>div>div{flex:1;width:55%;border-radius:3px 3px 0 0}
+.bar>div>span{font-size:6px;color:#6a6030;margin-top:2px}
+.plan{background:#fcfaf2;border:1px solid #d8d0a8;border-left:4px solid #d4a017;border-radius:4px;padding:10px 14px;margin-bottom:8px}
+.plan .ph{font-size:10px;font-weight:700;color:#2a2818;margin-bottom:2px}
+.plan .pd{font-size:9px;color:#5a5030}
+.plan .pd .tag{font-size:7px}
+.timeline{position:relative;margin:14px 0 10px}
+.timeline .tr{display:flex;align-items:center;margin-bottom:8px}
+.timeline .tr .td{width:48px;font-size:7.5px;color:#d4a017;font-weight:600;text-align:right;padding-right:8px}
+.timeline .tr .tb{flex:1;height:18px;background:#e8e0c0;border-radius:3px;position:relative;overflow:hidden}
+.timeline .tr .tb .tf{height:100%;border-radius:3px;display:flex;align-items:center;justify-content:center;font-size:7px;color:#fff;font-weight:600}
+.timeline .tr .tb .tf.d1{background:#2d8a4e;width:25%}
+.timeline .tr .tb .tf.d2{background:#d4a017;width:55%}
+.timeline .tr .tb .tf.d3{background:#c0392b;width:40%}
+.sig-end{padding:28px 36px}
+.sig-end h2{font-size:15px;color:#1a1808;margin-bottom:4px}
+.sig-end .se-sub{font-size:9px;color:#5a5030;margin-bottom:14px}
+.sig-end .rec{background:#f2ecd4;border-radius:4px;padding:10px 14px;margin-bottom:16px;font-size:10px;color:#2a2818}
+.sig-end .rec li{margin-bottom:3px;margin-left:14px}
+.sig-boxes{display:flex;gap:20px;justify-content:center}
+.sig-boxes .sb{text-align:center;min-width:160px}
+.sig-boxes .sb .sl{width:70%;height:1px;background:#c0b888;margin:4px auto;border-top:1px dashed #a09870}
+.sig-boxes .sb .sn{font-size:12px;font-weight:700;color:#2a2818}
+.sig-boxes .sb .sr{font-size:7.5px;color:#5a5030}
+.sef{text-align:center;margin-top:12px;padding-top:10px;border-top:1px solid #d8d0a8;font-size:7.5px;color:#9a906a}
+@media print{body{background:#fff;padding:0}.page{box-shadow:none;margin:0;page-break-after:always}.fixed-foot{position:fixed;bottom:0!important;background:#1a1808!important;print-color-adjust:exact!important}.cover{min-height:100vh}}
+@media(max-width:768px){.cover .cb{padding:16px}.stats{grid-template-columns:1fr 1fr}.cover .cm{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<!-- PAGE 1: COVER -->
+<div class="page" style="padding:0;background:transparent">
+<div class="cover">
+<div class="ct"><span class="ref">RPR-DAR-2022-001 | Rev. A</span><span class="cls">RECOVERY PLAN</span></div>
+<div class="cb">
+<div class="bge">PROJECT RECOVERY PLAN</div>
+<h1>THE ZONE RESIDENTIAL COMPLEX<br><span class="sub">Schedule Recovery & Performance Improvement Program</span></h1>
+<div class="csub">Issued: 02 July 2022 | Recovery Target: 25 Calendar Days by Q1 2023</div>
+<div class="cm">
+<div><div class="cml">Current Delay</div><div class="cmv" style="color:#c0392b">-45 Days</div></div>
+<div><div class="cml">Recovery Target</div><div class="cmv" style="color:#2d8a4e">25 Days</div></div>
+<div><div class="cml">Net Delay After Recovery</div><div class="cmv" style="color:#d4a017">~20 Days</div></div>
+<div><div class="cml">Recovery Cost</div><div class="cmv">$425,000</div></div>
+<div><div class="cml">ROI of Recovery</div><div class="cmv" style="color:#2d8a4e">4.2x</div></div>
+<div><div class="cml">Implementation</div><div class="cmv">Q3 2022</div></div>
+</div>
+<div class="csig"><div class="csn">Eng. Obieda Omari</div><div class="cst">Senior Planning & Cost Control Lead</div></div>
+</div>
+</div>
+<div class="pg" style="color:rgba(216,208,168,0.12);background:transparent">1 / 10</div>
+</div>
+
+<!-- PAGE 2: EXEC -->
+<div class="page">
+<div class="pad">
+<h2><span class="on">1</span> Recovery Plan Executive Summary</h2>
+<p>The Zone Residential Complex is currently 45 days behind the baseline schedule (SPI = 0.92, ES-based delay of ~20 days). This Recovery Plan outlines a structured intervention program targeting 25 days of net schedule recovery by Q1 2023 at an estimated cost of $425,000, yielding a projected ROI of 4.2x against potential liquidated damages of $1.8M.</p>
+<div class="stats">
+<div class="st"><div class="sv r">45d</div><div class="sl">Current Schedule Delay</div></div>
+<div class="st"><div class="sv g">25d</div><div class="sl">Recovery Target</div></div>
+<div class="st"><div class="sv g">20d</div><div class="sl">Net Delay Post-Recovery</div></div>
+<div class="st"><div class="sv g">$425K</div><div class="sl">Recovery Investment</div></div>
+</div>
+<div style="background:#f2ecd4;border-radius:4px;padding:10px 14px;border-left:3px solid #d4a017;font-size:10.5px;color:#3a3018;margin-bottom:14px"><strong>Strategic Context:</strong> The 45-day delay is driven primarily by finishing resource shortage (22 days), facade material approval delays (14 days), and design change CO-008 (28 days — partially concurrent). Of the 45 days, ~25 days are recoverable through targeted interventions: workforce augmentation, night shifts, material expediting, and sequence optimization. The remaining ~20 days represent irreducible delay that will be addressed through EOT applications. The recovery investment of $425K avoids potential LD exposure of $1.8M (at $40K/day).</div>
+<table>
+<thead><tr><th>Recovery Measure</th><th>Cost ($)</th><th>Days Recovered</th><th>ROI Multiple</th></tr></thead>
+<tbody>
+<tr><td>Workforce augmentation (44 workers)</td><td>140,000</td><td>18</td><td>7.7x</td></tr>
+<tr><td>Night shift operations (finishing)</td><td>95,000</td><td>12</td><td>7.6x</td></tr>
+<tr><td>Material expediting (facade)</td><td>85,000</td><td>14</td><td>9.9x</td></tr>
+<tr><td>BIM coordination & rework reduction</td><td>12,000</td><td>8</td><td>40x</td></tr>
+<tr><td>Sequence re-optimization</td><td>18,000</td><td>6</td><td>20x</td></tr>
+<tr><td>QA/QC fast-track inspection</td><td>18,000</td><td>6</td><td>20x</td></tr>
+<tr><td>Management & supervision uplift</td><td>57,000</td><td>—</td><td>—</td></tr>
+<tr><td><strong>Total</strong></td><td><strong>425,000</strong></td><td><strong>25</strong></td><td><strong>4.2x</strong></td></tr>
+</tbody>
+</table>
+</div>
+<div class="sb-bar"><span><span class="sbn">Eng. Obieda Omari</span> — Senior Planning & Cost Control Lead</span><span class="sbr">RPR-DAR-2022-001</span></div>
+<div class="pg">2 / 10</div>
+</div>
+
+<!-- PAGE 3: MEASURES -->
+<div class="page">
+<div class="pad">
+<h2><span class="on">2</span> Recovery Measures — Detailed</h2>
+<div class="plan">
+<div class="ph">1. Workforce Augmentation <span class="tag g">18 days recovery</span></div>
+<div class="pd">Mobilize 44 additional workers: 32 finishing laborers (increase from 88 to 120) and 12 facade installers (increase from 28 to 40). Workers sourced from Eastern Province with 2-week mobilization period. Estimated cost: $140K (mobilization, accommodation, productivity ramp-up). <strong>ROI: 7.7x</strong> against LD exposure.</div>
+</div>
+<div class="plan">
+<div class="ph">2. Night Shift Operations <span class="tag g">12 days recovery</span></div>
+<div class="pd">Implement night shift for critical finishing activities: plastering, tiling, ceiling installation. 6 PM — 2 AM shift with dedicated supervision and lighting. Target: 40% of finishing workforce on night shift. Estimated cost: $95K (shift premium, lighting, supervision). <strong>ROI: 7.6x</strong></div>
+</div>
+<div class="plan">
+<div class="ph">3. Material Expediting <span class="tag g">14 days recovery</span></div>
+<div class="pd">Pre-order facade aluminum composite panels with air freight for 40% of critical items. Vessel lead time: 6 weeks → air freight: 2 weeks. Order placed directly with factory, bypassing local agent. Estimated cost: $85K (air freight premium). <strong>ROI: 9.9x</strong></div>
+</div>
+<div class="plan">
+<div class="ph">4. BIM Coordination & Rework Reduction <span class="tag g">8 days recovery</span></div>
+<div class="pd">Weekly BIM coordination sessions between structural, MEP, and finishing trades. Model clash detection before physical installation. Target: reduce MEP rework by 60%. Estimated cost: $12K. <strong>ROI: 40x</strong></div>
+</div>
+<div class="plan">
+<div class="ph">5. Sequence Re-optimization <span class="tag g">6 days recovery</span></div>
+<div class="pd">Re-sequence finishing packages to enable parallel execution where possible. Levels 1-4 tiling to commence before ceiling installation in Levels 5-8. Update P6 logic ties. Estimated cost: $18K (planning effort). <strong>ROI: 20x</strong></div>
+</div>
+<div class="plan">
+<div class="ph">6. QA/QC Fast-Track <span class="tag g">6 days recovery</span></div>
+<div class="pd">Dedicated QA/QC inspector assigned to finishing and facade packages. Same-day inspection approvals instead of 2-3 day standard cycle. Estimated cost: $18K. <strong>ROI: 20x</strong></div>
+</div>
+</div>
+<div class="sb-bar"><span><span class="sbn">Eng. Obieda Omari</span> — Senior Planning & Cost Control Lead</span><span class="sbr">RPR-DAR-2022-001</span></div>
+<div class="pg">3 / 10</div>
+</div>
+
+<!-- PAGE 4: SCHEDULE RECOVERY -->
+<div class="page">
+<div class="pad">
+<h2><span class="on">3</span> Recovery Schedule — Phased Approach</h2>
+<p>Phased implementation of recovery measures over Q3-Q4 2022 with cumulative recovery impact.</p>
+<h3>Recovery Timeline</h3>
+<div class="timeline">
+<div class="tr"><div class="td">Jul W1-2</div><div class="tb"><div class="tf d1">Mobilize 44 workers</div></div></div>
+<div class="tr"><div class="td">Jul W3</div><div class="tb"><div class="tf d2">Night shifts begin + Facade pre-order</div></div></div>
+<div class="tr"><div class="td">Aug W1</div><div class="tb"><div class="tf d2">BIM weekly + Sequence re-opt</div></div></div>
+<div class="tr"><div class="td">Aug W3</div><div class="tb"><div class="tf d3">QA/QC fast-track + Progress review</div></div></div>
+</div>
+<h3>Week-by-Week Recovery Forecast</h3>
+<table>
+<thead><tr><th>Month</th><th>Cumulative Recovery (Days)</th><th>Cumulative Cost ($K)</th><th>Net Delay Remaining</th></tr></thead>
+<tbody>
+<tr><td>Start (Jul 1)</td><td>0</td><td>0</td><td>45 days</td></tr>
+<tr><td>Jul 2022</td><td>5</td><td>120</td><td>40 days</td></tr>
+<tr><td>Aug 2022</td><td>12</td><td>240</td><td>33 days</td></tr>
+<tr><td>Sep 2022</td><td>18</td><td>335</td><td>27 days</td></tr>
+<tr><td>Oct 2022</td><td>22</td><td>390</td><td>23 days</td></tr>
+<tr><td>Nov 2022</td><td>24</td><td>410</td><td>21 days</td></tr>
+<tr><td>Dec 2022</td><td>25</td><td>425</td><td>20 days</td></tr>
+</tbody>
+</table>
+<h3>Week-by-Week Recovery Chart</h3>
+<div class="bar">
+<div><div style="height:20%;background:#d4a017"></div><span>Jul</span></div>
+<div><div style="height:48%;background:#d4a017"></div><span>Aug</span></div>
+<div><div style="height:72%;background:#2d8a4e"></div><span>Sep</span></div>
+<div><div style="height:88%;background:#2d8a4e"></div><span>Oct</span></div>
+<div><div style="height:96%;background:#2d8a4e"></div><span>Nov</span></div>
+<div><div style="height:100%;background:#2d8a4e"></div><span>Dec</span></div>
+</div>
+<div style="text-align:center;font-size:7.5px;color:#6a6030;margin-bottom:6px">Cumulative recovery progress (% of 25-day target)</div>
+</div>
+<div class="sb-bar"><span><span class="sbn">Eng. Obieda Omari</span> — Senior Planning & Cost Control Lead</span><span class="sbr">RPR-DAR-2022-001</span></div>
+<div class="pg">4 / 10</div>
+</div>
+
+<!-- PAGE 5: RESOURCE PLAN -->
+<div class="page">
+<div class="pad">
+<h2><span class="on">4</span> Resource Mobilization Plan</h2>
+<p>Detailed resource requirements for the recovery program, showing ramp-up over Q3 2022.</p>
+<table>
+<thead><tr><th>Trade</th><th>Current</th><th>Required</th><th>To Mobilize</th><th>By When</th><th>Source</th></tr></thead>
+<tbody>
+<tr><td>Finishing — Skilled</td><td>50</td><td>72</td><td>22</td><td>14-Jul</td><td>Dammam / Khobar</td></tr>
+<tr><td>Finishing — General</td><td>38</td><td>48</td><td>10</td><td>14-Jul</td><td>Jeddah local</td></tr>
+<tr><td>Facade Installers</td><td>18</td><td>28</td><td>10</td><td>21-Jul</td><td>Riyadh</td></tr>
+<tr><td>Facade — Helpers</td><td>10</td><td>17</td><td>7</td><td>21-Jul</td><td>Jeddah local</td></tr>
+<tr><td>Night Shift Supervisors</td><td>0</td><td>4</td><td>4</td><td>21-Jul</td><td>Internal transfer</td></tr>
+<tr><td>QA/QC Inspector</td><td>1</td><td>2</td><td>1</td><td>01-Aug</td><td>External hire</td></tr>
+<tr><td><strong>Total</strong></td><td><strong>117</strong></td><td><strong>171</strong></td><td><strong>54</strong></td><td></td><td></td></tr>
+</tbody>
+</table>
+<h3>Equipment & Material Requirements</h3>
+<table>
+<thead><tr><th>Item</th><th>Current</th><th>Required</th><th>Procurement Action</th><th>Cost ($)</th></tr></thead>
+<tbody>
+<tr><td>Lighting towers (night shift)</td><td>2</td><td>6</td><td>Rent 4 additional units</td><td>12,000</td></tr>
+<tr><td>Scaffolding (facade access)</td><td>60% coverage</td><td>100% coverage</td><td>Rent 40% additional</td><td>18,000</td></tr>
+<tr><td>Aluminum composite panels</td><td>In transit (sea)</td><td>Air freight 40%</td><td>Air freight order placed</td><td>85,000</td></tr>
+<tr><td>Night shift PPE & safety</td><td>Insufficient</td><td>Full set (54 workers)</td><td>Procure from local supplier</td><td>8,000</td></tr>
+<tr><td>Finishing materials (bulk)</td><td>Insufficient stock</td><td>8 weeks forward stock</td><td>Bulk order with supplier</td><td>42,000</td></tr>
+</tbody>
+</table>
+</div>
+<div class="sb-bar"><span><span class="sbn">Eng. Obieda Omari</span> — Senior Planning & Cost Control Lead</span><span class="sbr">RPR-DAR-2022-001</span></div>
+<div class="pg">5 / 10</div>
+</div>
+
+<!-- PAGE 6: RISK & MITIGATION -->
+<div class="page">
+<div class="pad">
+<h2><span class="on">5</span> Recovery Risks & Mitigation</h2>
+<p>Risks associated with the recovery program itself, including mitigation strategies.</p>
+<table>
+<thead><tr><th>Risk</th><th>Probability</th><th>Impact on Recovery</th><th>Mitigation</th></tr></thead>
+<tbody>
+<tr><td>New workers low initial productivity</td><td>High</td><td>-4 days (2-week ramp-up)</td><td>Buddy system — pair new with experienced workers</td></tr>
+<tr><td>Night shift quality issues</td><td>Medium</td><td>-3 days (rework)</td><td>Dedicated night shift supervisor + enhanced QA</td></tr>
+<tr><td>Air freight material damage</td><td>Low</td><td>-5 days (replacement)</td><td>Insurance + 10% over-order for critical items</td></tr>
+<tr><td>Coordination delays with MEP</td><td>Medium</td><td>-4 days</td><td>Daily BIM coordination + dedicated MEP liaison</td></tr>
+<tr><td>Morale / fatigue from extended shifts</td><td>Medium</td><td>-3 days (productivity loss)</td><td>Rotating shifts, overtime cap at 12h/day</td></tr>
+<tr><td>Client approval delays</td><td>Low</td><td>-2 days</td><td>Pre-approved inspection checklist</td></tr>
+</tbody>
+</table>
+<h3>Recovery Risk Buffer</h3>
+<p style="font-size:10px;color:#5a5030">A risk buffer of 8 days is included in the recovery plan. The target of 25 days' recovery is calculated on a P50 basis. The P80 (80% confidence) recovery is estimated at 18 days. The P20 (optimistic) recovery is 32 days. Monthly recovery reviews will track actual vs. planned progress and allow course correction.</p>
+<table>
+<thead><tr><th>Confidence Level</th><th>Recovery Days</th><th>Net Delay After Recovery</th><th>LD Exposure at $40K/day</th></tr></thead>
+<tbody>
+<tr><td>P20 (Optimistic)</td><td>32</td><td>13 days</td><td>$520,000</td></tr>
+<tr><td>P50 (Target)</td><td>25</td><td>20 days</td><td>$800,000</td></tr>
+<tr><td>P80 (Conservative)</td><td>18</td><td>27 days</td><td>$1,080,000</td></tr>
+<tr><td>Without Recovery</td><td>0</td><td>45 days</td><td>$1,800,000</td></tr>
+</tbody>
+</table>
+</div>
+<div class="sb-bar"><span><span class="sbn">Eng. Obieda Omari</span> — Senior Planning & Cost Control Lead</span><span class="sbr">RPR-DAR-2022-001</span></div>
+<div class="pg">6 / 10</div>
+</div>
+
+<!-- PAGE 7: GOVERNANCE -->
+<div class="page">
+<div class="pad">
+<h2><span class="on">6</span> Recovery Governance & Reporting</h2>
+<p>Management structure and reporting framework to ensure recovery program execution and accountability.</p>
+<h3>Recovery Management Structure</h3>
+<table>
+<thead><tr><th>Role</th><th>Responsibility</th><th>Reporting</th></tr></thead>
+<tbody>
+<tr><td>Recovery Program Director</td><td>Overall recovery program ownership, budget authority up to $425K</td><td>Jadwa GM (weekly)</td></tr>
+<tr><td>Recovery Planning Lead</td><td>Schedule update, recovery tracking, progress reporting</td><td>Program Director</td></tr>
+<tr><td>Workforce Mobilization Officer</td><td>Recruitment, accommodation, onboarding of 54 workers</td><td>Program Director</td></tr>
+<tr><td>Night Shift Superintendent</td><td>Night operations management, safety, quality</td><td>Site Manager</td></tr>
+<tr><td>Material Expediting Officer</td><td>Air freight coordination, material tracking, delivery</td><td>Procurement Manager</td></tr>
+<tr><td>BIM Coordinator</td><td>Weekly clash detection, model updates, coordination</td><td>Technical Manager</td></tr>
+</tbody>
+</table>
+<h3>Reporting Cadence</h3>
+<table>
+<thead><tr><th>Report</th><th>Frequency</th><th>Audience</th><th>Content</th></tr></thead>
+<tbody>
+<tr><td>Recovery Flash Report</td><td>Daily</td><td>Recovery team</td><td>Day-by-day progress, resource attendance, issues</td></tr>
+<tr><td>Recovery Progress Report</td><td>Weekly</td><td>Project management</td><td>Recovery days achieved, cost, risks, forecast</td></tr>
+<tr><td>Recovery Steering Review</td><td>Monthly</td><td>Jadwa GM / Takamul</td><td>Cumulative recovery, budget, schedule impact</td></tr>
+<tr><td>Recovery Close-Out Report</td><td>At recovery completion</td><td>All stakeholders</td><td>Final recovery achieved, lessons learned</td></tr>
+</tbody>
+</table>
+</div>
+<div class="sb-bar"><span><span class="sbn">Eng. Obieda Omari</span> — Senior Planning & Cost Control Lead</span><span class="sbr">RPR-DAR-2022-001</span></div>
+<div class="pg">7 / 10</div>
+</div>
+
+<!-- PAGE 8: COST -->
+<div class="page">
+<div class="pad">
+<h2><span class="on">7</span> Recovery Program Budget</h2>
+<p>Detailed budget breakdown of the $425,000 recovery program investment.</p>
+<table>
+<thead><tr><th>Cost Category</th><th>Direct ($)</th><th>Indirect ($)</th><th>Total ($)</th></tr></thead>
+<tbody>
+<tr><td>Workforce mobilization & accommodation</td><td>95,000</td><td>18,000</td><td>113,000</td></tr>
+<tr><td>Night shift premium (25% uplift)</td><td>72,000</td><td>23,000</td><td>95,000</td></tr>
+<tr><td>Air freight material expediting</td><td>72,000</td><td>13,000</td><td>85,000</td></tr>
+<tr><td>Additional equipment rental</td><td>38,000</td><td>6,000</td><td>44,000</td></tr>
+<tr><td>Supervision & management uplift</td><td>48,000</td><td>9,000</td><td>57,000</td></tr>
+<tr><td>BIM coordination software & support</td><td>8,000</td><td>4,000</td><td>12,000</td></tr>
+<tr><td>QA/QC fast-track implementation</td><td>14,000</td><td>4,000</td><td>18,000</td></tr>
+<tr><td>Sequence re-optimization consulting</td><td>12,000</td><td>6,000</td><td>18,000</td></tr>
+<tr><td>Contingency (15%)</td><td>—</td><td>—</td><td>55,000</td></tr>
+<tr><td><strong>Total Recovery Program</strong></td><td></td><td></td><td><strong>425,000</strong></td></tr>
+</tbody>
+</table>
+<h3>Cost-Benefit Analysis</h3>
+<table>
+<thead><tr><th>Scenario</th><th>Recovery Cost ($)</th><th>LD Avoided ($)</th><th>Net Benefit ($)</th><th>ROI</th></tr></thead>
+<tbody>
+<tr><td>Target Recovery (25d)</td><td>425,000</td><td>1,800,000</td><td>1,375,000</td><td>4.2x</td></tr>
+<tr><td>Optimistic Recovery (32d)</td><td>425,000</td><td>1,800,000</td><td>1,375,000</td><td>4.2x</td></tr>
+<tr><td>Conservative Recovery (18d)</td><td>425,000</td><td>1,080,000</td><td>655,000</td><td>2.5x</td></tr>
+<tr><td>No Recovery (0d)</td><td>0</td><td>0</td><td>($1,800,000)</td><td>—</td></tr>
+</tbody>
+</table>
+</div>
+<div class="sb-bar"><span><span class="sbn">Eng. Obieda Omari</span> — Senior Planning & Cost Control Lead</span><span class="sbr">RPR-DAR-2022-001</span></div>
+<div class="pg">8 / 10</div>
+</div>
+
+<!-- PAGE 9: LESSONS -->
+<div class="page">
+<div class="pad">
+<h2><span class="on">8</span> Lessons Learned & Preventive Actions</h2>
+<p>Root cause analysis of the schedule delay and recommendations to prevent recurrence on future projects.</p>
+<table>
+<thead><tr><th>Root Cause</th><th>Contributing Factor</th><th>Preventive Action</th><th>Responsible</th></tr></thead>
+<tbody>
+<tr><td>Insufficient finishing labor</td><td>Underestimate in tender (88 vs. 120 required)</td><td>Validate resource-loaded schedule at tender stage</td><td>Estimating</td></tr>
+<tr><td>Facade material approval lag</td><td>14-day client approval exceeded contractual review</td><td>Pre-approved sample library + escalation clause</td><td>Procurement</td></tr>
+<tr><td>Design change CO-008</td><td>Incomplete design freeze at IFC stage</td><td>Design freeze gate before tender award</td><td>Q Design</td></tr>
+<tr><td>MEP coordination rework</td><td>Insufficient BIM integration in design</td><td>BIM Level 2 mandate for all trades</td><td>Technical</td></tr>
+<tr><td>Low productivity in finishing</td><td>Inadequate supervision ratios (1:30)</td><td>Supervision ratio of 1:15 for finishing</td><td>Site Management</td></tr>
+</tbody>
+</table>
+<h3>Preventive Recommendations for Future Phases</h3>
+<div class="plan" style="border-left-color:#2d8a4e">
+<div class="ph">1. Resource-Loaded Schedule Validation</div>
+<div class="pd">All tender schedules must include resource loading (labor by trade, by month). Validate against historical productivity norms before contract award.</div>
+</div>
+<div class="plan" style="border-left-color:#2d8a4e">
+<div class="ph">2. Design Freeze Gate</div>
+<div class="pd">Implement a formal design freeze milestone at IFC stage. Any post-freeze changes to go through a schedule/cost impact assessment gate with Q Design and Takamul sign-off.</div>
+</div>
+<div class="plan" style="border-left-color:#2d8a4e">
+<div class="ph">3. Monthly Resource Forecast</div>
+<div class="pd">Monthly resource forecasting for the next 3 months — identify shortfalls 8 weeks ahead. Use P6 resource analysis as an early warning tool.</div>
+</div>
+</div>
+<div class="sb-bar"><span><span class="sbn">Eng. Obieda Omari</span> — Senior Planning & Cost Control Lead</span><span class="sbr">RPR-DAR-2022-001</span></div>
+<div class="pg">9 / 10</div>
+</div>
+
+<!-- PAGE 10: SIG -->
+<div class="page">
+<div class="sig-end">
+<h2>Recovery Plan — Approval & Sign-off</h2>
+<div class="se-sub">Project Recovery Plan | The Zone Residential Complex | Issued: 02 July 2022</div>
+<div class="rec">
+<strong>Recovery Plan Summary:</strong>
+<ol>
+<li>Total recovery investment: <strong>$425,000</strong> — targeting 25 calendar days of schedule recovery.</li>
+<li>Net delay after recovery: approximately 20 days (addressed via EOT applications).</li>
+<li>LD exposure avoided: up to <strong>$1,800,000</strong> (at $40K/day for 45 days).</li>
+<li>Recovery ROI: <strong>4.2x</strong> — every $1 spent recovers $4.20 in LD exposure.</li>
+<li>Implementation start: <strong>07 July 2022</strong> — workforce mobilization.</li>
+<li>Recovery target completion: <strong>31 December 2022</strong> — full recovery achieved.</li>
+<li>Monthly steering reviews with Jadwa management and Takamul.</li>
+</ol>
+</div>
+<div class="sig-boxes">
+<div class="sb"><div class="sn">Eng. Obieda Omari</div><div class="sl"></div><div class="sr">Senior Planning & Cost Control Lead</div></div>
+<div class="sb"><div class="sn">Project Manager</div><div class="sl"></div><div class="sr">Jadwa Contracting Co.</div></div>
+<div class="sb"><div class="sn">Client Representative</div><div class="sl"></div><div class="sr">Takamul Real Estate Co.</div></div>
+</div>
+<div class="sef">RPR-DAR-2022-001 | Rev. A | Confidential — Recovery Plan Document</div>
+</div>
+<div class="sb-bar" style="margin-top:8px"><span><span class="sbn">Eng. Obieda Omari</span> — Senior Planning & Cost Control Lead</span><span class="sbr">RPR-DAR-2022-001</span></div>
+<div class="pg">10 / 10</div>
+</div>
+
+<div class="fixed-foot"><div class="f-sig"><div class="f-dot"></div><strong>Eng. Obieda Omari</strong> — Sr. Planning & Cost Control Lead</div><span>RPR-DAR-2022-001 • Confidential</span></div>
+</body>
+</html>

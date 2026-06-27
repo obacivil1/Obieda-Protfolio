@@ -1,0 +1,33 @@
+# OS files
+Thumbs.db
+.DS_Store
+*.log
+
+# IDE
+.vscode/
+.idea/
+*.suo
+
+# Temp
+node_modules/
+*.tmp
+
+# Raw project data & archives
+Protofolio/Projects/
+Protofolio/Reports/
+
+# Old root-level portfolio binaries
+/Protofolio/*.pdf
+/Protofolio/*.pbix
+/Protofolio/*.png
+/Protofolio/*.jpg
+
+# Personal photos
+My Picture/
+
+# Notes
+cv_projects.txt
+
+# Old CV PDFs (except the current one)
+/CV/*.pdf
+!/CV/Obieda_Omari_CV_ATS.pdf

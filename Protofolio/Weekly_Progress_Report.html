@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Weekly Progress Report | WPR-DLH-2025-012</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Inter',sans-serif;background:#1a2332;color:#1e2a3a;padding:20px;line-height:1.5}
+.page{max-width:210mm;margin:0 auto 24px;background:#fff;position:relative;page-break-after:always;overflow:hidden}
+.pad{padding:32px 40px}
+.pg{position:absolute;bottom:10px;left:50%;transform:translateX(-50%);font-size:8.5px;color:#8a9aa8;font-family:'Inter',sans-serif;direction:ltr;letter-spacing:.5px;background:rgba(255,255,255,0.85);padding:1px 10px;border-radius:10px}
+.fixed-foot{position:fixed;bottom:0;left:0;right:0;background:#0f1a28;color:rgba(255,255,255,0.7);padding:3px 20px;display:flex;align-items:center;justify-content:space-between;font-size:8.5px;z-index:999;direction:ltr}
+.fixed-foot .f-sig{display:flex;align-items:center;gap:4px}
+.fixed-foot .f-sig .f-dot{width:5px;height:5px;background:#3b82f6;border-radius:50%}
+.fixed-foot .f-sig strong{color:#3b82f6;font-size:9px}
+/* COVER */
+.cover-wrap{background:linear-gradient(135deg,#0b1a2e,#142a42,#1d3a56);min-height:100vh;padding:0;position:relative;display:flex;flex-direction:column}
+.cover-wrap .cv-top{display:flex;justify-content:space-between;padding:20px 36px;align-items:flex-start}
+.cover-wrap .cv-top .cv-ref{font-family:'Inter',sans-serif;font-size:9px;color:rgba(255,255,255,0.2);letter-spacing:1px}
+.cover-wrap .cv-top .cv-class{padding:3px 14px;border:1px solid rgba(59,130,246,0.3);border-radius:2px;font-size:8px;letter-spacing:2px;color:#3b82f6}
+.cover-wrap .cv-body{flex:1;display:flex;flex-direction:column;justify-content:center;padding:20px 56px 40px}
+.cover-wrap .cv-badge{display:inline-block;background:rgba(59,130,246,0.12);border:1px solid rgba(59,130,246,0.2);padding:5px 22px;font-size:11px;color:#3b82f6;letter-spacing:3px;margin-bottom:32px;width:fit-content}
+.cover-wrap h1{font-size:30px;font-weight:800;color:#fff;margin-bottom:6px;line-height:1.3}
+.cover-wrap h1 .sub{font-size:15px;font-weight:300;color:rgba(255,255,255,0.3);display:block;margin-top:4px}
+.cover-wrap .cv-sub{font-size:14px;color:rgba(255,255,255,0.35);margin-bottom:36px}
+.cover-wrap .cv-meta{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;max-width:620px;margin-bottom:32px}
+.cover-wrap .cv-meta div{padding:10px 14px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.06)}
+.cover-wrap .cv-meta .cvl{font-size:8px;color:rgba(255,255,255,0.3);margin-bottom:2px;text-transform:uppercase;letter-spacing:1px}
+.cover-wrap .cv-meta .cvv{font-size:12px;color:#fff;font-weight:600}
+.cover-wrap .cv-sig{border-top:1px solid rgba(255,255,255,0.06);padding-top:20px}
+.cover-wrap .cv-sig .cs-name{color:#3b82f6;font-weight:700;font-size:14px}
+.cover-wrap .cv-sig .cs-title{color:rgba(255,255,255,0.25);font-size:10px}
+/* EXEC SUMMARY */
+.exec-summary{background:#f0f5fa;padding:28px 40px}
+.exec-summary h2{font-size:17px;color:#0b1a2e;margin-bottom:4px}
+.exec-summary .es-sub{font-size:10px;color:#6a7a8a;margin-bottom:16px}
+.exec-kpis{display:grid;grid-template-columns:repeat(6,1fr);gap:8px;margin-bottom:16px}
+.exec-kpis .ek{background:#fff;border-radius:6px;padding:10px 4px;text-align:center;box-shadow:0 1px 4px rgba(0,0,0,0.04)}
+.exec-kpis .ek .ek-val{font-size:17px;font-weight:800;font-family:'Inter',sans-serif}
+.exec-kpis .ek .ek-val.grn{color:#16a34a}
+.exec-kpis .ek .ek-val.amb{color:#d97706}
+.exec-kpis .ek .ek-val.red{color:#dc2626}
+.exec-kpis .ek .ek-lbl{font-size:8px;color:#7a8a9a;margin-top:2px}
+.exec-summary .es-box{background:#fff;border-radius:6px;padding:12px 16px;border-left:3px solid #3b82f6;font-size:11.5px;color:#2a3a4a;box-shadow:0 1px 4px rgba(0,0,0,0.04)}
+/* PROJECT OVERVIEW */
+.overview-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;padding:28px 40px}
+.overview-grid .og-full{grid-column:1/-1}
+.overview-grid h2{font-size:16px;color:#0b1a2e;margin-bottom:10px;display:flex;align-items:center;gap:8px}
+.overview-grid h2 .on{border:2px solid #0b1a2e;width:22px;height:22px;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700}
+.og-table{width:100%;border-collapse:collapse;font-size:10.5px}
+.og-table td{padding:5px 8px;border-bottom:1px solid #e8ecf0;vertical-align:top}
+.og-table td:first-child{color:#5a6a7a;width:130px;font-weight:500}
+.org-chart{display:flex;flex-direction:column;align-items:center;gap:6px;padding:12px;background:#f4f7fa;border-radius:6px;margin-top:6px}
+.org-chart .oc-row{display:flex;gap:6px;flex-wrap:wrap;justify-content:center}
+.org-chart .oc-box{background:#fff;border:1px solid #d0d8e0;border-radius:4px;padding:5px 10px;text-align:center;font-size:9px;min-width:90px}
+.org-chart .oc-box strong{display:block;font-size:10px;color:#0b1a2e;margin-bottom:1px}
+.org-chart .oc-line{width:1px;height:10px;background:#c0c8d0}
+/* WORK ACCOMPLISHED */
+.wa-wrap{padding:28px 40px}
+.wa-wrap h2{font-size:16px;color:#0b1a2e;margin-bottom:10px;display:flex;align-items:center;gap:8px}
+.wa-wrap h2 .on{border:2px solid #0b1a2e;width:22px;height:22px;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700}
+.wa-table{width:100%;border-collapse:collapse;font-size:10.5px}
+.wa-table th{background:#0b1a2e;color:#fff;padding:6px 8px;text-align:left;font-weight:600;font-size:9.5px}
+.wa-table td{padding:5px 8px;border-bottom:1px solid #e0e6ec}
+.wa-table tr:nth-child(even){background:#f6f9fc}
+.wa-table .tag{display:inline-block;padding:1px 7px;border-radius:2px;font-size:8px;font-weight:600}
+.wa-table .tag.dn{background:#d4edda;color:#166534}
+.wa-table .tag.ip{background:#fff3cd;color:#854d0e}
+.wa-table .tag.nt{background:#f8d7da;color:#991b1b}
+/* PHOTOS */
+.photo-section{padding:28px 40px}
+.photo-section h2{font-size:16px;color:#0b1a2e;margin-bottom:12px;display:flex;align-items:center;gap:8px}
+.photo-section h2 .on{border:2px solid #0b1a2e;width:22px;height:22px;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700}
+.photo-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.photo-grid .pg-card{border:1px solid #e0e6ec;border-radius:6px;overflow:hidden}
+.photo-grid .pg-card .pg-img{height:120px;background:linear-gradient(135deg,#d0d8e0,#e8ecf0);display:flex;align-items:center;justify-content:center;font-size:24px;color:#8a9aa8;position:relative}
+.photo-grid .pg-card .pg-img .pg-loc{position:absolute;top:5px;right:5px;background:rgba(11,26,46,0.75);color:#fff;font-size:7.5px;padding:2px 8px;border-radius:2px}
+.photo-grid .pg-card .pg-caption{padding:6px 10px}
+.photo-grid .pg-card .pg-caption .pg-t{font-size:10px;color:#1e2a3a;font-weight:600}
+.photo-grid .pg-card .pg-caption .pg-d{font-size:8.5px;color:#6a7a8a}
+/* CHART */
+.chart-section{padding:28px 40px}
+.chart-section h2{font-size:16px;color:#0b1a2e;margin-bottom:4px;display:flex;align-items:center;gap:8px}
+.chart-section h2 .on{border:2px solid #0b1a2e;width:22px;height:22px;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700}
+.chart-section .cs-sub{font-size:10px;color:#6a7a8a;margin-bottom:14px}
+.chart-section svg{width:100%;height:auto;display:block}
+.chart-section .cs-legend{text-align:center;font-size:9px;color:#5a6a7a;margin:6px 0 12px}
+.chart-section .cs-legend span{margin:0 8px}
+.chart-section .cs-analysis{background:#f4f7fa;border-radius:6px;padding:10px 14px;font-size:10.5px;color:#2a3a4a}
+/* LOOKAHEAD */
+.la-wrap{padding:28px 40px}
+.la-wrap h2{font-size:16px;color:#0b1a2e;margin-bottom:10px;display:flex;align-items:center;gap:8px}
+.la-wrap h2 .on{border:2px solid #0b1a2e;width:22px;height:22px;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700}
+.la-table{width:100%;border-collapse:collapse;font-size:10.5px}
+.la-table th{background:#0b1a2e;color:#fff;padding:6px 8px;text-align:left;font-size:9.5px}
+.la-table td{padding:5px 8px;border-bottom:1px solid #e0e6ec}
+.la-table .pri{display:inline-block;width:5px;height:5px;border-radius:50%}
+.la-table .pri.h{background:#dc2626}
+.la-table .pri.m{background:#d97706}
+.la-table .pri.l{background:#16a34a}
+/* HSE */
+.hse-section{padding:28px 40px;background:#f0f7f4}
+.hse-section h2{font-size:16px;color:#0b1a2e;margin-bottom:10px;display:flex;align-items:center;gap:8px}
+.hse-section h2 .on{border:2px solid #0b1a2e;width:22px;height:22px;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700}
+.hse-kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:12px}
+.hse-kpis .hk{background:#fff;border-radius:6px;padding:10px;text-align:center}
+.hse-kpis .hk .hk-val{font-size:18px;font-weight:800;color:#16a34a}
+.hse-kpis .hk .hk-lbl{font-size:8.5px;color:#6a7a8a;margin-top:2px}
+.hse-table{width:100%;border-collapse:collapse;font-size:10px}
+.hse-table th{background:#0b1a2e;color:#fff;padding:5px 8px;text-align:left;font-size:9px}
+.hse-table td{padding:4px 8px;border-bottom:1px solid #dce4e8}
+.hse-table .tag{display:inline-block;padding:1px 7px;border-radius:2px;font-size:7.5px;font-weight:600}
+.hse-table .tag.cl{background:#d4edda;color:#166534}
+/* FINANCIAL */
+.fin-section{padding:28px 40px}
+.fin-section h2{font-size:16px;color:#0b1a2e;margin-bottom:10px;display:flex;align-items:center;gap:8px}
+.fin-section h2 .on{border:2px solid #0b1a2e;width:22px;height:22px;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700}
+.fin-table{width:100%;border-collapse:collapse;font-size:10.5px;margin-bottom:12px}
+.fin-table th{background:#0b1a2e;color:#fff;padding:6px 8px;text-align:left;font-size:9.5px}
+.fin-table td{padding:5px 8px;border-bottom:1px solid #e0e6ec}
+.fin-table tr:last-child td{font-weight:700;background:#f0f4f8}
+/* SIGNATURES */
+.sig-wrap{padding:32px 40px}
+.sig-wrap h2{font-size:17px;color:#0b1a2e;margin-bottom:4px}
+.sig-wrap .sig-sub{font-size:10px;color:#6a7a8a;margin-bottom:16px}
+.sig-wrap .sig-rec{background:#f4f7fa;border-radius:6px;padding:12px 16px;margin-bottom:18px}
+.sig-wrap .sig-rec li{font-size:10.5px;color:#2a3a4a;margin-bottom:4px;margin-left:14px}
+.sig-wrap .sig-boxes{display:flex;gap:24px;justify-content:center}
+.sig-wrap .sig-boxes .sb{text-align:center;min-width:180px}
+.sig-wrap .sig-boxes .sb .sb-line{width:75%;height:1px;background:#b0bcc8;margin:5px auto;border-top:1px dashed #8a9aa8}
+.sig-wrap .sig-boxes .sb .sb-name{font-size:13px;font-weight:700;color:#0b1a2e}
+.sig-wrap .sig-boxes .sb .sb-role{font-size:8.5px;color:#6a7a8a}
+.sig-wrap .sig-footer{text-align:center;margin-top:16px;padding-top:12px;border-top:1px solid #e0e6ec;font-size:8.5px;color:#8a9aa8}
+.sb-bar{display:flex;justify-content:space-between;align-items:center;border-top:1px solid #e0e6ec;padding:5px 0 2px;margin-top:14px;font-size:8px;color:#8a9aa8;font-family:'Inter',sans-serif}
+.sb-bar .sbb-name{color:#0b1a2e;font-weight:600}
+.sb-bar .sbb-ref{color:#b0bcc8;letter-spacing:.5px}
+@media print{body{background:#fff;padding:0}.page{box-shadow:none;margin:0;page-break-after:always}.fixed-foot{position:fixed;bottom:0!important;background:#0f1a28!important;-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important}.cover-wrap{min-height:100vh}}
+@media(max-width:768px){body{padding:8px}.exec-kpis{grid-template-columns:repeat(3,1fr)}.cover-wrap .cv-body{padding:16px}.cover-wrap h1{font-size:22px}.cover-wrap .cv-meta{grid-template-columns:1fr}.overview-grid,.photo-grid{grid-template-columns:1fr}.hse-kpis{grid-template-columns:1fr 1fr}}
+</style>
+</head>
+<body>
+
+<!-- PAGE 1: COVER -->
+<div class="page" style="padding:0;background:transparent">
+<div class="cover-wrap">
+<div class="cv-top"><span class="cv-ref">WPR-DLH-2025-012 | Rev. A</span><span class="cv-class">PROJECT DOCUMENT</span></div>
+<div class="cv-body">
+<div class="cv-badge">WEEKLY PROGRESS REPORT</div>
+<h1>DALLAH HOSPITAL MEDICAL COMPLEX<br><span class="sub">Medical & Healthcare Facility — Riyadh</span></h1>
+<div class="cv-sub">Reporting Period: June 20 – 26, 2025 | Week No. 12</div>
+<div class="cv-meta">
+<div><div class="cvl">Report Date</div><div class="cvv">June 27, 2025</div></div>
+<div><div class="cvl">Client</div><div class="cvv">Ministry of Health (MOH)</div></div>
+<div><div class="cvl">Contractor</div><div class="cvv">Saudi Arabian Construction Co. (SACCO)</div></div>
+<div><div class="cvl">Consultant</div><div class="cvv">Dar Al-Handasah</div></div>
+<div><div class="cvl">Contract Value</div><div class="cvv">$48,500,000</div></div>
+<div><div class="cvl">Overall Progress</div><div class="cvv" style="color:#3b82f6">48.7%</div></div>
+</div>
+<div class="cv-sig">
+<div class="cs-name">Eng. Obieda Omari</div>
+<div class="cs-title">Planning & Cost Control Engineer</div>
+</div>
+</div>
+</div>
+<div class="pg" style="color:rgba(255,255,255,0.25);background:transparent">1 / 12</div>
+</div>
+
+<!-- PAGE 2: EXECUTIVE SUMMARY -->
+<div class="page">
+<div class="exec-summary">
+<h2>Executive Summary</h2>
+<div class="es-sub">Week 12 — Dallah Hospital Medical Complex, Jeddah</div>
+<div class="exec-kpis">
+<div class="ek"><div class="ek-val amb">48.7%</div><div class="ek-lbl">Actual Progress</div></div>
+<div class="ek"><div class="ek-val amb">51.2%</div><div class="ek-lbl">Planned Progress</div></div>
+<div class="ek"><div class="ek-val red">-2.5%</div><div class="ek-lbl">Schedule Variance</div></div>
+<div class="ek"><div class="ek-val grn">94.8%</div><div class="ek-lbl">Productivity Rate</div></div>
+<div class="ek"><div class="ek-val grn">156</div><div class="ek-lbl">LTI-Free Days</div></div>
+<div class="ek"><div class="ek-val grn">72</div><div class="ek-lbl">Site Workforce</div></div>
+</div>
+<div class="es-box"><strong>Week Summary:</strong> Concrete pouring for columns on Level 06 completed (95 m³). Slight delay in slab rebar installation at Level 07 (88% complete) pending consultant re-coordination. Waterproofing and plastering works on schedule. Facade material delivery delayed by 4 days — expedite request submitted. Weekly burn rate $188,000 within budget.</div>
+</div>
+<div class="pad">
+<h3 style="font-size:13px;color:#0b1a2e;margin:0 0 8px">Key Performance Dashboard</h3>
+<svg viewBox="0 0 560 140">
+<rect x="20" y="14" width="120" height="54" rx="4" fill="#f4f7fa"/>
+<text x="80" y="38" text-anchor="middle" font-family="Inter" font-size="16" font-weight="700" fill="#0b1a2e">48.7%</text>
+<text x="80" y="56" text-anchor="middle" font-family="Inter" font-size="7.5" fill="#6a7a8a">Actual Progress</text>
+<rect x="150" y="14" width="120" height="54" rx="4" fill="#f4f7fa"/>
+<text x="210" y="38" text-anchor="middle" font-family="Inter" font-size="16" font-weight="700" fill="#0b1a2e">51.2%</text>
+<text x="210" y="56" text-anchor="middle" font-family="Inter" font-size="7.5" fill="#6a7a8a">Planned Progress</text>
+<rect x="280" y="14" width="120" height="54" rx="4" fill="#f4f7fa"/>
+<text x="340" y="38" text-anchor="middle" font-family="Inter" font-size="16" font-weight="700" fill="#dc2626">-2.5%</text>
+<text x="340" y="56" text-anchor="middle" font-family="Inter" font-size="7.5" fill="#6a7a8a">Schedule Variance</text>
+<rect x="410" y="14" width="120" height="54" rx="4" fill="#f4f7fa"/>
+<text x="470" y="38" text-anchor="middle" font-family="Inter" font-size="16" font-weight="700" fill="#16a34a">0.95</text>
+<text x="470" y="56" text-anchor="middle" font-family="Inter" font-size="7.5" fill="#6a7a8a">SPI</text>
+<line x1="20" y1="80" x2="530" y2="80" stroke="#e0e6ec" stroke-width="1"/>
+<rect x="20" y="88" width="100" height="18" rx="3" fill="#0b1a2e"/><text x="70" y="100" text-anchor="middle" font-family="Inter" font-size="7.5" fill="#fff">Structural</text><rect x="128" y="88" width="80" height="18" rx="3" fill="#16a34a"/><text x="168" y="100" text-anchor="middle" font-family="Inter" font-size="7.5" fill="#fff">MEP</text><rect x="216" y="88" width="60" height="18" rx="3" fill="#d97706"/><text x="246" y="100" text-anchor="middle" font-family="Inter" font-size="7.5" fill="#fff">Finishing</text><rect x="284" y="88" width="50" height="18" rx="3" fill="#6a7a8a"/><text x="309" y="100" text-anchor="middle" font-family="Inter" font-size="7.5" fill="#fff">Facade</text><text x="20" y="125" font-family="Inter" font-size="7.5" fill="#6a7a8a">Progress Breakdown by Trade • Week 12</text>
+</svg>
+</div>
+<div class="sb-bar"><span><span class="sbb-name">Eng. Obieda Omari</span> — Planning & Cost Control Engineer</span><span class="sbb-ref">WPR-DLH-2025-012</span></div>
+<div class="pg">2 / 12</div>
+</div>
+
+<!-- PAGE 3: PROJECT OVERVIEW -->
+<div class="page">
+<div class="overview-grid">
+<div class="og-full"><h2><span class="on">1</span> Project Overview</h2></div>
+<div>
+<table class="og-table">
+<tr><td>Project Name</td><td>Dallah Hospital Medical Complex</td></tr>
+<tr><td>Location</td><td>Riyadh — Al Olaya District, King Fahd Road</td></tr>
+<tr><td>Client</td><td>Ministry of Health (MOH)</td></tr>
+<tr><td>Consultant</td><td>Dar Al-Handasah Consultants</td></tr>
+<tr><td>Contractor</td><td>Saudi Arabian Construction Co. (SACCO)</td></tr>
+<tr><td>Contract Value</td><td>$48,500,000 USD</td></tr>
+<tr><td>Contract Duration</td><td>30 months (Jan 2024 — Jun 2026)</td></tr>
+<tr><td>Total Area</td><td>52,000 m²</td></tr>
+</table>
+</div>
+<div>
+<table class="og-table">
+<tr><td>No. of Floors</td><td>Basement + G + 8 Floors + Roof + Helipad</td></tr>
+<tr><td>Building Type</td><td>Medical hospital & outpatient facilities</td></tr>
+<tr><td>Parking</td><td>450 cars (basement + surface + underground)</td></tr>
+<tr><td>Elevators</td><td>6 passenger + 2 service + 2 stretcher</td></tr>
+<tr><td>Medical Capacity</td><td>250 beds + 12 consulting rooms</td></tr>
+<tr><td>Foundation Type</td><td>Raft foundation on piles</td></tr>
+<tr><td>Structural System</td><td>RC frame with shear wall core</td></tr>
+<tr><td>Facade System</td><td>Curtain wall + aluminum cladding</td></tr>
+</table>
+</div>
+<div class="og-full">
+<h2 style="margin-top:4px">Project Organization</h2>
+<div class="org-chart">
+<div class="oc-row"><div class="oc-box"><strong>Client</strong>Ministry of Health (MOH)</div></div>
+<div class="oc-line"></div>
+<div class="oc-row"><div class="oc-box"><strong>Consultant</strong>Dar Al-Handasah</div><div class="oc-box"><strong>Contractor</strong>Saudi Arabian Construction Co.</div></div>
+<div class="oc-line"></div>
+<div class="oc-row"><div class="oc-box"><strong>Project Manager</strong>PMO Team</div><div class="oc-box"><strong>Planning Engineer</strong>Eng. Obieda Omari</div><div class="oc-box"><strong>Site Engineer</strong>Site Team</div><div class="oc-box"><strong>MEP Engineer</strong>MEP Team</div></div>
+</div>
+</div>
+</div>
+<div class="sb-bar"><span><span class="sbb-name">Eng. Obieda Omari</span> — Planning & Cost Control Engineer</span><span class="sbb-ref">WPR-DLH-2025-012</span></div>
+<div class="pg">3 / 12</div>
+</div>
+
+<!-- PAGE 4: WORK ACCOMPLISHED -->
+<div class="page">
+<div class="wa-wrap">
+<h2><span class="on">2</span> Work Accomplished — Week 12</h2>
+<table class="wa-table">
+<thead><tr><th>#</th><th>Activity</th><th>Location</th><th>Unit</th><th>Planned</th><th>Actual</th><th>%</th><th>Status</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>Column concrete pour — C08-C14</td><td>Zone A, L06</td><td>m³</td><td>95</td><td>95</td><td>100%</td><td><span class="tag dn">Done</span></td></tr>
+<tr><td>2</td><td>Slab rebar installation — L07</td><td>Zone A, L07</td><td>Ton</td><td>34</td><td>30</td><td>88%</td><td><span class="tag ip">Partial delay</span></td></tr>
+<tr><td>3</td><td>Roof waterproofing — Zone B</td><td>Zone B Roof</td><td>m²</td><td>280</td><td>280</td><td>100%</td><td><span class="tag dn">Done</span></td></tr>
+<tr><td>4</td><td>HVAC duct installation</td><td>Zone C, MEP</td><td>m</td><td>65</td><td>55</td><td>85%</td><td><span class="tag ip">Re-coordination</span></td></tr>
+<tr><td>5</td><td>Internal plastering</td><td>Zone D, L03-05</td><td>m²</td><td>420</td><td>420</td><td>100%</td><td><span class="tag dn">Done</span></td></tr>
+<tr><td>6</td><td>Curtain wall installation</td><td>East Facade</td><td>m²</td><td>160</td><td>120</td><td>75%</td><td><span class="tag nt">Material delay</span></td></tr>
+<tr><td>7</td><td>Electrical conduits</td><td>Zone A, L06</td><td>m</td><td>150</td><td>145</td><td>97%</td><td><span class="tag dn">Done</span></td></tr>
+<tr><td>8</td><td>Fire fighting piping</td><td>Zone C Stair</td><td>m</td><td>50</td><td>50</td><td>100%</td><td><span class="tag dn">Done</span></td></tr>
+</tbody>
+</table>
+<div style="font-size:9.5px;color:#6a7a8a;margin-top:8px"><strong>Note:</strong> 4 tons of rebar for slab L07 delayed — expected delivery June 29. Curtain wall glass panels delayed due to production line issue — expected arrival July 1.</div>
+</div>
+<div class="sb-bar"><span><span class="sbb-name">Eng. Obieda Omari</span> — Planning & Cost Control Engineer</span><span class="sbb-ref">WPR-DLH-2025-012</span></div>
+<div class="pg">4 / 12</div>
+</div>
+
+<!-- PAGE 5: PROGRESS PHOTOS -->
+<div class="page">
+<div class="photo-section">
+<h2><span class="on">3</span> Site Progress Photos</h2>
+<div class="photo-grid">
+<div class="pg-card"><div class="pg-img"><span class="pg-loc">Zone A — Level 06</span></div><div class="pg-caption"><div class="pg-t">Column Concrete Pour — C08 to C14</div><div class="pg-d">95 m³ concrete placed for columns at Level 06, completed June 24</div></div></div>
+<div class="pg-card"><div class="pg-img"><span class="pg-loc">Zone B — Roof Area</span></div><div class="pg-caption"><div class="pg-t">Roof Waterproofing Membrane</div><div class="pg-d">280 m² waterproofing installed at Zone B roof, completed June 25</div></div></div>
+<div class="pg-card"><div class="pg-img"><span class="pg-loc">Zone C — MEP Works</span></div><div class="pg-caption"><div class="pg-t">HVAC Duct Installation</div><div class="pg-d">55/65 m of ductwork installed — coordination issue with fire protection</div></div></div>
+<div class="pg-card"><div class="pg-img"><span class="pg-loc">East Facade</span></div><div class="pg-caption"><div class="pg-t">Curtain Wall — East Elevation</div><div class="pg-d">120/160 m² installed — awaiting glass panel shipment from supplier</div></div></div>
+</div>
+<p style="text-align:center;font-size:9px;color:#6a7a8a;margin-top:14px">* Representative site photos taken during the period June 20–26, 2025</p>
+</div>
+<div class="sb-bar"><span><span class="sbb-name">Eng. Obieda Omari</span> — Planning & Cost Control Engineer</span><span class="sbb-ref">WPR-DLH-2025-012</span></div>
+<div class="pg">5 / 12</div>
+</div>
+
+<!-- PAGE 6: S-CURVE -->
+<div class="page">
+<div class="chart-section">
+<h2><span class="on">4</span> Progress S-Curve Analysis</h2>
+<div class="cs-sub">Planned vs. Actual Cumulative Progress — Weeks 1–12</div>
+<svg viewBox="0 0 560 200">
+<rect x="30" y="10" width="500" height="160" rx="4" fill="#f8fafc" stroke="#e0e6ec" stroke-width="1"/>
+<line x1="70" y1="30" x2="70" y2="160" stroke="#e8ecf0" stroke-width="0.5"/>
+<line x1="170" y1="30" x2="170" y2="160" stroke="#e8ecf0" stroke-width="0.5"/>
+<line x1="270" y1="30" x2="270" y2="160" stroke="#e8ecf0" stroke-width="0.5"/>
+<line x1="370" y1="30" x2="370" y2="160" stroke="#e8ecf0" stroke-width="0.5"/>
+<line x1="470" y1="30" x2="470" y2="160" stroke="#e8ecf0" stroke-width="0.5"/>
+<line x1="30" y1="50" x2="530" y2="50" stroke="#e8ecf0" stroke-width="0.5"/>
+<line x1="30" y1="90" x2="530" y2="90" stroke="#e8ecf0" stroke-width="0.5"/>
+<line x1="30" y1="130" x2="530" y2="130" stroke="#e8ecf0" stroke-width="0.5"/>
+<polyline points="70,158 120,148 170,135 220,118 270,96 320,70 370,50 420,34 470,26" fill="none" stroke="#0b1a2e" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+<polyline points="70,158 120,150 170,138 220,122 270,102 320,76 370,56 420,40 470,32" fill="none" stroke="#3b82f6" stroke-width="2.5" stroke-dasharray="5,3" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="30" y="54" font-family="Inter" font-size="7" fill="#8a9aa8">60%</text>
+<text x="30" y="94" font-family="Inter" font-size="7" fill="#8a9aa8">40%</text>
+<text x="30" y="134" font-family="Inter" font-size="7" fill="#8a9aa8">20%</text>
+<text x="70" y="178" font-family="Inter" font-size="7" fill="#8a9aa8" text-anchor="middle">W2</text>
+<text x="170" y="178" font-family="Inter" font-size="7" fill="#8a9aa8" text-anchor="middle">W4</text>
+<text x="270" y="178" font-family="Inter" font-size="7" fill="#8a9aa8" text-anchor="middle">W6</text>
+<text x="370" y="178" font-family="Inter" font-size="7" fill="#8a9aa8" text-anchor="middle">W8</text>
+<text x="470" y="178" font-family="Inter" font-size="7" fill="#8a9aa8" text-anchor="middle">W10-12</text>
+<line x1="470" y1="26" x2="470" y2="32" stroke="#dc2626" stroke-width="1.5" stroke-dasharray="2,2"/>
+<text x="485" y="31" font-family="Inter" font-size="6" fill="#dc2626">Δ=1.7%</text>
+</svg>
+<div class="cs-legend"><span style="color:#0b1a2e">■</span> Planned (Baseline) <span style="color:#3b82f6;margin-right:16px">■</span> Actual (Current)</div>
+<div class="cs-analysis"><strong>Variance Analysis:</strong> The cumulative gap between planned and actual is 1.7%, within the allowable ±3% threshold. Primary causes: curtain wall material delay (4 days) and MEP route re-coordination (2 days). A recovery plan is in place for weeks 13–15 with additional workforce allocation.</div>
+</div>
+<div class="sb-bar"><span><span class="sbb-name">Eng. Obieda Omari</span> — Planning & Cost Control Engineer</span><span class="sbb-ref">WPR-DLH-2025-012</span></div>
+<div class="pg">6 / 12</div>
+</div>
+
+<!-- PAGE 7: LOOKAHEAD -->
+<div class="page">
+<div class="la-wrap">
+<h2><span class="on">5</span> Lookahead — Week 13</h2>
+<table class="la-table">
+<thead><tr><th></th><th>Activity</th><th>Location</th><th>Quantity</th><th>Start</th><th>Finish</th><th>Responsible</th></tr></thead>
+<tbody>
+<tr><td><span class="pri h"></span></td><td>Slab concrete pour — L07</td><td>Zone A</td><td>140 m³</td><td>Jun 28</td><td>Jun 30</td><td>Concrete Subcon</td></tr>
+<tr><td><span class="pri h"></span></td><td>Column rebar — L08</td><td>Zone A</td><td>30 ton</td><td>Jul 01</td><td>Jul 03</td><td>Steel Subcon</td></tr>
+<tr><td><span class="pri m"></span></td><td>Plumbing works — Zone C</td><td>Zone C</td><td>100 m</td><td>Jun 28</td><td>Jul 02</td><td>MEP Subcon</td></tr>
+<tr><td><span class="pri m"></span></td><td>Curtain wall — West</td><td>West Facade</td><td>140 m²</td><td>Jun 29</td><td>Jul 05</td><td>Facade Subcon</td></tr>
+<tr><td><span class="pri l"></span></td><td>Roof waterproofing</td><td>Roof Area</td><td>320 m²</td><td>Jul 01</td><td>Jul 04</td><td>Waterproofing Co.</td></tr>
+<tr><td><span class="pri l"></span></td><td>Electrical conduits — L07</td><td>Zone A</td><td>160 m</td><td>Jun 28</td><td>Jul 03</td><td>Electrical Subcon</td></tr>
+<tr><td><span class="pri l"></span></td><td>Fire system pressure test</td><td>Zone C</td><td>-</td><td>Jul 02</td><td>Jul 03</td><td>QA/QC Engineer</td></tr>
+</tbody>
+</table>
+<div style="display:flex;gap:10px;margin-top:8px;font-size:9px;color:#5a6a7a"><span><span class="pri h" style="display:inline-block;vertical-align:middle;margin-left:3px"></span> High</span><span><span class="pri m" style="display:inline-block;vertical-align:middle;margin-left:3px"></span> Medium</span><span><span class="pri l" style="display:inline-block;vertical-align:middle;margin-left:3px"></span> Low</span></div>
+<div style="background:#fef8e8;border-left:3px solid #d97706;padding:8px 14px;margin-top:10px;border-radius:4px;font-size:10px;color:#5a3a10"><strong>Priority Alert:</strong> Rebar delivery must be secured before June 28 to ensure slab pour on schedule. Expedite procurement follow-up.</div>
+</div>
+<div class="sb-bar"><span><span class="sbb-name">Eng. Obieda Omari</span> — Planning & Cost Control Engineer</span><span class="sbb-ref">WPR-DLH-2025-012</span></div>
+<div class="pg">7 / 12</div>
+</div>
+
+<!-- PAGE 8: HSE -->
+<div class="page">
+<div class="hse-section">
+<h2><span class="on">6</span> Health, Safety & Quality</h2>
+<div class="hse-kpis">
+<div class="hk"><div class="hk-val">156</div><div class="hk-lbl">LTI-Free Days</div></div>
+<div class="hk"><div class="hk-val" style="color:#dc2626">0</div><div class="hk-lbl">Recordable Incidents</div></div>
+<div class="hk"><div class="hk-val" style="color:#d97706">1</div><div class="hk-lbl">Near Miss Reports</div></div>
+<div class="hk"><div class="hk-val">42</div><div class="hk-lbl">Safety Inspections</div></div>
+</div>
+<h3 style="font-size:12px;color:#0b1a2e;margin:0 0 6px">Near Miss Report — Week 12</h3>
+<table class="hse-table">
+<thead><tr><th>Date</th><th>Location</th><th>Description</th><th>Action Taken</th><th>Status</th></tr></thead>
+<tbody><tr><td>Jun 24</td><td>Zone A, L06</td><td>Tool dropped from scaffolding during concrete works</td><td>Tool lanyards + safety net installed</td><td><span class="tag cl">Closed</span></td></tr></tbody>
+</table>
+<h3 style="font-size:12px;color:#0b1a2e;margin:12px 0 6px">Quality Control — Test Results</h3>
+<table class="hse-table">
+<thead><tr><th>Test Type</th><th>Qty</th><th>Pass</th><th>Fail</th><th>Pass Rate</th></tr></thead>
+<tbody>
+<tr><td>Concrete cylinders — 7 day</td><td>10</td><td>10</td><td>0</td><td>100%</td></tr>
+<tr><td>Rebar tensile test</td><td>6</td><td>6</td><td>0</td><td>100%</td></tr>
+<tr><td>Pipe pressure test</td><td>5</td><td>4</td><td>1</td><td>80%</td></tr>
+<tr><td>Weld inspection</td><td>6</td><td>6</td><td>0</td><td>100%</td></tr>
+</tbody>
+</table>
+</div>
+<div class="sb-bar"><span><span class="sbb-name">Eng. Obieda Omari</span> — Planning & Cost Control Engineer</span><span class="sbb-ref">WPR-DLH-2025-012</span></div>
+<div class="pg">8 / 12</div>
+</div>
+
+<!-- PAGE 9: RESOURCES -->
+<div class="page" style="background:#f8fafc">
+<div style="padding:28px 40px">
+<h2 style="font-size:16px;color:#0b1a2e;margin-bottom:10px;display:flex;align-items:center;gap:8px"><span class="on" style="border:2px solid #0b1a2e;width:22px;height:22px;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700">7</span> Resources & Equipment</h2>
+<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:12px">
+<div style="background:#fff;border:1px solid #e0e6ec;border-radius:4px;padding:8px 10px;display:flex;justify-content:space-between;align-items:center"><span style="font-size:9.5px;color:#5a6a7a">Concrete & Steel Workers</span><span style="font-size:13px;font-weight:700;color:#0b1a2e">28</span></div>
+<div style="background:#fff;border:1px solid #e0e6ec;border-radius:4px;padding:8px 10px;display:flex;justify-content:space-between;align-items:center"><span style="font-size:9.5px;color:#5a6a7a">MEP Workers</span><span style="font-size:13px;font-weight:700;color:#0b1a2e">18</span></div>
+<div style="background:#fff;border:1px solid #e0e6ec;border-radius:4px;padding:8px 10px;display:flex;justify-content:space-between;align-items:center"><span style="font-size:9.5px;color:#5a6a7a">Finishing Workers</span><span style="font-size:13px;font-weight:700;color:#0b1a2e">16</span></div>
+<div style="background:#fff;border:1px solid #e0e6ec;border-radius:4px;padding:8px 10px;display:flex;justify-content:space-between;align-items:center"><span style="font-size:9.5px;color:#5a6a7a">Facade Workers</span><span style="font-size:13px;font-weight:700;color:#0b1a2e">8</span></div>
+<div style="background:#fff;border:1px solid #e0e6ec;border-radius:4px;padding:8px 10px;display:flex;justify-content:space-between;align-items:center"><span style="font-size:9.5px;color:#5a6a7a">Engineers & Technicians</span><span style="font-size:13px;font-weight:700;color:#0b1a2e">10</span></div>
+<div style="background:#fff;border:1px solid #e0e6ec;border-radius:4px;padding:8px 10px;display:flex;justify-content:space-between;align-items:center"><span style="font-size:9.5px;color:#5a6a7a">Equipment Operators</span><span style="font-size:13px;font-weight:700;color:#0b1a2e">6</span></div>
+</div>
+<h3 style="font-size:12px;color:#0b1a2e;margin:0 0 6px">Manpower Daily Distribution</h3>
+<table style="width:100%;border-collapse:collapse;font-size:10px;margin-bottom:12px">
+<thead><tr style="background:#0b1a2e;color:#fff"><th style="padding:5px 8px;text-align:left;font-weight:600;font-size:9px">Trade</th><th style="padding:5px 8px;text-align:left;font-weight:600;font-size:9px">Sun</th><th style="padding:5px 8px;text-align:left;font-weight:600;font-size:9px">Mon</th><th style="padding:5px 8px;text-align:left;font-weight:600;font-size:9px">Tue</th><th style="padding:5px 8px;text-align:left;font-weight:600;font-size:9px">Wed</th><th style="padding:5px 8px;text-align:left;font-weight:600;font-size:9px">Thu</th><th style="padding:5px 8px;text-align:left;font-weight:600;font-size:9px">Total</th></tr></thead>
+<tbody>
+<tr><td style="padding:4px 8px;border-bottom:1px solid #e0e6ec">Concrete & Steel</td><td style="padding:4px 8px;border-bottom:1px solid #e0e6ec">6</td><td style="padding:4px 8px;border-bottom:1px solid #e0e6ec">6</td><td style="padding:4px 8px;border-bottom:1px solid #e0e6ec">6</td><td style="padding:4px 8px;border-bottom:1px solid #e0e6ec">6</td><td style="padding:4px 8px;border-bottom:1px solid #e0e6ec">4</td><td style="padding:4px 8px;border-bottom:1px solid #e0e6ec">28</td></tr>
+<tr><td style="padding:4px 8px;border-bottom:1px solid #e0e6ec">MEP</td><td style="padding:4px 8px;border-bottom:1px solid #e0e6ec">4</td><td style="padding:4px 8px;border-bottom:1px solid #e0e6ec">4</td><td style="padding:4px 8px;border-bottom:1px solid #e0e6ec">4</td><td style="padding:4px 8px;border-bottom:1px solid #e0e6ec">4</td><td style="padding:4px 8px;border-bottom:1px solid #e0e6ec">2</td><td style="padding:4px 8px;border-bottom:1px solid #e0e6ec">18</td></tr>
+<tr><td style="padding:4px 8px;border-bottom:1px solid #e0e6ec">Finishing</td><td style="padding:4px 8px;border-bottom:1px solid #e0e6ec">3</td><td style="padding:4px 8px;border-bottom:1px solid #e0e6ec">3</td><td style="padding:4px 8px;border-bottom:1px solid #e0e6ec">4</td><td style="padding:4px 8px;border-bottom:1px solid #e0e6ec">4</td><td style="padding:4px 8px;border-bottom:1px solid #e0e6ec">2</td><td style="padding:4px 8px;border-bottom:1px solid #e0e6ec">16</td></tr>
+<tr><td style="padding:4px 8px;border-bottom:1px solid #e0e6ec">Facade</td><td style="padding:4px 8px;border-bottom:1px solid #e0e6ec">2</td><td style="padding:4px 8px;border-bottom:1px solid #e0e6ec">2</td><td style="padding:4px 8px;border-bottom:1px solid #e0e6ec">2</td><td style="padding:4px 8px;border-bottom:1px solid #e0e6ec">2</td><td style="padding:4px 8px;border-bottom:1px solid #e0e6ec">0</td><td style="padding:4px 8px;border-bottom:1px solid #e0e6ec">8</td></tr>
+<tr style="font-weight:700"><td style="padding:4px 8px;border-bottom:1px solid #e0e6ec;background:#e8edf2">Daily Total</td><td style="padding:4px 8px;border-bottom:1px solid #e0e6ec;background:#e8edf2">15</td><td style="padding:4px 8px;border-bottom:1px solid #e0e6ec;background:#e8edf2">15</td><td style="padding:4px 8px;border-bottom:1px solid #e0e6ec;background:#e8edf2">16</td><td style="padding:4px 8px;border-bottom:1px solid #e0e6ec;background:#e8edf2">16</td><td style="padding:4px 8px;border-bottom:1px solid #e0e6ec;background:#e8edf2">8</td><td style="padding:4px 8px;border-bottom:1px solid #e0e6ec;background:#e8edf2">70</td></tr>
+</tbody>
+</table>
+<h3 style="font-size:12px;color:#0b1a2e;margin:0 0 6px">Major Equipment Status</h3>
+<table style="width:100%;border-collapse:collapse;font-size:10px">
+<thead><tr style="background:#0b1a2e;color:#fff"><th style="padding:5px 8px;text-align:left;font-weight:600;font-size:9px">Equipment</th><th style="padding:5px 8px;text-align:left;font-weight:600;font-size:9px">Qty</th><th style="padding:5px 8px;text-align:left;font-weight:600;font-size:9px">Status</th><th style="padding:5px 8px;text-align:left;font-weight:600;font-size:9px">Remarks</th></tr></thead>
+<tbody>
+<tr><td style="padding:4px 8px;border-bottom:1px solid #e0e6ec">Tower Crane</td><td style="padding:4px 8px;border-bottom:1px solid #e0e6ec">2</td><td style="padding:4px 8px;border-bottom:1px solid #e0e6ec;color:#16a34a">Good</td><td style="padding:4px 8px;border-bottom:1px solid #e0e6ec">Scheduled maintenance Sat</td></tr>
+<tr><td style="padding:4px 8px;border-bottom:1px solid #e0e6ec">Concrete Pump</td><td style="padding:4px 8px;border-bottom:1px solid #e0e6ec">1</td><td style="padding:4px 8px;border-bottom:1px solid #e0e6ec;color:#16a34a">Good</td><td style="padding:4px 8px;border-bottom:1px solid #e0e6ec">-</td></tr>
+<tr><td style="padding:4px 8px;border-bottom:1px solid #e0e6ec">Mast Climber</td><td style="padding:4px 8px;border-bottom:1px solid #e0e6ec">2</td><td style="padding:4px 8px;border-bottom:1px solid #e0e6ec;color:#16a34a">Good</td><td style="padding:4px 8px;border-bottom:1px solid #e0e6ec">-</td></tr>
+<tr><td style="padding:4px 8px;border-bottom:1px solid #e0e6ec">Generator</td><td style="padding:4px 8px;border-bottom:1px solid #e0e6ec">3</td><td style="padding:4px 8px;border-bottom:1px solid #e0e6ec;color:#d97706">Fair</td><td style="padding:4px 8px;border-bottom:1px solid #e0e6ec">Gen #2 needs service</td></tr>
+</tbody>
+</table>
+</div>
+<div class="sb-bar"><span><span class="sbb-name">Eng. Obieda Omari</span> — Planning & Cost Control Engineer</span><span class="sbb-ref">WPR-DLH-2025-012</span></div>
+<div class="pg">9 / 12</div>
+</div>
+
+<!-- PAGE 10: RISKS -->
+<div class="page">
+<div style="padding:28px 40px">
+<h2 style="font-size:16px;color:#0b1a2e;margin-bottom:10px;display:flex;align-items:center;gap:8px"><span class="on" style="border:2px solid #0b1a2e;width:22px;height:22px;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700">8</span> Issues & Risk Register</h2>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:14px">
+<div style="border:1px solid #e0e6ec;border-radius:4px;padding:10px;background:#fff">
+<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px"><span style="font-size:10.5px;font-weight:600;color:#1e2a3a">Curtain Wall Material Delay</span><span style="font-size:7.5px;padding:1px 6px;border-radius:2px;font-weight:600;background:#f8d7da;color:#991b1b">Critical</span></div>
+<div style="font-size:9px;color:#5a6a7a">Glass panel shipment delayed due to production line issue. Expected arrival July 1. Impact: East facade delayed 4 days.</div>
+<div style="font-size:8.5px;color:#8a9aa8;margin-top:4px;padding-top:4px;border-top:1px solid #e8ecf0"><strong>Action:</strong> Expedite request + alternative supplier on standby</div>
+</div>
+<div style="border:1px solid #e0e6ec;border-radius:4px;padding:10px;background:#fff">
+<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px"><span style="font-size:10.5px;font-weight:600;color:#1e2a3a">HVAC vs. Fire Protection Conflict</span><span style="font-size:7.5px;padding:1px 6px;border-radius:2px;font-weight:600;background:#fff3cd;color:#854d0e">Medium</span></div>
+<div style="font-size:9px;color:#5a6a7a">Route conflict between HVAC ducts and fire protection in Zone C near column C06 (Sterilization Dept). RFI submitted to Dar Al-Handasah.</div>
+<div style="font-size:8.5px;color:#8a9aa8;margin-top:4px;padding-top:4px;border-top:1px solid #e8ecf0"><strong>Action:</strong> Design revision under review — expected within 48 hrs</div>
+</div>
+<div style="border:1px solid #e0e6ec;border-radius:4px;padding:10px;background:#fff">
+<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px"><span style="font-size:10.5px;font-weight:600;color:#1e2a3a">Rebar Shortage — Level 07</span><span style="font-size:7.5px;padding:1px 6px;border-radius:2px;font-weight:600;background:#fff3cd;color:#854d0e">Medium</span></div>
+<div style="font-size:9px;color:#5a6a7a">Remaining rebar insufficient for slab L07. Urgent procurement request submitted.</div>
+<div style="font-size:8.5px;color:#8a9aa8;margin-top:4px;padding-top:4px;border-top:1px solid #e8ecf0"><strong>Action:</strong> Urgent purchase order approved — delivery expected Jun 29</div>
+</div>
+<div style="border:1px solid #e0e6ec;border-radius:4px;padding:10px;background:#fff">
+<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px"><span style="font-size:10.5px;font-weight:600;color:#1e2a3a">Electrical Design Change CO-015</span><span style="font-size:7.5px;padding:1px 6px;border-radius:2px;font-weight:600;background:#d4edda;color:#166534">Low</span></div>
+<div style="font-size:9px;color:#5a6a7a">Additional 8 outlets requested in Zone A per change order. Schedule impact under assessment.</div>
+<div style="font-size:8.5px;color:#8a9aa8;margin-top:4px;padding-top:4px;border-top:1px solid #e8ecf0"><strong>Action:</strong> Impact assessment + schedule update in progress</div>
+</div>
+</div>
+<h3 style="font-size:12px;color:#0b1a2e;margin:0 0 6px">Probability-Impact Matrix</h3>
+<svg viewBox="0 0 300 60">
+<rect x="0" y="0" width="90" height="50" rx="3" fill="#d4edda"/><text x="45" y="30" text-anchor="middle" font-family="Inter" font-size="9" fill="#166534" font-weight="600">Low</text>
+<rect x="95" y="0" width="90" height="50" rx="3" fill="#fff3cd"/><text x="140" y="30" text-anchor="middle" font-family="Inter" font-size="9" fill="#854d0e" font-weight="600">Medium</text>
+<rect x="190" y="0" width="90" height="50" rx="3" fill="#f8d7da"/><text x="235" y="30" text-anchor="middle" font-family="Inter" font-size="9" fill="#991b1b" font-weight="600">High</text>
+<text x="150" y="60" text-anchor="middle" font-family="Inter" font-size="6.5" fill="#6a7a8a">← Impact →</text>
+</svg>
+</div>
+<div class="sb-bar"><span><span class="sbb-name">Eng. Obieda Omari</span> — Planning & Cost Control Engineer</span><span class="sbb-ref">WPR-DLH-2025-012</span></div>
+<div class="pg">10 / 12</div>
+</div>
+
+<!-- PAGE 11: FINANCIAL -->
+<div class="page">
+<div class="fin-section">
+<h2><span class="on">9</span> Financial Performance</h2>
+<table class="fin-table">
+<thead><tr><th>Work Package</th><th>Budget ($)</th><th>Expended to Date ($)</th><th>% Spent</th></tr></thead>
+<tbody>
+<tr><td>Structural & Concrete</td><td>15,200,000</td><td>9,728,000</td><td>64.0%</td></tr>
+<tr><td>MEP Works</td><td>12,800,000</td><td>5,632,000</td><td>44.0%</td></tr>
+<tr><td>Interior Finishing</td><td>9,400,000</td><td>2,068,000</td><td>22.0%</td></tr>
+<tr><td>Facade & Glazing</td><td>5,600,000</td><td>952,000</td><td>17.0%</td></tr>
+<tr><td>External Works</td><td>5,500,000</td><td>2,145,000</td><td>39.0%</td></tr>
+<tr><td>Total</td><td>48,500,000</td><td>20,525,000</td><td>42.3%</td></tr>
+</tbody>
+</table>
+<h3 style="font-size:12px;color:#0b1a2e;margin:10px 0 6px">Weekly Burn Rate — Last 8 Weeks</h3>
+<div style="display:flex;align-items:flex-end;gap:5px;height:80px;margin:8px 0;padding:6px 4px;background:#f6f9fc;border-radius:6px">
+<div style="flex:1;display:flex;flex-direction:column;align-items:center;height:100%"><div style="flex:1;width:60%;border-radius:3px 3px 0 0;background:#0b1a2e;height:35%"></div><span style="font-size:6.5px;color:#6a7a8a;margin-top:2px">W5</span></div>
+<div style="flex:1;display:flex;flex-direction:column;align-items:center;height:100%"><div style="flex:1;width:60%;border-radius:3px 3px 0 0;background:#0b1a2e;height:48%"></div><span style="font-size:6.5px;color:#6a7a8a;margin-top:2px">W6</span></div>
+<div style="flex:1;display:flex;flex-direction:column;align-items:center;height:100%"><div style="flex:1;width:60%;border-radius:3px 3px 0 0;background:#0b1a2e;height:42%"></div><span style="font-size:6.5px;color:#6a7a8a;margin-top:2px">W7</span></div>
+<div style="flex:1;display:flex;flex-direction:column;align-items:center;height:100%"><div style="flex:1;width:60%;border-radius:3px 3px 0 0;background:#0b1a2e;height:55%"></div><span style="font-size:6.5px;color:#6a7a8a;margin-top:2px">W8</span></div>
+<div style="flex:1;display:flex;flex-direction:column;align-items:center;height:100%"><div style="flex:1;width:60%;border-radius:3px 3px 0 0;background:#0b1a2e;height:50%"></div><span style="font-size:6.5px;color:#6a7a8a;margin-top:2px">W9</span></div>
+<div style="flex:1;display:flex;flex-direction:column;align-items:center;height:100%"><div style="flex:1;width:60%;border-radius:3px 3px 0 0;background:#3b82f6;height:62%"></div><span style="font-size:6.5px;color:#6a7a8a;margin-top:2px">W10</span></div>
+<div style="flex:1;display:flex;flex-direction:column;align-items:center;height:100%"><div style="flex:1;width:60%;border-radius:3px 3px 0 0;background:#3b82f6;height:58%"></div><span style="font-size:6.5px;color:#6a7a8a;margin-top:2px">W11</span></div>
+<div style="flex:1;display:flex;flex-direction:column;align-items:center;height:100%"><div style="flex:1;width:60%;border-radius:3px 3px 0 0;background:#3b82f6;height:60%"></div><span style="font-size:6.5px;color:#6a7a8a;margin-top:2px">W12</span></div>
+</div>
+<div style="text-align:center;font-size:8px;color:#6a7a8a;margin-top:2px">Avg. weekly burn: $225,000 | Cumulative expenditure: $20,525,000</div>
+</div>
+<div class="sb-bar"><span><span class="sbb-name">Eng. Obieda Omari</span> — Planning & Cost Control Engineer</span><span class="sbb-ref">WPR-DLH-2025-012</span></div>
+<div class="pg">11 / 12</div>
+</div>
+
+<!-- PAGE 12: SIGNATURES -->
+<div class="page">
+<div class="sig-wrap">
+<h2>Recommendations & Signatures</h2>
+<div class="sig-sub">Weekly Progress Report — Week 12 | Dallah Hospital Medical Complex</div>
+<div class="sig-rec">
+<strong style="font-size:11px;color:#0b1a2e">Recommendations:</strong>
+<ol style="margin-top:5px">
+<li>Expedite medical gas piping installation to avoid delaying HVAC commissioning in ICU zones.</li>
+<li>Schedule coordination meeting with Dar Al-Handasah to resolve MEP routing conflict in Zone C (near Sterilization Dept).</li>
+<li>Prioritize emergency department finishing works to meet Q3 2025 soft opening milestone.</li>
+<li>Review Change Order CO-015 and update schedule impact accordingly.</li>
+<li>Expedite procurement of MEP medical equipment (backup generators, MRI cooling units) to maintain critical path.</li>
+</ol>
+</div>
+<div class="sig-boxes">
+<div class="sb"><div class="sb-name">Eng. Obieda Omari</div><div class="sb-line"></div><div class="sb-role">Planning & Cost Control Engineer</div></div>
+<div class="sb"><div class="sb-name">Project Management</div><div class="sb-line"></div><div class="sb-role">Project Manager — SACCO</div></div>
+</div>
+<div class="sig-footer">WPR-DLH-2025-012 | Rev. A | Confidential — This report contains confidential project information</div>
+</div>
+<div class="pg">12 / 12</div>
+</div>
+
+<div class="fixed-foot"><div class="f-sig"><div class="f-dot"></div><strong>Eng. Obieda Omari</strong> — Planning & Cost Control Engineer</div><span>WPR-DLH-2025-012 • Confidential</span></div>
+</body>
+</html>

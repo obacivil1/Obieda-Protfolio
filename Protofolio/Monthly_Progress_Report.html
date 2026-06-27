@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Monthly Progress Report | Eng. Obieda Omari</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&family=Inter:wght@300;400;500;600;700&display=swap');
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Cairo','Inter',sans-serif;background:#f5efe8;color:#2c1810;padding:20px;line-height:1.7}
+.page{max-width:210mm;margin:0 auto 24px;background:#fffdfa;border-radius:4px;box-shadow:0 6px 30px rgba(92,47,20,0.08);padding:48px 52px;position:relative;page-break-after:always}
+.page-num{position:absolute;bottom:12px;left:50%;transform:translateX(-50%);font-size:10px;color:#b2957a;font-family:'Inter',sans-serif;direction:ltr}
+/* COVER */
+.cover{background:linear-gradient(145deg,#1a0f0a,#2c1810,#3d2216);color:#f5efe8;text-align:center;padding:80px 60px;min-height:90vh;display:flex;flex-direction:column;justify-content:center;border-radius:4px;position:relative;overflow:hidden}
+.cover::before{content:'';position:absolute;top:-60%;left:-30%;width:80%;height:120%;background:radial-gradient(ellipse,rgba(180,120,70,0.08),transparent);pointer-events:none}
+.cover::after{content:'';position:absolute;bottom:0;left:0;right:0;height:4px;background:linear-gradient(90deg,#b47846,#d4a574,#b47846)}
+.cover .crest{width:72px;height:72px;border:2px solid rgba(180,120,70,0.3);border-radius:50%;margin:0 auto 32px;display:flex;align-items:center;justify-content:center;font-size:28px;color:#d4a574;font-weight:700;font-family:'Inter',sans-serif}
+.cover .top-bar{display:flex;justify-content:space-between;align-items:center;margin-bottom:60px;font-size:11px;color:rgba(245,239,232,0.4)}
+.cover .top-bar .doc-ref{direction:ltr;font-family:'Inter',sans-serif;letter-spacing:1px}
+.cover .classification{padding:4px 16px;border:1px solid rgba(180,120,70,0.3);border-radius:2px;font-size:9px;letter-spacing:2px;color:#d4a574}
+.cover h1{font-size:30px;font-weight:900;margin-bottom:8px;line-height:1.4}
+.cover h1 .ar{display:block}
+.cover h1 .en{font-size:16px;font-weight:300;color:rgba(245,239,232,0.4);margin-top:4px}
+.cover .sub{font-size:14px;color:rgba(245,239,232,0.3);margin-bottom:48px;font-weight:300}
+.cover .meta-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;max-width:600px;margin:0 auto 40px;text-align:center}
+.cover .meta-grid .mg-item{padding:12px 8px;border:1px solid rgba(245,239,232,0.06);border-radius:2px}
+.cover .meta-grid .mg-label{font-size:9px;color:rgba(245,239,232,0.35);text-transform:uppercase;letter-spacing:1px;margin-bottom:4px}
+.cover .meta-grid .mg-val{font-size:13px;color:#d4a574;font-weight:600}
+.cover .sig-box{border-top:1px solid rgba(245,239,232,0.08);padding-top:24px;margin-top:8px}
+.cover .sig-name{color:#d4a574;font-weight:700;font-size:16px;letter-spacing:1px}
+.cover .sig-title{color:rgba(245,239,232,0.35);font-size:11px;font-weight:300;margin-top:4px}
+/* TOC */
+.toc h2{font-size:18px;color:#2c1810;margin-bottom:20px;border-bottom:2px solid #d4a574;padding-bottom:8px;display:flex;align-items:center;gap:10px}
+.toc h2::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,#d4a574,transparent)}
+.toc table{width:100%;border-collapse:collapse;font-size:12.5px}
+.toc td{padding:10px 8px;border-bottom:1px solid #efe5dc}
+.toc td.num{width:36px;color:#d4a574;font-weight:700;text-align:center}
+.toc td.dots{color:#d4c5b5;letter-spacing:2px}
+.toc td.pg{width:40px;text-align:left;direction:ltr;color:#b2957a;font-family:'Inter',sans-serif}
+/* CONTENT */
+.page h2{font-size:17px;color:#2c1810;margin-bottom:14px;border-bottom:2px solid #d4a574;padding-bottom:8px;display:flex;align-items:center;gap:10px}
+.page h2 .sec-num{background:#2c1810;color:#f5efe8;width:26px;height:26px;border-radius:2px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700}
+.page h3{font-size:14px;color:#3d2216;margin:16px 0 10px}
+.page p{font-size:12.5px;color:#6b4f3a}
+.metric-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;margin-bottom:18px}
+.metric-card{background:linear-gradient(135deg,#fdf8f4,#f8f0e8);border-radius:2px;padding:14px 12px;text-align:center;border-top:3px solid #d4a574}
+.metric-card .mc-val{font-size:24px;font-weight:900;color:#2c1810;font-family:'Inter',sans-serif;direction:ltr}
+.metric-card .mc-val.green{color:#5a8a5a}
+.metric-card .mc-val.red{color:#b34a3a}
+.metric-card .mc-val.amber{color:#c4953a}
+.metric-card .mc-lbl{font-size:10px;color:#b2957a;margin-top:4px}
+table.data{width:100%;border-collapse:collapse;margin-bottom:14px;font-size:12px}
+table.data th{background:#2c1810;color:#f5efe8;padding:9px 10px;text-align:right;font-weight:600;font-size:11px}
+table.data td{padding:8px 10px;border-bottom:1px solid #efe5dc}
+table.data tr:nth-child(even){background:#fdfaf7}
+.tag{display:inline-block;padding:2px 10px;border-radius:2px;font-size:10px;font-weight:600}
+.tag.go{background:#e8f0e8;color:#3a6a3a}
+.tag.ca{background:#f8f0d8;color:#8a7530}
+.tag.st{background:#f8e0d8;color:#8a3a2a}
+.tag.pr{background:#e8e0f8;color:#5a3a8a}
+.block-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-bottom:16px}
+.info-block{background:#fdfaf7;border-radius:2px;padding:14px;border:1px solid #efe5dc}
+.info-block h4{font-size:12px;color:#2c1810;margin-bottom:4px}
+.info-block p{font-size:11px;color:#6b4f3a}
+.info-block .ibl-badge{display:inline-block;padding:1px 8px;border-radius:2px;font-size:9px;font-weight:600;margin-bottom:5px}
+.info-block .ibl-badge.cr{background:#f8e0d8;color:#8a3a2a}
+.info-block .ibl-badge.in{background:#e8f0e8;color:#3a6a3a}
+.info-block .ibl-badge.rs{background:#f0e8d8;color:#8a7530}
+.chart-row{display:flex;gap:4px;align-items:flex-end;height:120px;padding:8px 0;margin-bottom:4px}
+.chart-row .cr-bar{flex:1;border-radius:2px 2px 0 0;min-height:4px;position:relative}
+.chart-row .cr-bar .cl{position:absolute;bottom:-18px;left:50%;transform:translateX(-50%);font-size:7.5px;color:#b2957a;white-space:nowrap}
+.chart-key{text-align:center;font-size:9px;color:#b2957a;margin-top:16px}
+.sig-section{margin-top:28px;padding-top:16px;border-top:1px solid #efe5dc;display:flex;justify-content:space-around;align-items:flex-end;font-size:11px;color:#6b4f3a}
+.sig-block{text-align:center;min-width:160px}
+.sig-block .sig-line{width:80%;height:1px;background:#d4c5b5;margin:6px auto 3px}
+.sig-block .sig-label{font-size:9px;color:#b2957a}
+.sticky-footer{position:fixed;bottom:0;left:0;right:0;background:linear-gradient(135deg,rgba(26,15,10,0.96),rgba(44,24,16,0.94));color:#f5efe8;padding:5px 20px;display:flex;align-items:center;justify-content:space-between;font-size:10px;z-index:999;direction:rtl;backdrop-filter:blur(4px);box-shadow:0 -2px 16px rgba(0,0,0,0.2)}
+.sticky-footer .sf-sig{display:flex;align-items:center;gap:6px}
+.sticky-footer .sf-sig::before{content:'';width:2px;height:14px;background:#d4a574;border-radius:2px}
+.sticky-footer .sf-sig strong{color:#d4a574;font-size:10.5px}
+.sticky-footer .sf-sig span{color:#b2957a;font-size:9px}
+@media print{body{background:#fff;padding:0}.page{box-shadow:none;margin:0;padding:36px 40px;border-radius:0;page-break-after:always}.sticky-footer{position:fixed;bottom:0;left:0;right:0;background:#1a0f0a!important;-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important}.cover{min-height:100vh;border-radius:0;padding:60px 40px}}
+@media(max-width:768px){body{padding:10px;padding-bottom:48px}.page{padding:20px 16px}.cover{padding:40px 20px;min-height:80vh}.cover .meta-grid{grid-template-columns:1fr 1fr}.block-grid,.metric-row{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<!-- PAGE 1: COVER -->
+<div class="page" style="padding:0;background:transparent;box-shadow:none">
+<div class="cover">
+<div class="crest">NWC</div>
+<div class="top-bar"><span class="doc-ref">MPR-NWC-2026-006</span><span class="classification">INTERNAL — CONFIDENTIAL</span></div>
+<h1><span class="ar">التقرير الشهري — مشروع شبكات المياه</span><span class="en">Monthly Progress Report — Water Network Project</span></h1>
+<div class="sub">يونيو 2026 | الفترة من 1 يونيو إلى 30 يونيو 2026</div>
+<div class="meta-grid">
+<div class="mg-item"><div class="mg-label">الجهة المالكة</div><div class="mg-val">المجموعة المتحدة للمياه (NWC)</div></div>
+<div class="mg-item"><div class="mg-label">المقاول</div><div class="mg-val">شركة المختصون للمقاولات (SAC)</div></div>
+<div class="mg-item"><div class="mg-label">رقم العقد</div><div class="mg-val">NWC-SAC-2024-089</div></div>
+<div class="mg-item"><div class="mg-label">مدة العقد</div><div class="mg-val">30 شهراً</div></div>
+<div class="mg-item"><div class="mg-label">تاريخ البدء</div><div class="mg-val">01 يناير 2025</div></div>
+<div class="mg-item"><div class="mg-label">تاريخ الانتهاء</div><div class="mg-val">30 يونيو 2027</div></div>
+</div>
+<div class="sig-box">
+<div style="display:flex;justify-content:center;gap:40px;flex-wrap:wrap">
+<div><div class="sig-name">م. عبيدة العمري</div><div class="sig-title">مهندس تخطيط أول — Senior Planning Engineer</div></div>
+<div><div class="sig-name" style="color:rgba(245,239,232,0.5);font-size:14px">م. خالد السبيعي</div><div class="sig-title">مدير المشروع</div></div>
+</div>
+</div>
+</div>
+<div class="page-num" style="color:rgba(245,239,232,0.2)">1 / 12</div>
+</div>
+
+<!-- PAGE 2: TOC -->
+<div class="page">
+<div class="toc">
+<h2>فهرس المحتويات | Table of Contents</h2>
+<table>
+<tr><td class="num">1</td><td>ملخص تنفيذي شهري</td><td class="dots">.....................................................................................................................</td><td class="pg">3</td></tr>
+<tr><td class="num">2</td><td>إحصائيات المشروع</td><td class="dots">.....................................................................................................................</td><td class="pg">4</td></tr>
+<tr><td class="num">3</td><td>أعمال الشهر — الإنجازات</td><td class="dots">.....................................................................................................................</td><td class="pg">5</td></tr>
+<tr><td class="num">4</td><td>تحليل التقدم — منحنيات S</td><td class="dots">.....................................................................................................................</td><td class="pg">6</td></tr>
+<tr><td class="num">5</td><td>حالة الأنشطة الرئيسية</td><td class="dots">.....................................................................................................................</td><td class="pg">7</td></tr>
+<tr><td class="num">6</td><td>المشكلات والمخاطر</td><td class="dots">.....................................................................................................................</td><td class="pg">8</td></tr>
+<tr><td class="num">7</td><td>الموارد البشرية والمعدات</td><td class="dots">.....................................................................................................................</td><td class="pg">9</td></tr>
+<tr><td class="num">8</td><td>أعمال السلامة والجودة</td><td class="dots">.....................................................................................................................</td><td class="pg">10</td></tr>
+<tr><td class="num">9</td><td>خطة الشهر القادم</td><td class="dots">.....................................................................................................................</td><td class="pg">11</td></tr>
+<tr><td class="num">10</td><td>توصيات — توقيعات — ختم</td><td class="dots">.....................................................................................................................</td><td class="pg">12</td></tr>
+</table>
+</div>
+<div class="page-num">2 / 12</div>
+</div>
+
+<!-- PAGE 3: EXECUTIVE SUMMARY -->
+<div class="page">
+<h2><span class="sec-num">1</span> ملخص تنفيذي شهري | Monthly Executive Summary</h2>
+<p style="font-size:12.5px;color:#6b4f3a;margin-bottom:18px">ملخص الأداء العام للمشروع لشهر يونيو 2026. يشمل المؤشرات المالية والتقدم الفعلي مقابل المخطط وأهم أحداث الشهر.</p>
+<div class="metric-row">
+<div class="metric-card"><div class="mc-val">42.8%</div><div class="mc-lbl">الإنجاز المخطط التراكمي</div></div>
+<div class="metric-card"><div class="mc-val amber">41.3%</div><div class="mc-lbl">الإنجاز الفعلي التراكمي</div></div>
+<div class="metric-card"><div class="mc-val red">-1.5%</div><div class="mc-lbl">تباين الجدول (SV)</div></div>
+<div class="metric-card"><div class="mc-val green">0.96</div><div class="mc-lbl">مؤشر أداء الجدول (SPI)</div></div>
+<div class="metric-card"><div class="mc-val">$18.2M</div><div class="mc-lbl">الصرف المالي حتى تاريخه</div></div>
+<div class="metric-card"><div class="mc-val green">$0.85M</div><div class="mc-lbl">الصرف الشهري — يونيو</div></div>
+</div>
+<div style="background:#f8f0e8;border-radius:2px;padding:14px 16px;border-right:3px solid #d4a574;margin-bottom:14px;font-size:12px;color:#3d2216">
+<strong style="color:#b47846">ملخص الشهر:</strong> تم إنجاز مد 3,800 م من خطوط المياه الرئيسية في القطاعين A و B. اكتمال ربط محطة الضخ P-02 مع الخط الرئيسي. تأخر أعمال الحفر في القطاع C بسبب وجود صخور. إجمالي الصرف المالي للشهر $0.85M ضمن الميزانية المخطط لها.
+</div>
+<table class="data">
+<thead><tr><th>المؤشر الرئيسي</th><th>قيمة</th><th>الحالة</th></tr></thead>
+<tbody>
+<tr><td>العمال في الموقع (متوسط)</td><td>186</td><td><span class="tag go">جيد</span></td></tr>
+<tr><td>أيام العمل الشهرية</td><td>26</td><td><span class="tag go">جيد</span></td></tr>
+<tr><td>حوادث العمل (LTI)</td><td>0</td><td><span class="tag go">ممتاز</span></td></tr>
+<tr><td>أوامر التغيير المعلقة</td><td>4</td><td><span class="tag ca">قيد المراجعة</span></td></tr>
+<tr><td>مطالبات المقاول</td><td>2</td><td><span class="tag ca">قيد التفاوض</span></td></tr>
+</tbody>
+</table>
+<div class="page-num">3 / 12</div>
+</div>
+
+<!-- PAGE 4: PROJECT STATISTICS -->
+<div class="page">
+<h2><span class="sec-num">2</span> إحصائيات المشروع | Project Statistics</h2>
+<table class="data">
+<thead><tr><th>البيان</th><th>القيمة</th><th>ملاحظات</th></tr></thead>
+<tbody>
+<tr><td>القيمة الإجمالية للعقد</td><td>$38,600,000</td><td>مشروع شبكات مياه — المرحلة II</td></tr>
+<tr><td>إجمالي الصرف حتى تاريخه</td><td>$18,200,000</td><td>47.2% من قيمة العقد</td></tr>
+<tr><td>الصرف الشهري (يونيو)</td><td>$850,000</td><td>ضمن الميزانية</td></tr>
+<tr><td>القيمة المتبقية</td><td>$20,400,000</td><td>لأعمال 24 شهراً متبقية</td></tr>
+<tr><td>نسبة الإنجاز المخطط</td><td>42.8%</td><td>خط الأساس (Baseline)</td></tr>
+<tr><td>نسبة الإنجاز الفعلي</td><td>41.3%</td><td>التقدير الميداني</td></tr>
+</tbody>
+</table>
+<h3>البيانات الجغرافية | Geographical Data</h3>
+<table class="data">
+<thead><tr><th>القطاع</th><th>طول الشبكة (كم)</th><th>منجز (كم)</th><th>%</th><th>الحالة</th></tr></thead>
+<tbody>
+<tr><td>القطاع A — شمال</td><td>28.5</td><td>22.3</td><td>78.2%</td><td><span class="tag go">متقدم</span></td></tr>
+<tr><td>القطاع B — وسط</td><td>32.0</td><td>18.6</td><td>58.1%</td><td><span class="tag go">جاري</span></td></tr>
+<tr><td>القطاع C — جنوب</td><td>24.5</td><td>8.2</td><td>33.5%</td><td><span class="tag ca">تأخر بالحفر</span></td></tr>
+<tr><td>القطاع D — غرب</td><td>18.0</td><td>3.5</td><td>19.4%</td><td><span class="tag st">بداية متأخرة</span></td></tr>
+<tr><td style="font-weight:700">الإجمالي</td><td style="font-weight:700">103.0</td><td style="font-weight:700">52.6</td><td style="font-weight:700">51.1%</td><td></td></tr>
+</tbody>
+</table>
+<p style="font-size:11px;color:#b2957a;margin-top:10px">* نسبة الإنجاز الإجمالي لجميع القطاعات 51.1% لكن العقد يشمل أيضاً محطات ضخ ومحابس رئيسية.</p>
+<div class="page-num">4 / 12</div>
+</div>
+
+<!-- PAGE 5: MONTHLY ACHIEVEMENTS -->
+<div class="page">
+<h2><span class="sec-num">3</span> أعمال الشهر — الإنجازات | Monthly Achievements</h2>
+<table class="data">
+<thead><tr><th>النشاط</th><th>الموقع</th><th>الكمية المخطط لها</th><th>الكمية المنجزة</th><th>%</th><th>ملاحظات</th></tr></thead>
+<tbody>
+<tr><td>مد خطوط مياه رئيسية ∅400 مم</td><td>قطاع A</td><td>2,200 م</td><td>2,200 م</td><td>100%</td><td>اكتمل حسب الجدول</td></tr>
+<tr><td>مد خطوط مياه فرعية ∅200 مم</td><td>قطاع B</td><td>1,800 م</td><td>1,600 م</td><td>89%</td><td>تأخر بسيط بالحفر</td></tr>
+<tr><td>ربط محطة ضخ P-02</td><td>قطاع A</td><td>1 وحدة</td><td>1 وحدة</td><td>100%</td><td>تم الربط والاختبار</td></tr>
+<tr><td>أعمال حفر — قطاع C</td><td>قطاع C</td><td>1,500 م³</td><td>900 م³</td><td>60%</td><td>صخور — تم استئجار كسارة</td></tr>
+<tr><td>تركيب محابس (Valves)</td><td>قطاع A+B</td><td>24 وحدة</td><td>22 وحدة</td><td>92%</td><td>باقي 2 — انتظار وصول</td></tr>
+<tr><td>اختبارات ضغط (Pressure Test)</td><td>قطاع A</td><td>1,200 م</td><td>1,200 م</td><td>100%</td><td>جميع النتائج مطابقة</td></tr>
+<tr><td>أعمال ردم وترميم</td><td>قطاع A</td><td>1,800 م</td><td>1,600 م</td><td>89%</td><td>جاري</td></tr>
+<tr><td>تركيب عدادات مياه</td><td>قطاع A+B</td><td>60</td><td>45</td><td>75%</td><td>تأخر توريد العدادات</td></tr>
+</tbody>
+</table>
+<div style="background:#f0f5e8;border-radius:2px;padding:10px 14px;border-right:3px solid #5a8a5a;font-size:11.5px;color:#3a5a3a">
+<strong>أبرز الإنجازات:</strong> اكتمال ربط محطة الضخ P-02 وخطوط المياه الرئيسية في القطاع A بالكامل (6.5 كم).
+</div>
+<div class="page-num">5 / 12</div>
+</div>
+
+<!-- PAGE 6: S-CURVE -->
+<div class="page">
+<h2><span class="sec-num">4</span> تحليل التقدم — منحنيات S | Progress Analysis & S-Curves</h2>
+<div style="background:#fdfaf7;border-radius:2px;padding:16px;margin-bottom:16px;border:1px solid #efe5dc">
+<div style="display:flex;width:100%;height:140px;align-items:flex-end;gap:3px">
+<div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%">
+<div style="width:60%;height:12%;background:#2c1810;border-radius:2px 2px 0 0"></div>
+<div style="width:60%;height:10%;background:#d4a574;border-radius:0 0 2px 2px;margin-top:1px"></div>
+<span style="font-size:7px;color:#b2957a;margin-top:3px">يناير</span>
+</div>
+<div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%">
+<div style="width:60%;height:22%;background:#2c1810;border-radius:2px 2px 0 0"></div>
+<div style="width:60%;height:20%;background:#d4a574;border-radius:0 0 2px 2px;margin-top:1px"></div>
+<span style="font-size:7px;color:#b2957a;margin-top:3px">فبراير</span>
+</div>
+<div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%">
+<div style="width:60%;height:30%;background:#2c1810;border-radius:2px 2px 0 0"></div>
+<div style="width:60%;height:28%;background:#d4a574;border-radius:0 0 2px 2px;margin-top:1px"></div>
+<span style="font-size:7px;color:#b2957a;margin-top:3px">مارس</span>
+</div>
+<div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%">
+<div style="width:60%;height:40%;background:#2c1810;border-radius:2px 2px 0 0"></div>
+<div style="width:60%;height:38%;background:#d4a574;border-radius:0 0 2px 2px;margin-top:1px"></div>
+<span style="font-size:7px;color:#b2957a;margin-top:3px">أبريل</span>
+</div>
+<div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%">
+<div style="width:60%;height:48%;background:#2c1810;border-radius:2px 2px 0 0"></div>
+<div style="width:60%;height:46%;background:#d4a574;border-radius:0 0 2px 2px;margin-top:1px"></div>
+<span style="font-size:7px;color:#b2957a;margin-top:3px">مايو</span>
+</div>
+<div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%">
+<div style="width:60%;height:56%;background:#2c1810;border-radius:2px 2px 0 0"></div>
+<div style="width:60%;height:54%;background:#d4a574;border-radius:0 0 2px 2px;margin-top:1px"></div>
+<span style="font-size:7px;color:#b2957a;margin-top:3px">يونيو</span>
+</div>
+</div>
+<div class="chart-key"><span style="color:#2c1810">■</span> Planned <span style="color:#d4a574;margin-right:14px">■</span> Actual</div>
+</div>
+<p style="font-size:11.5px;color:#6b4f3a">الفجوة التراكمية بين المخطط والفعلي 1.5% وهي ضمن الحدود المسموح بها. الأداء الشهري مستقر مع تحسن طفيف مقارنة بالشهر الماضي (مايو: 1.8% فجوة). من المتوقع تعويض الفجوة خلال شهري يوليو وأغسطس مع زيادة الإنتاجية في القطاع C بعد تجاوز طبقة الصخور.</p>
+<div class="page-num">6 / 12</div>
+</div>
+
+<!-- PAGE 7: KEY ACTIVITIES STATUS -->
+<div class="page">
+<h2><span class="sec-num">5</span> حالة الأنشطة الرئيسية | Key Activities Status</h2>
+<table class="data">
+<thead><tr><th>النشاط الرئيسي</th><th>تاريخ البداية</th><th>تاريخ النهاية</th><th>المدة</th><th>%</th><th>حالة المسار الحرج</th></tr></thead>
+<tbody>
+<tr><td>أعمال الحفر — القطاع A</td><td>01/01/25</td><td>15/08/25</td><td>8 أشهر</td><td>92%</td><td><span class="tag go">غير حرج</span></td></tr>
+<tr><td>مد خطوط رئيسية A</td><td>01/03/25</td><td>01/12/25</td><td>9 أشهر</td><td>78%</td><td><span class="tag go">غير حرج</span></td></tr>
+<tr><td>محطة ضخ P-02</td><td>01/02/25</td><td>30/06/26</td><td>17 شهراً</td><td>85%</td><td><span class="tag pr">مسار حرج</span></td></tr>
+<tr><td>أعمال الحفر — القطاع C</td><td>01/04/25</td><td>01/12/25</td><td>8 أشهر</td><td>56%</td><td><span class="tag ca">حرج محتمل</span></td></tr>
+<tr><td>مد خطوط قطاع B</td><td>01/05/25</td><td>01/03/26</td><td>10 أشهر</td><td>58%</td><td><span class="tag go">غير حرج</span></td></tr>
+<tr><td>محطة ضخ P-01</td><td>01/06/25</td><td>31/12/26</td><td>19 شهراً</td><td>32%</td><td><span class="tag pr">مسار حرج</span></td></tr>
+<tr><td>اختبارات وتشغيل</td><td>01/01/27</td><td>30/06/27</td><td>6 أشهر</td><td>0%</td><td><span class="tag go">غير بدء</span></td></tr>
+</tbody>
+</table>
+<div style="margin-top:14px;background:#fdfaf7;border:1px solid #efe5dc;border-radius:2px;padding:12px;font-size:11.5px;color:#6b4f3a">
+<strong style="color:#b47846">تحليل المسار الحرج:</strong> محطتا الضخ P-02 و P-01 هما على المسار الحرج. P-02 تم تحقيق 85% ومن المتوقع الانتهاء قبل الموعد المحدد بشهر واحد. P-01 لا تزال في بداية الأعمال ويجب متابعتها عن كثب.
+</div>
+<div class="page-num">7 / 12</div>
+</div>
+
+<!-- PAGE 8: ISSUES & RISKS -->
+<div class="page">
+<h2><span class="sec-num">6</span> المشكلات والمخاطر | Issues & Risk Register</h2>
+<div class="block-grid">
+<div class="info-block"><span class="ibl-badge cr">عالي</span><h4 style="color:#8a3a2a">صخور في القطاع C</h4><p>ظهور طبقة صخرية على عمق 2-3 متر تتطلب تكسير واستخدام معدات خاصة. تم استئجار كسارة هيدروليكية إضافية.</p></div>
+<div class="info-block"><span class="ibl-badge cr">عالي</span><h4 style="color:#8a3a2a">تأخر توريد العدادات</h4><p>المورد أبلغ عن تأخر 3 أسابيع في شحنة العدادات الإلكترونية. تم رفع طلب شراء عاجل لمورد بديل.</p></div>
+<div class="info-block"><span class="ibl-badge rs">متوسط</span><h4 style="color:#8a7530">حقوق الطريق (ROW)</h4><p>نزاع مع إحدى الجهات على امتداد 200 م في القطاع D. الإجراءات القانونية جارية.</p></div>
+<div class="info-block"><span class="ibl-badge rs">متوسط</span><h4 style="color:#8a7530">تسرب في الوصلة الرئيسية</h4><p>تسرب صغير في وصلة ∅400 مم بالقرب من محطة P-02 (قيد الإصلاح). لا يوجد أثر على الجدول.</p></div>
+<div class="info-block"><span class="ibl-badge in">منخفض</span><h4 style="color:#3a6a3a">تأخير تصاريح البلدية</h4><p>تصريح الحفر في القطاع D لم يصدر بعد. متوقع خلال أسبوع.</p></div>
+<div class="info-block"><span class="ibl-badge in">منخفض</span><h4 style="color:#3a6a3a">تغيير مواصفات المحابس</h4><p>أمر تغيير من NWC بخصوص نوع المحابس في الخطوط الرئيسية. التكلفة 0.</p></div>
+</div>
+<h3>سجل المخاطر | Risk Register</h3>
+<table class="data">
+<thead><tr><th>الخطر</th><th>الاحتمالية</th><th>التأثير</th><th>الإجراء التخفيفي</th></tr></thead>
+<tbody>
+<tr><td>تأخر وصول المواد المستوردة</td><td>مرتفعة</td><td>مرتفع</td><td>تقديم طلبات الشراء مبكراً + موردون بديلون</td></tr>
+<tr><td>ظروف جوية سيئة</td><td>متوسطة</td><td>متوسط</td><td>خطة طوارئ + جدولة مرنة للأنشطة الحرجة</td></tr>
+<tr><td>نقص العمالة الماهرة</td><td>متوسطة</td><td>مرتفع</td><td>التنسيق مع مقاولين من الباطن معتمدين</td></tr>
+<tr><td>تغير في أسعار المواد</td><td>منخفضة</td><td>متوسط</td><td>عقود توريد ثابتة السعر</td></tr>
+</tbody>
+</table>
+<div class="page-num">8 / 12</div>
+</div>
+
+<!-- PAGE 9: RESOURCES -->
+<div class="page">
+<h2><span class="sec-num">7</span> الموارد البشرية والمعدات | Manpower & Equipment</h2>
+<table class="data">
+<thead><tr><th>التخصص</th><th>متوسط العدد الشهري</th><th>العدد المخطط</th><th>الفجوة</th></tr></thead>
+<tbody>
+<tr><td>عمال حفر</td><td>42</td><td>45</td><td>-3</td></tr>
+<tr><td>عمال لحام مواسير</td><td>18</td><td>20</td><td>-2</td></tr>
+<tr><td>عمال تركيب محابس</td><td>12</td><td>12</td><td>0</td></tr>
+<tr><td>مهندسون وفنيون</td><td>14</td><td>14</td><td>0</td></tr>
+<tr><td>مشغلو معدات</td><td>16</td><td>16</td><td>0</td></tr>
+<tr><td>عمال خرسانة وترميم</td><td>24</td><td>24</td><td>0</td></tr>
+<tr><td>عمال صيانة وخدمات</td><td>10</td><td>10</td><td>0</td></tr>
+<tr><td>سائقون وخدمات لوجستية</td><td>8</td><td>8</td><td>0</td></tr>
+<tr><td style="font-weight:700">الإجمالي</td><td style="font-weight:700">144</td><td style="font-weight:700">149</td><td style="font-weight:700;color:#b34a3a">-5</td></tr>
+</tbody>
+</table>
+<h3>المعدات الرئيسية | Major Equipment</h3>
+<table class="data">
+<thead><tr><th>المعدة</th><th>العدد</th><th>ساعات التشغيل</th><th>الحالة</th></tr></thead>
+<tbody>
+<tr><td>بوكلين (Excavator)</td><td>6</td><td>1,248</td><td><span class="tag go">جيد</span></td></tr>
+<tr><td>بلدوزر (Bulldozer)</td><td>3</td><td>624</td><td><span class="tag go">جيد</span></td></tr>
+<tr><td>ونش (Crane)</td><td>2</td><td>312</td><td><span class="tag go">جيد</span></td></tr>
+<tr><td>كسارة هيدروليكية (Breaker)</td><td>2</td><td>120</td><td><span class="tag ca">مستأجرة جديدة</span></td></tr>
+<tr><td>ضواغط هواء (Compressor)</td><td>4</td><td>624</td><td><span class="tag go">جيد</span></td></tr>
+<tr><td>شاحنات قلاب (Dump Truck)</td><td>12</td><td>2,496</td><td><span class="tag go">جيد</span></td></tr>
+</tbody>
+</table>
+<div class="page-num">9 / 12</div>
+</div>
+
+<!-- PAGE 10: HSE & QUALITY -->
+<div class="page">
+<h2><span class="sec-num">8</span> أعمال السلامة والجودة | HSE & Quality</h2>
+<h3>مؤشرات السلامة الشهرية | Monthly HSE Indicators</h3>
+<table class="data">
+<thead><tr><th>المؤشر</th><th>الشهر الحالي</th><th>الشهر الماضي</th><th>التغير</th><th>إجمالي المشروع</th></tr></thead>
+<tbody>
+<tr><td>أيام دون إصابات (LTI)</td><td>30</td><td>31</td><td>-1</td><td>546</td></tr>
+<tr><td>حوادث مسجلة</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+<tr><td>حوادث وشيكة (Near Miss)</td><td>2</td><td>3</td><td>-1</td><td>22</td></tr>
+<tr><td>جولات تفتيش سلامة</td><td>6</td><td>5</td><td>+1</td><td>52</td></tr>
+<tr><td>بطاقات سلامة (STOP Cards)</td><td>28</td><td>24</td><td>+4</td><td>196</td></tr>
+<tr><td>تدريب سلامة (شخص)</td><td>36</td><td>42</td><td>-6</td><td>480</td></tr>
+</tbody>
+</table>
+<h3>فحوصات الجودة | Quality Inspections</h3>
+<table class="data">
+<thead><tr><th>نوع الفحص</th><th>العدد</th><th>مقبول</th><th>مرفوض</th><th>القبول%</th></tr></thead>
+<tbody>
+<tr><td>اختبار ضغط خطوط مياه</td><td>24</td><td>23</td><td>1</td><td>96%</td></tr>
+<tr><td>اختبار كلور (Chlorination)</td><td>12</td><td>12</td><td>0</td><td>100%</td></tr>
+<tr><td>فحص لحام مواسير</td><td>48</td><td>46</td><td>2</td><td>96%</td></tr>
+<tr><td>فحص التربة (Compaction)</td><td>36</td><td>35</td><td>1</td><td>97%</td></tr>
+<tr><td>اختبار المحابس</td><td>22</td><td>22</td><td>0</td><td>100%</td></tr>
+</tbody>
+</table>
+<div class="page-num">10 / 12</div>
+</div>
+
+<!-- PAGE 11: LOOKAHEAD -->
+<div class="page">
+<h2><span class="sec-num">9</span> خطة الشهر القادم | Lookahead — July 2026</h2>
+<table class="data">
+<thead><tr><th>#</th><th>النشاط</th><th>الموقع</th><th>الكمية المستهدفة</th><th>تاريخ البدء</th><th>تاريخ الانتهاء</th><th>المسؤول</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>مد خطوط رئيسية ∅400 مم</td><td>قطاع B</td><td>2,500 م</td><td>01/07</td><td>15/07</td><td>مقاول المد</td></tr>
+<tr><td>2</td><td>أعمال حفر — قطاع C</td><td>قطاع C</td><td>2,000 م³</td><td>03/07</td><td>20/07</td><td>مقاول الحفر</td></tr>
+<tr><td>3</td><td>توريد عدادات مياه</td><td>قطاع A+B</td><td>200 وحدة</td><td>04/07</td><td>10/07</td><td>المورد</td></tr>
+<tr><td>4</td><td>اختبارات ضغط — قطاع A</td><td>قطاع A</td><td>1,500 م</td><td>10/07</td><td>14/07</td><td>مهندس الجودة</td></tr>
+<tr><td>5</td><td>تركيب محابس رئيسية</td><td>قطاع B</td><td>18 وحدة</td><td>12/07</td><td>20/07</td><td>مقاول التركيب</td></tr>
+<tr><td>6</td><td>أعمال ردم — قطاع A</td><td>قطاع A</td><td>1,800 م</td><td>14/07</td><td>25/07</td><td>مقاول الحفر</td></tr>
+<tr><td>7</td><td>ربط محطة P-02 (نهائي)</td><td>قطاع A</td><td>مهمة</td><td>20/07</td><td>30/07</td><td>فريق التشغيل</td></tr>
+<tr><td>8</td><td>بدء أعمال قطاع D</td><td>قطاع D</td><td>-</td><td>25/07</td><td>-</td><td>مدير المشروع</td></tr>
+</tbody>
+</table>
+<div style="background:#f8f0d8;border-radius:2px;padding:10px 14px;border-right:3px solid #c4953a;margin-top:14px;font-size:11.5px;color:#7a6a2a">
+<strong>⚠️ أولويات الشهر القادم:</strong> (1) التعامل مع الصخور في القطاع C. (2) استلام العدادات الموردة. (3) الانتهاء من ربط محطة P-02.
+</div>
+<div class="page-num">11 / 12</div>
+</div>
+
+<!-- PAGE 12: CLOSING -->
+<div class="page">
+<h2><span class="sec-num">10</span> توصيات — توقيعات — ختم | Recommendations & Signatures</h2>
+<h3>التوصيات الختامية | Closing Recommendations</h3>
+<ol style="font-size:12px;color:#6b4f3a;margin-bottom:20px;padding-right:18px">
+<li style="margin-bottom:6px">تسريع وتيرة الحفر في القطاع C باستخدام الكسارة الهيدروليكية على مدار فترتين عمل.</li>
+<li style="margin-bottom:6px">متابعة توريد العدادات مع الموردين ومحاسبة في حال التأخير الإضافي.</li>
+<li style="margin-bottom:6px">الانتهاء من أعمال ربط محطة P-02 بالموعد المقرر (30 يوليو) لضمان عدم تأثر المسار الحرج.</li>
+<li style="margin-bottom:6px">حل نزاع حقوق الطريق (ROW) في القطاع D بالطرق الودية قبل بدء الأعمال.</li>
+<li style="margin-bottom:6px">مراجعة أوامر التغيير المعلقة مع NWC لتحديث الجدول والميزانية.</li>
+</ol>
+<h3>التوقيعات | Signatures</h3>
+<div class="sig-section">
+<div class="sig-block"><strong style="color:#b47846;font-size:13px">م. عبيدة العمري</strong><div class="sig-line"></div><div class="sig-label">مهندس تخطيط أول</div></div>
+<div class="sig-block"><strong style="color:#2c1810;font-size:13px">م. خالد السبيعي</strong><div class="sig-line"></div><div class="sig-label">مدير المشروع</div></div>
+<div class="sig-block"><strong style="color:#2c1810;font-size:13px">م. عبدالرحمن الفوزان</strong><div class="sig-line"></div><div class="sig-label">ممثل NWC</div></div>
+</div>
+<div style="margin-top:24px;padding-top:14px;border-top:1px solid #efe5dc;display:flex;justify-content:space-between;align-items:center;font-size:10px;color:#b2957a">
+<span>NWC-SAC-2024-089 | MPR-2026-006</span>
+<span style="text-transform:uppercase;letter-spacing:2px">CONFIDENTIAL</span>
+</div>
+<div class="page-num">12 / 12</div>
+</div>
+
+<div class="sticky-footer"><div class="sf-sig"><strong>م. عبيدة العمري</strong> <span>— مهندس تخطيط أول | NWC Water Network Project</span></div><div style="color:rgba(245,239,232,0.15);font-size:9px">MPR-NWC-2026-006 • صادر بتاريخ 30 يونيو 2026</div></div>
+</body>
+</html>

@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cost Control & Cash Flow Report | CCR-DAR-2022-005</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Inter',sans-serif;background:#1a2a1a;color:#1e2a1e;padding:16px;line-height:1.5}
+.page{max-width:210mm;margin:0 auto 20px;background:#fcfdf9;position:relative;page-break-after:always;overflow:hidden}
+.pad{padding:28px 36px}
+.pg{position:absolute;bottom:8px;left:50%;transform:translateX(-50%);font-size:8px;color:#8a9a7a;font-family:'Inter',sans-serif;letter-spacing:.5px;background:rgba(255,255,255,0.85);padding:1px 10px;border-radius:8px}
+.fixed-foot{position:fixed;bottom:0;left:0;right:0;background:#0f1a0f;color:rgba(255,255,255,0.6);padding:3px 20px;display:flex;align-items:center;justify-content:space-between;font-size:7.5px;z-index:999;direction:ltr}
+.fixed-foot .f-sig{display:flex;align-items:center;gap:4px}
+.fixed-foot .f-sig .f-dot{width:5px;height:5px;background:#2d8a4e;border-radius:50%}
+.fixed-foot .f-sig strong{color:#2d8a4e;font-size:8px}
+.sb-bar{display:flex;justify-content:space-between;align-items:center;border-top:1px solid #d0ddd0;padding:4px 0 2px;margin-top:14px;font-size:7.5px;color:#8a9a7a}
+.sb-bar .sbn{color:#1e2a1e;font-weight:600}
+.sb-bar .sbr{color:#aabb9a;letter-spacing:.5px}
+.cover{background:linear-gradient(135deg,#0a1f0a,#1a3a1a,#2a5a2a);min-height:100vh;display:flex;flex-direction:column}
+.cover .ct{padding:16px 32px;display:flex;justify-content:space-between;align-items:flex-start}
+.cover .ct .ref{font-size:8.5px;color:rgba(255,255,255,0.15)}
+.cover .ct .cls{padding:2px 12px;border:1px solid rgba(45,138,78,0.3);border-radius:2px;font-size:7.5px;letter-spacing:2px;color:#2d8a4e}
+.cover .cb{flex:1;display:flex;flex-direction:column;justify-content:center;padding:20px 48px 40px}
+.cover .cb .bge{display:inline-block;background:rgba(45,138,78,0.12);border:1px solid rgba(45,138,78,0.2);padding:4px 18px;font-size:9px;color:#2d8a4e;letter-spacing:3px;margin-bottom:28px;width:fit-content}
+.cover h1{font-size:26px;font-weight:800;color:#fff;margin-bottom:4px}
+.cover h1 .sub{font-size:13px;font-weight:300;color:rgba(255,255,255,0.25);display:block;margin-top:2px}
+.cover .csub{font-size:12px;color:rgba(255,255,255,0.3);margin-bottom:28px}
+.cover .cm{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;max-width:580px;margin-bottom:28px}
+.cover .cm div{padding:8px 12px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.06)}
+.cover .cm .cml{font-size:7px;color:rgba(255,255,255,0.25);text-transform:uppercase;letter-spacing:1px;margin-bottom:2px}
+.cover .cm .cmv{font-size:11px;color:#fff;font-weight:600}
+.cover .csig{border-top:1px solid rgba(255,255,255,0.06);padding-top:16px}
+.cover .csig .csn{color:#2d8a4e;font-weight:700;font-size:13px}
+.cover .csig .cst{color:rgba(255,255,255,0.2);font-size:9px}
+h2{font-size:15px;color:#0a1f0a;margin-bottom:10px;display:flex;align-items:center;gap:8px}
+h2 .on{background:#2d8a4e;color:#fff;width:22px;height:22px;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700}
+h3{font-size:12px;color:#1e3a1e;margin:12px 0 6px}
+p{font-size:11px;color:#4a5a4a;margin-bottom:8px}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-bottom:14px}
+.stats .st{background:#f0f8f0;border-radius:4px;padding:10px 6px;text-align:center;border-bottom:3px solid #2d8a4e}
+.stats .st .sv{font-size:16px;font-weight:800;color:#1e2a1e}
+.stats .st .sv.g{color:#2d8a4e}
+.stats .st .sv.r{color:#c0392b}
+.stats .st .sl{font-size:7px;color:#6a7a6a;margin-top:2px}
+table{width:100%;border-collapse:collapse;font-size:10px;margin-bottom:12px}
+th{background:#0a1f0a;color:#f0f8f0;padding:5px 8px;text-align:left;font-weight:600;font-size:9px}
+td{padding:4px 8px;border-bottom:1px solid #dce4dc}
+tr:nth-child(even){background:#f4faf4}
+tr:last-child td{font-weight:700;background:#e8f0e8}
+.bar{display:flex;align-items:flex-end;gap:4px;height:70px;margin:8px 0;padding:6px 4px;background:#f0f8f0;border-radius:4px}
+.bar>div{flex:1;display:flex;flex-direction:column;align-items:center;height:100%}
+.bar>div>div{flex:1;width:55%;border-radius:3px 3px 0 0}
+.bar>div>span{font-size:6px;color:#6a7a6a;margin-top:2px}
+.tag{display:inline-block;padding:1px 6px;border-radius:2px;font-size:7.5px;font-weight:600}
+.tag.g{background:#d4edda;color:#1a6a3a}
+.tag.y{background:#fff3cd;color:#7a6a2a}
+.tag.r{background:#f8d7da;color:#8a2a1a}
+.cards{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px}
+.cards .cd{border:1px solid #dce4dc;border-radius:4px;padding:10px;background:#fff}
+.cards .cd h4{font-size:10px;color:#1e2a1e;margin-bottom:3px}
+.cards .cd p{font-size:9px;color:#4a5a4a;margin:0}
+.cards .cd .bdg{display:inline-block;padding:1px 5px;border-radius:2px;font-size:7px;font-weight:600;margin-bottom:3px}
+.cards .cd .bdg.c1{background:#f8d7da;color:#8a2a1a}
+.cards .cd .bdg.c2{background:#fff3cd;color:#7a6a2a}
+.sig-end{padding:28px 36px}
+.sig-end h2{font-size:15px;color:#0a1f0a;margin-bottom:4px}
+.sig-end .se-sub{font-size:9px;color:#6a7a6a;margin-bottom:14px}
+.sig-end .rec{background:#f0f8f0;border-radius:4px;padding:10px 14px;margin-bottom:16px;font-size:10px;color:#2a3a2a}
+.sig-end .rec li{margin-bottom:3px;margin-left:14px}
+.sig-boxes{display:flex;gap:20px;justify-content:center}
+.sig-boxes .sb{text-align:center;min-width:160px}
+.sig-boxes .sb .sl{width:70%;height:1px;background:#c0d0c0;margin:4px auto;border-top:1px dashed #aabb9a}
+.sig-boxes .sb .sn{font-size:12px;font-weight:700;color:#1e2a1e}
+.sig-boxes .sb .sr{font-size:7.5px;color:#6a7a6a}
+.sef{text-align:center;margin-top:12px;padding-top:10px;border-top:1px solid #dce4dc;font-size:7.5px;color:#8a9a7a}
+@media print{body{background:#fff;padding:0}.page{box-shadow:none;margin:0;page-break-after:always}.fixed-foot{position:fixed;bottom:0!important;background:#0f1a0f!important;print-color-adjust:exact!important}.cover{min-height:100vh}}
+@media(max-width:768px){.cover .cb{padding:16px}.stats{grid-template-columns:1fr 1fr}.cards{grid-template-columns:1fr}.cover .cm{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<!-- PAGE 1: COVER -->
+<div class="page" style="padding:0;background:transparent">
+<div class="cover">
+<div class="ct"><span class="ref">CCR-DAR-2022-005 | Rev. A</span><span class="cls">FINANCIAL DOCUMENT</span></div>
+<div class="cb">
+<div class="bge">COST CONTROL & CASH FLOW REPORT</div>
+<h1>THE ZONE RESIDENTIAL COMPLEX<br><span class="sub">Financial Performance & Cost Analysis — Jeddah</span></h1>
+<div class="csub">Reporting Period: January – June 2022 | Q2 2022 Review</div>
+<div class="cm">
+<div><div class="cml">Budget at Completion</div><div class="cmv">$32,800,000</div></div>
+<div><div class="cml">Expenditure to Date</div><div class="cmv">$12,812,000</div></div>
+<div><div class="cml">Cost Variance (CV)</div><div class="cmv" style="color:#2d8a4e">$+186,000</div></div>
+<div><div class="cml">CPI</div><div class="cmv" style="color:#2d8a4e">1.02</div></div>
+<div><div class="cml">Estimate at Completion</div><div class="cmv" style="color:#2d8a4e">$32,450,000</div></div>
+<div><div class="cml">Variance at Completion</div><div class="cmv" style="color:#2d8a4e">$+350,000</div></div>
+</div>
+<div class="csig"><div class="csn">Eng. Obieda Omari</div><div class="cst">Senior Planning & Cost Control Lead</div></div>
+</div>
+</div>
+<div class="pg" style="color:rgba(255,255,255,0.15);background:transparent">1 / 10</div>
+</div>
+
+<!-- PAGE 2: EXEC -->
+<div class="page">
+<div class="pad">
+<h2><span class="on">1</span> Financial Executive Summary</h2>
+<p>Overall cost performance for The Zone Residential Complex as of June 30, 2022. The project is currently under budget with a positive Cost Variance (CV) of $186K and CPI of 1.02.</p>
+<div class="stats">
+<div class="st"><div class="sv g">$12.81M</div><div class="sl">Expenditure to Date</div></div>
+<div class="st"><div class="sv g">$12.62M</div><div class="sl">Earned Value (EV)</div></div>
+<div class="st"><div class="sv g">1.02</div><div class="sl">Cost Performance (CPI)</div></div>
+<div class="st"><div class="sv g">$+186K</div><div class="sl">Cost Variance (CV)</div></div>
+</div>
+<div style="background:#f0f8f0;border-radius:4px;padding:10px 14px;border-left:3px solid #2d8a4e;font-size:10.5px;color:#2a4a2a;margin-bottom:14px"><strong>Financial Summary:</strong> The project demonstrates healthy cost performance. Structural works (56% spend) are tracking below budget due to favorable concrete pricing. MEP and finishing packages within tolerance. A contingency draw of $92K is recommended for facade material escalation.</div>
+<table>
+<thead><tr><th>Work Package</th><th>BAC ($)</th><th>EV ($)</th><th>AC ($)</th><th>CV ($)</th><th>CPI</th></tr></thead>
+<tbody>
+<tr><td>Structural & Concrete</td><td>10,500,000</td><td>5,880,000</td><td>5,720,000</td><td>+160,000</td><td>1.03</td></tr>
+<tr><td>MEP Works</td><td>8,200,000</td><td>3,280,000</td><td>3,240,000</td><td>+40,000</td><td>1.01</td></tr>
+<tr><td>Interior Finishing</td><td>6,560,000</td><td>1,640,000</td><td>1,670,000</td><td>-30,000</td><td>0.98</td></tr>
+<tr><td>Facade & Glazing</td><td>3,940,000</td><td>788,000</td><td>810,000</td><td>-22,000</td><td>0.97</td></tr>
+<tr><td>External Works</td><td>3,600,000</td><td>1,224,000</td><td>1,220,000</td><td>+4,000</td><td>1.00</td></tr>
+<tr><td>Total</td><td>32,800,000</td><td>12,812,000</td><td>12,660,000</td><td>+152,000</td><td>1.01</td></tr>
+</tbody>
+</table>
+</div>
+<div class="sb-bar"><span><span class="sbn">Eng. Obieda Omari</span> — Senior Planning & Cost Control Lead</span><span class="sbr">CCR-DAR-2022-005</span></div>
+<div class="pg">2 / 10</div>
+</div>
+
+<!-- PAGE 3: CASH FLOW -->
+<div class="page">
+<div class="pad">
+<h2><span class="on">2</span> Cash Flow Forecast</h2>
+<p>Projected monthly cash flow for the remaining contract period based on current performance trends and updated S-curve.</p>
+<table>
+<thead><tr><th>Month</th><th>Planned ($)</th><th>Actual/Forecast ($)</th><th>Cum. Planned ($)</th><th>Cum. Actual ($)</th></tr></thead>
+<tbody>
+<tr><td>Jan 2022</td><td>520,000</td><td>495,000</td><td>7,200,000</td><td>7,020,000</td></tr>
+<tr><td>Feb 2022</td><td>580,000</td><td>560,000</td><td>7,780,000</td><td>7,580,000</td></tr>
+<tr><td>Mar 2022</td><td>610,000</td><td>595,000</td><td>8,390,000</td><td>8,175,000</td></tr>
+<tr><td>Apr 2022</td><td>650,000</td><td>630,000</td><td>9,040,000</td><td>8,805,000</td></tr>
+<tr><td>May 2022</td><td>680,000</td><td>660,000</td><td>9,720,000</td><td>9,465,000</td></tr>
+<tr><td>Jun 2022</td><td>620,000</td><td>605,000</td><td>10,340,000</td><td>10,070,000</td></tr>
+<tr><td>Jul 2022 (F)</td><td>700,000</td><td>680,000</td><td>11,040,000</td><td>10,750,000</td></tr>
+<tr><td>Aug 2022 (F)</td><td>740,000</td><td>720,000</td><td>11,780,000</td><td>11,470,000</td></tr>
+<tr><td>Sep 2022 (F)</td><td>780,000</td><td>760,000</td><td>12,560,000</td><td>12,230,000</td></tr>
+<tr><td>Q4 2022 (F)</td><td>2,400,000</td><td>2,350,000</td><td>14,960,000</td><td>14,580,000</td></tr>
+<tr><td>H1 2023 (F)</td><td>5,040,000</td><td>4,950,000</td><td>20,000,000</td><td>19,530,000</td></tr>
+<tr><td>Total</td><td>32,800,000</td><td>32,450,000</td><td>-</td><td>-</td></tr>
+</tbody>
+</table>
+<p style="font-size:9px;color:#6a7a6a">(F) = Forecast. EAC projected at $32.45M vs. BAC of $32.80M — under budget by $350K.</p>
+</div>
+<div class="sb-bar"><span><span class="sbn">Eng. Obieda Omari</span> — Senior Planning & Cost Control Lead</span><span class="sbr">CCR-DAR-2022-005</span></div>
+<div class="pg">3 / 10</div>
+</div>
+
+<!-- PAGE 4: S-CURVE -->
+<div class="page">
+<div class="pad">
+<h2><span class="on">3</span> Financial S-Curve Analysis</h2>
+<p>Planned vs. Actual expenditure S-curve showing cumulative cash flow performance through June 2022.</p>
+<svg viewBox="0 0 560 180" style="width:100%;margin:6px 0">
+<rect x="30" y="8" width="500" height="145" rx="3" fill="#f8fcf8" stroke="#d0ddd0" stroke-width="0.5"/>
+<line x1="70" y1="25" x2="70" y2="145" stroke="#e0ece0" stroke-width="0.5"/>
+<line x1="170" y1="25" x2="170" y2="145" stroke="#e0ece0" stroke-width="0.5"/>
+<line x1="270" y1="25" x2="270" y2="145" stroke="#e0ece0" stroke-width="0.5"/>
+<line x1="370" y1="25" x2="370" y2="145" stroke="#e0ece0" stroke-width="0.5"/>
+<line x1="470" y1="25" x2="470" y2="145" stroke="#e0ece0" stroke-width="0.5"/>
+<line x1="30" y1="50" x2="530" y2="50" stroke="#e0ece0" stroke-width="0.5"/>
+<line x1="30" y1="80" x2="530" y2="80" stroke="#e0ece0" stroke-width="0.5"/>
+<line x1="30" y1="110" x2="530" y2="110" stroke="#e0ece0" stroke-width="0.5"/>
+<polyline points="70,142 120,132 170,118 220,100 270,80 320,58 370,42 420,30 470,24" fill="none" stroke="#1a3a1a" stroke-width="2.5" stroke-linecap="round"/>
+<polyline points="70,142 120,134 170,121 220,104 270,84 320,62 370,46 420,34 470,28" fill="none" stroke="#2d8a4e" stroke-width="2.5" stroke-dasharray="5,3" stroke-linecap="round"/>
+<text x="30" y="54" font-family="Inter" font-size="6.5" fill="#8a9a7a">$20M</text>
+<text x="30" y="84" font-family="Inter" font-size="6.5" fill="#8a9a7a">$10M</text>
+<text x="70" y="160" font-family="Inter" font-size="6.5" fill="#8a9a7a" text-anchor="middle">Jan</text>
+<text x="170" y="160" font-family="Inter" font-size="6.5" fill="#8a9a7a" text-anchor="middle">Feb</text>
+<text x="270" y="160" font-family="Inter" font-size="6.5" fill="#8a9a7a" text-anchor="middle">Mar</text>
+<text x="370" y="160" font-family="Inter" font-size="6.5" fill="#8a9a7a" text-anchor="middle">Apr-May</text>
+<text x="470" y="160" font-family="Inter" font-size="6.5" fill="#8a9a7a" text-anchor="middle">Jun</text>
+</svg>
+<div style="text-align:center;font-size:8px;color:#6a7a6a;margin:4px 0 10px"><span style="color:#1a3a1a">■</span> Planned Spend <span style="color:#2d8a4e;margin-right:12px">■</span> Actual Spend</div>
+<div style="background:#f0f8f0;border-radius:3px;padding:8px 12px;font-size:9.5px;color:#2a4a2a"><strong>Analysis:</strong> Actual spend tracks below planned by approximately $270K cumulatively. The favorable variance is primarily attributed to lower-than-budgeted concrete pricing ($160K savings) and efficient MEP procurement ($40K savings). Facade finishing packages show slight overruns requiring monitoring.</div>
+</div>
+<div class="sb-bar"><span><span class="sbn">Eng. Obieda Omari</span> — Senior Planning & Cost Control Lead</span><span class="sbr">CCR-DAR-2022-005</span></div>
+<div class="pg">4 / 10</div>
+</div>
+
+<!-- PAGE 5: EVM -->
+<div class="page">
+<div class="pad">
+<h2><span class="on">4</span> Earned Value Management — Detailed</h2>
+<p>EVM performance indices and variance analysis for all work packages as of June 30, 2022.</p>
+<table>
+<thead><tr><th>Package</th><th>PV ($)</th><th>EV ($)</th><th>AC ($)</th><th>SV ($)</th><th>CV ($)</th><th>SPI</th><th>CPI</th></tr></thead>
+<tbody>
+<tr><td>Structural</td><td>5,985,000</td><td>5,880,000</td><td>5,720,000</td><td>-105,000</td><td>+160,000</td><td>0.98</td><td>1.03</td></tr>
+<tr><td>MEP</td><td>3,380,000</td><td>3,280,000</td><td>3,240,000</td><td>-100,000</td><td>+40,000</td><td>0.97</td><td>1.01</td></tr>
+<tr><td>Finishing</td><td>1,720,000</td><td>1,640,000</td><td>1,670,000</td><td>-80,000</td><td>-30,000</td><td>0.95</td><td>0.98</td></tr>
+<tr><td>Facade</td><td>850,000</td><td>788,000</td><td>810,000</td><td>-62,000</td><td>-22,000</td><td>0.93</td><td>0.97</td></tr>
+<tr><td>External</td><td>1,290,000</td><td>1,224,000</td><td>1,220,000</td><td>-66,000</td><td>+4,000</td><td>0.95</td><td>1.00</td></tr>
+<tr><td>Total</td><td>13,225,000</td><td>12,812,000</td><td>12,660,000</td><td>-413,000</td><td>+152,000</td><td>0.97</td><td>1.01</td></tr>
+</tbody>
+</table>
+<h3>EAC & TCPI Analysis</h3>
+<table>
+<thead><tr><th>Metric</th><th>Value</th><th>Interpretation</th></tr></thead>
+<tbody>
+<tr><td>BAC</td><td>$32,800,000</td><td>Budget at Completion</td></tr>
+<tr><td>EAC (CPI-based)</td><td>$32,450,000</td><td>Under budget by $350K</td></tr>
+<tr><td>EAC (CPI×SPI)</td><td>$32,560,000</td><td>Under budget by $240K</td></tr>
+<tr><td>VAC (at current CPI)</td><td>+$350,000</td><td>Favorable variance</td></tr>
+<tr><td>TCPI (to BAC)</td><td>1.01</td><td>Must achieve 1.01 for remaining work</td></tr>
+<tr><td>Management Reserve</td><td>$480,000</td><td>1.5% of BAC — intact</td></tr>
+</tbody>
+</table>
+</div>
+<div class="sb-bar"><span><span class="sbn">Eng. Obieda Omari</span> — Senior Planning & Cost Control Lead</span><span class="sbr">CCR-DAR-2022-005</span></div>
+<div class="pg">5 / 10</div>
+</div>
+
+<!-- PAGE 6: VARIANCE -->
+<div class="page">
+<div class="pad">
+<h2><span class="on">5</span> Cost Variance Breakdown</h2>
+<p>Detailed variance analysis identifying root causes of cost deviations across all packages.</div>
+<div class="cards">
+<div class="cd"><div class="bdg c2">Favorable -$160K</div><h4>Structural — Concrete Savings</h4><p>Concrete unit price secured at $85/m³ vs. budgeted $92/m³ due to bulk procurement agreement. Total savings on 16,500 m³ poured to date.</p></div>
+<div class="cd"><div class="bdg c2">Favorable -$40K</div><h4>MEP — Competitive Tender</h4><p>MEP subcontract awarded 4.5% below budget. Efficient material procurement from direct suppliers. HVAC ductwork 6% under budget.</p></div>
+<div class="cd"><div class="bdg c1">Adverse +$30K</div><h4>Finishing — Labor Escalation</h4><p>Skilled labor rates increased 8% in Q2 2022. Impact partially offset by lower material costs. Recovery plan in progress.</p></div>
+<div class="cd"><div class="bdg c1">Adverse +$22K</div><h4>Facade — Material Escalation</h4><p>Aluminum composite panel prices increased 12% due to global aluminum market. Contingency draw recommended.</p></div>
+</div>
+<h3>Variance Heat Map by Cost Category</h3>
+<table>
+<thead><tr><th>Category</th><th>Budget ($)</th><th>Actual ($)</th><th>Variance ($)</th><th>Status</th></tr></thead>
+<tbody>
+<tr><td>Direct Materials</td><td>11,480,000</td><td>11,240,000</td><td>+240,000</td><td><span class="tag g">Favorable</span></td></tr>
+<tr><td>Direct Labor</td><td>9,840,000</td><td>9,920,000</td><td>-80,000</td><td><span class="tag y">Monitor</span></td></tr>
+<tr><td>Subcontractors</td><td>6,560,000</td><td>6,520,000</td><td>+40,000</td><td><span class="tag g">Favorable</span></td></tr>
+<tr><td>Equipment</td><td>2,460,000</td><td>2,440,000</td><td>+20,000</td><td><span class="tag g">Favorable</span></td></tr>
+<tr><td>Overheads</td><td>2,460,000</td><td>2,460,000</td><td>0</td><td><span class="tag g">On Budget</span></td></tr>
+<tr><td>Total</td><td>32,800,000</td><td>32,580,000</td><td>+220,000</td><td><span class="tag g">Favorable</span></td></tr>
+</tbody>
+</table>
+</div>
+<div class="sb-bar"><span><span class="sbn">Eng. Obieda Omari</span> — Senior Planning & Cost Control Lead</span><span class="sbr">CCR-DAR-2022-005</span></div>
+<div class="pg">6 / 10</div>
+</div>
+
+<!-- PAGE 7: CASH FLOW CHART -->
+<div class="page">
+<div class="pad">
+<h2><span class="on">6</span> Monthly Cash Flow & Burn Rate</h2>
+<p>Actual monthly expenditure vs. planned burn rate for the past 6 months with forecast.</p>
+<div class="bar">
+<div><div style="height:38%;background:#1a3a1a"></div><span>Jan</span></div>
+<div><div style="height:42%;background:#1a3a1a"></div><span>Feb</span></div>
+<div><div style="height:45%;background:#1a3a1a"></div><span>Mar</span></div>
+<div><div style="height:50%;background:#1a3a1a"></div><span>Apr</span></div>
+<div><div style="height:52%;background:#1a3a1a"></div><span>May</span></div>
+<div><div style="height:48%;background:#2d8a4e"></div><span>Jun</span></div>
+</div>
+<div style="text-align:center;font-size:7.5px;color:#6a7a6a;margin-bottom:10px">Monthly expenditure ($K) — Planned vs. Actual (Jun in green)</div>
+<table>
+<thead><tr><th>Cash Flow Metric</th><th>Value</th></tr></thead>
+<tbody>
+<tr><td>Average Monthly Burn Rate (Actual)</td><td>$618,000</td></tr>
+<tr><td>Average Monthly Burn Rate (Planned)</td><td>$643,000</td></tr>
+<tr><td>Monthly Savings Rate</td><td>$25,000 (3.9%)</td></tr>
+<tr><td>Peak Monthly Spend (Forecast)</td><td>$820,000 (Oct 2022)</td></tr>
+<tr><td>Cash Flow at Completion (Forecast)</td><td>$32,450,000</td></tr>
+<tr><td>Underrun vs. BAC</td><td>$350,000 (1.07%)</td></tr>
+</tbody>
+</table>
+<h3>Forecast Confidence Assessment</h3>
+<table>
+<thead><tr><th>Parameter</th><th>Confidence</th><th>Basis</th></tr></thead>
+<tbody>
+<tr><td>Material Cost Forecast</td><td><span class="tag g">High</span></td><td>Fixed-price contracts in place for 80% of materials</td></tr>
+<tr><td>Labor Cost Forecast</td><td><span class="tag y">Medium</span></td><td>Market escalation risk — 8% already absorbed</td></tr>
+<tr><td>Subcontractor Forecast</td><td><span class="tag g">High</span></td><td>Lump-sum subcontracts with 5% retention</td></tr>
+<tr><td>Contingency Required</td><td><span class="tag y">$180K</span></td><td>3.2% of remaining work — adequate</td></tr>
+</tbody>
+</table>
+</div>
+<div class="sb-bar"><span><span class="sbn">Eng. Obieda Omari</span> — Senior Planning & Cost Control Lead</span><span class="sbr">CCR-DAR-2022-005</span></div>
+<div class="pg">7 / 10</div>
+</div>
+
+<!-- PAGE 8: RISKS -->
+<div class="page">
+<div class="pad">
+<h2><span class="on">7</span> Cost Risks & Mitigation</h2>
+<div class="cards">
+<div class="cd"><div class="bdg c1">High</div><h4>Material Price Escalation</h4><p>Global steel and aluminum prices volatile. Current contracts cover 60% of remaining quantities. <strong>Mitigation:</strong> Fix remaining 40% via forward contracts.</p></div>
+<div class="cd"><div class="bdg c2">Medium</div><h4>Labor Availability & Rates</h4><p>Skilled labor shortage in Jeddah market. Rates up 8% in Q2. <strong>Mitigation:</strong> Mobilize additional workforce from Eastern Province.</p></div>
+<div class="cd"><div class="bdg c2">Medium</div><h4>Subcontractor Performance Risk</h4><p>Finishing subcontractor showing signs of strain. Progress lagging by 15%. <strong>Mitigation:</strong> Monthly performance reviews + backup subcon identified.</p></div>
+<div class="cd"><div class="bdg c3">Low</div><h4>Design Change Impact</h4><p>CO-008 scope change under assessment. Estimated cost impact $12K-18K. <strong>Mitigation:</strong> Fast-track approval with Q Design.</p></div>
+</div>
+<h3>Cost Risk Register — Top 5</h3>
+<table>
+<thead><tr><th>Risk ID</th><th>Description</th><th>Prob.</th><th>Impact ($)</th><th>Mitigation Strategy</th></tr></thead>
+<tbody>
+<tr><td>CR-01</td><td>Steel rebar price increase >15%</td><td>M</td><td>$85,000</td><td>Forward contract negotiation — Q3 2022</td></tr>
+<tr><td>CR-02</td><td>Finishing labor shortage</td><td>H</td><td>$120,000</td><td>Alternative subcontractor pre-qualified</td></tr>
+<tr><td>CR-03</td><td>Facade material delay cost</td><td>H</td><td>$65,000</td><td>Expedite + air freight allowance</td></tr>
+<tr><td>CR-04</td><td>MEP rework due to coordination</td><td>M</td><td>$42,000</td><td>BIM coordination sessions weekly</td></tr>
+<tr><td>CR-05</td><td>Exchange rate fluctuation</td><td>L</td><td>$35,000</td><td>75% contracts in SAR — hedged</td></tr>
+</tbody>
+</table>
+</div>
+<div class="sb-bar"><span><span class="sbn">Eng. Obieda Omari</span> — Senior Planning & Cost Control Lead</span><span class="sbr">CCR-DAR-2022-005</span></div>
+<div class="pg">8 / 10</div>
+</div>
+
+<!-- PAGE 9: RECOMMENDATIONS -->
+<div class="page">
+<div class="pad">
+<h2><span class="on">8</span> Cost Performance Recommendations</h2>
+<div class="cards">
+<div class="cd"><h4>1. Secure Forward Material Contracts</h4><p>Fix remaining 40% of steel and aluminum quantities via forward contracts to hedge against market volatility. Estimated saving: $85K.</p></div>
+<div class="cd"><h4>2. Increase Finishing Workforce</h4><p>Mobilize additional 15 skilled workers from Eastern Province to recover finishing schedule and avoid liquidated damages.</p></div>
+<div class="cd"><h4>3. Contingency Draw for Facade</h4><p>Approve $92K contingency draw for facade material escalation. Justified by current CPI >1.0 performance.</p></div>
+<div class="cd"><h4>4. Monthly EVM Reviews</h4><p>Implement monthly earned value reviews with all package managers. Early warning triggers at CPI <0.95.</p></div>
+</div>
+<h3>Forecast vs. Budget — Final Position</h3>
+<table>
+<thead><tr><th>Scenario</th><th>EAC ($)</th><th>VAC ($)</th><th>Probability</th></tr></thead>
+<tbody>
+<tr><td>Optimistic (CPI 1.03 sustained)</td><td>31,840,000</td><td>+960,000</td><td>20%</td></tr>
+<tr><td>Most Likely (CPI 1.01)</td><td>32,450,000</td><td>+350,000</td><td>60%</td></tr>
+<tr><td>Pessimistic (CPI drops to 0.97)</td><td>33,820,000</td><td>-1,020,000</td><td>20%</td></tr>
+</tbody>
+</table>
+</div>
+<div class="sb-bar"><span><span class="sbn">Eng. Obieda Omari</span> — Senior Planning & Cost Control Lead</span><span class="sbr">CCR-DAR-2022-005</span></div>
+<div class="pg">9 / 10</div>
+</div>
+
+<!-- PAGE 10: SIGNATURES -->
+<div class="page">
+<div class="sig-end">
+<h2>Sign-off & Approvals</h2>
+<div class="se-sub">Cost Control & Cash Flow Report — Q2 2022 Review | The Zone Residential Complex</div>
+<div class="rec">
+<strong>Recommendations Summary:</strong>
+<ol>
+<li>Forward-contract remaining steel and aluminum quantities by July 15, 2022.</li>
+<li>Approve $92K contingency draw for facade material cost escalation.</li>
+<li>Increase finishing workforce by 15 workers — target mobilization by July 10.</li>
+<li>Implement monthly EVM review meetings starting August 2022.</li>
+<li>Update project cost forecast and submit to Takamul (Client) by July 7.</li>
+</ol>
+</div>
+<div class="sig-boxes">
+<div class="sb"><div class="sn">Eng. Obieda Omari</div><div class="sl"></div><div class="sr">Senior Planning & Cost Control Lead</div></div>
+<div class="sb"><div class="sn">Project Controls</div><div class="sl"></div><div class="sr">Project Manager — Jadwa Contracting</div></div>
+<div class="sb"><div class="sn">Client Representative</div><div class="sl"></div><div class="sr">Takamul Real Estate Co.</div></div>
+</div>
+<div class="sef">CCR-DAR-2022-005 | Rev. A | Confidential — Financial Project Document</div>
+</div>
+<div class="sb-bar" style="margin-top:8px"><span><span class="sbn">Eng. Obieda Omari</span> — Senior Planning & Cost Control Lead</span><span class="sbr">CCR-DAR-2022-005</span></div>
+<div class="pg">10 / 10</div>
+</div>
+
+<div class="fixed-foot"><div class="f-sig"><div class="f-dot"></div><strong>Eng. Obieda Omari</strong> — Sr. Planning & Cost Control Lead</div><span>CCR-DAR-2022-005 • Confidential</span></div>
+</body>
+</html>

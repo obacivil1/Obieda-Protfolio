@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Power BI Dashboards | Obieda Omari</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&family=Inter:wght@400;500;600;700&display=swap');
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Cairo','Inter',sans-serif;background:#f4f4f6;color:#1a1a2e;padding:40px;line-height:1.7}
+.report{max-width:1100px;margin:0 auto;background:#fff;border-radius:12px;box-shadow:0 4px 40px rgba(0,0,0,0.08);padding:48px 56px}
+.header{display:flex;justify-content:space-between;align-items:flex-start;border-bottom:3px solid #C9A84C;padding-bottom:20px;margin-bottom:32px}
+.header h1{font-size:22px;color:#C9A84C;font-weight:700;margin:0}
+.header .meta{text-align:left;direction:ltr;font-size:12px;color:#666;font-family:'Inter',sans-serif;line-height:1.6}
+.header .sig{display:flex;align-items:center;gap:10px;margin-top:8px;font-size:12px;color:#555}
+.header .sig-bar{width:3px;height:24px;background:#C9A84C;border-radius:2px}
+.badge{display:inline-block;background:#C9A84C;color:#fff;padding:4px 16px;border-radius:4px;font-size:12px;font-weight:600;margin-bottom:12px}
+h2{font-size:20px;margin-bottom:20px;color:#1a1a2e;font-weight:700;text-align:center}
+.dashboard-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:24px;margin-bottom:32px}
+.dash-card{background:#f8f9fc;border-radius:10px;overflow:hidden;border:1px solid #e8e8ee;transition:all 0.3s}
+.dash-card:hover{transform:translateY(-3px);box-shadow:0 8px 24px rgba(0,0,0,0.08)}
+.dash-card img{width:100%;height:auto;display:block;border-bottom:1px solid #e8e8ee}
+.dash-card .info{padding:16px 18px}
+.dash-card .info h3{font-size:14px;color:#C9A84C;margin-bottom:4px}
+.dash-card .info p{font-size:12px;color:#666}
+.footer{margin-top:40px;padding-top:20px;border-top:1px solid #e8e8ee;display:flex;justify-content:space-between;align-items:center;font-size:12px;color:#888}
+.sticky-footer{position:fixed;bottom:0;left:0;right:0;background:linear-gradient(135deg,rgba(8,15,30,0.95),rgba(30,42,74,0.92));color:#fff;padding:6px 24px;display:flex;align-items:center;justify-content:space-between;font-size:11px;z-index:999;direction:rtl;backdrop-filter:blur(4px);box-shadow:0 -2px 12px rgba(0,0,0,0.15)}
+.sticky-footer .sf-sig{display:flex;align-items:center;gap:8px}
+.sticky-footer .sf-bar{width:2px;height:16px;background:#C9A84C;border-radius:2px}
+.sticky-footer .sf-sig strong{color:#C9A84C;font-size:12px}
+.sticky-footer .sf-sig span{color:#8892b0;font-size:10px}
+@media print{body{background:#fff;padding:0;padding-bottom:40px}.report{box-shadow:none;padding:32px}.sticky-footer{position:fixed;bottom:0;left:0;right:0;background:#1a1a2e!important;color:#fff!important;-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important}.sticky-footer .sf-sig strong{color:#C9A84C!important}}
+@media(max-width:768px){body{padding:16px;padding-bottom:50px}.report{padding:24px}.dashboard-grid{grid-template-columns:1fr}.header{flex-direction:column;gap:8px;align-items:flex-start}}
+</style>
+</head>
+<body>
+<div class="report">
+<div class="header">
+<div>
+<h1>Power BI Dashboards</h1>
+<div class="badge">عرض تقارير الأداء التفاعلية | Interactive Performance Reports</div>
+<div class="sig"><div class="sig-bar"></div><span>إعداد: <strong>م. عبيدة العمري</strong> — كبير مهندسي التخطيط ومراقبة التكاليف</span></div>
+</div>
+<div class="meta">
+<div>Presentation: Q1 2025</div>
+<div>Project Controls & Performance</div>
+<div style="margin-top:4px;color:#C9A84C;font-weight:600">Prepared by: Eng. Obieda Omari</div>
+</div>
+</div>
+
+<h2>Professional Project Control Dashboards</h2>
+<div class="dashboard-grid">
+<div class="dash-card">
+<img src="Images/04.png" alt="Project Dashboard" onerror="this.outerHTML='<div style=padding:60px;text-align:center;color:#999;font-size:13px>Power BI Dashboard<br>Main Project Overview</div>'">
+<div class="info"><h3>Project Performance Dashboard</h3><p>Main dashboard integrating schedule, cost, and progress KPIs for executive management reporting</p></div>
+</div>
+<div class="dash-card">
+<img src="Images/06.png" alt="EVM Dashboard" onerror="this.outerHTML='<div style=padding:60px;text-align:center;color:#999;font-size:13px>EVM Analysis<br>Earned Value Dashboard</div>'">
+<div class="info"><h3>Earned Value Management (EVM)</h3><p>SPI/CPI trends, variance analysis, and forecast at completion — real-time EVM tracking</p></div>
+</div>
+<div class="dash-card">
+<img src="Images/01.png" alt="Progress Report" onerror="this.outerHTML='<div style=padding:60px;text-align:center;color:#999;font-size:13px>Progress Report<br>Weekly Performance</div>'">
+<div class="info"><h3>Progress Measurement & S-Curves</h3><p>Weekly progress tracking with planned vs actual S-curves and physical completion percentages</p></div>
+</div>
+<div class="dash-card">
+<img src="Images/07.png" alt="Schedule Dashboard" onerror="this.outerHTML='<div style=padding:60px;text-align:center;color:#999;font-size:13px>Schedule Dashboard<br>Primavera Integration</div>'">
+<div class="info"><h3>Schedule Control Dashboard</h3><p>Integrated with Primavera P6 for real-time schedule monitoring, milestone tracking, and critical path analysis</p></div>
+</div>
+</div>
+
+<p style="text-align:center;font-size:13px;color:#888;max-width:700px;margin:0 auto">لوحات Power BI تفاعلية معتمدة على بيانات حقيقية من مشاريع كبرى — تم تصميمها باستخدام Power Query، DAX، ومؤشرات أداء متقدمة</p>
+
+<div class="footer">
+<div style="display:flex;align-items:center;gap:12px"><div style="width:3px;height:30px;background:#C9A84C;border-radius:2px"></div><div><strong style="color:#C9A84C">Eng. Obieda Omari</strong><br><span style="font-size:11px;color:#999">Sr. Planning & Cost Control Engineer</span></div></div>
+<div>تفاعلي | Interactive Dashboards</div>
+</div>
+</div>
+<div class="sticky-footer"><div class="sf-sig"><div class="sf-bar"></div><strong>م. عبيدة العمري</strong> <span>— كبير مهندسي التخطيط ومراقبة التكاليف</span></div><div style="color:rgba(255,255,255,0.3);font-size:10px">Power BI Dashboards</div></div>
+</body>
+</html>

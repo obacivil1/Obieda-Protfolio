@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Primavera P6 Schedule Report | PSR-DAR-2022-002</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap');
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Inter',sans-serif;background:#0c1430;color:#c8d0e8;padding:16px;line-height:1.5}
+.page{max-width:210mm;margin:0 auto 20px;background:#f0f2fa;position:relative;page-break-after:always;overflow:hidden;color:#1a1e30}
+.pad{padding:28px 36px}
+.pg{position:absolute;bottom:8px;left:50%;transform:translateX(-50%);font-size:8px;color:#6a7a9a;font-family:'Inter',sans-serif;letter-spacing:.5px;background:rgba(240,242,250,0.85);padding:1px 10px;border-radius:8px}
+.fixed-foot{position:fixed;bottom:0;left:0;right:0;background:#0c1430;color:rgba(200,208,232,0.5);padding:3px 20px;display:flex;align-items:center;justify-content:space-between;font-size:7.5px;z-index:999;direction:ltr}
+.fixed-foot .f-sig{display:flex;align-items:center;gap:4px}
+.fixed-foot .f-sig .f-dot{width:5px;height:5px;background:#4a7aff;border-radius:50%}
+.fixed-foot .f-sig strong{color:#4a7aff;font-size:8px}
+.sb-bar{display:flex;justify-content:space-between;align-items:center;border-top:1px solid #c8d0e8;padding:4px 0 2px;margin-top:14px;font-size:7.5px;color:#6a7a9a}
+.sb-bar .sbn{color:#1a1e30;font-weight:600}
+.sb-bar .sbr{color:#8a9aba;letter-spacing:.5px}
+.cover{background:linear-gradient(135deg,#0a0e20,#141c3a,#1a2850);min-height:100vh;display:flex;flex-direction:column}
+.cover .ct{padding:16px 32px;display:flex;justify-content:space-between;align-items:flex-start}
+.cover .ct .ref{font-size:8.5px;color:rgba(200,208,232,0.12)}
+.cover .ct .cls{padding:2px 12px;border:1px solid rgba(74,122,255,0.25);border-radius:2px;font-size:7.5px;letter-spacing:2px;color:#4a7aff}
+.cover .cb{flex:1;display:flex;flex-direction:column;justify-content:center;padding:20px 48px 40px}
+.cover .cb .bge{display:inline-block;background:rgba(74,122,255,0.08);border:1px solid rgba(74,122,255,0.15);padding:4px 18px;font-size:9px;color:#4a7aff;letter-spacing:3px;margin-bottom:28px;width:fit-content}
+.cover h1{font-size:26px;font-weight:800;color:#fff;margin-bottom:4px}
+.cover h1 .sub{font-size:13px;font-weight:300;color:rgba(255,255,255,0.2);display:block;margin-top:2px}
+.cover .csub{font-size:12px;color:rgba(255,255,255,0.25);margin-bottom:28px}
+.cover .cm{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;max-width:580px;margin-bottom:28px}
+.cover .cm div{padding:8px 12px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.05)}
+.cover .cm .cml{font-size:7px;color:rgba(200,208,232,0.25);text-transform:uppercase;letter-spacing:1px;margin-bottom:2px}
+.cover .cm .cmv{font-size:11px;color:#fff;font-weight:600;font-family:'JetBrains Mono',monospace}
+.cover .csig{border-top:1px solid rgba(255,255,255,0.05);padding-top:16px}
+.cover .csig .csn{color:#4a7aff;font-weight:700;font-size:13px}
+.cover .csig .cst{color:rgba(255,255,255,0.15);font-size:9px}
+h2{font-size:15px;color:#0a0e20;margin-bottom:10px;display:flex;align-items:center;gap:8px}
+h2 .on{background:#0a0e20;color:#fff;width:22px;height:22px;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700}
+h3{font-size:12px;color:#141c3a;margin:12px 0 6px}
+p{font-size:11px;color:#3a4860;margin-bottom:8px}
+.kpis{display:grid;grid-template-columns:repeat(5,1fr);gap:6px;margin-bottom:14px}
+.kpis .kp{background:#e4eaf8;border-radius:4px;padding:10px 4px;text-align:center;border-bottom:3px solid #4a7aff}
+.kpis .kp .kv{font-size:15px;font-weight:800;color:#0a0e20;font-family:'JetBrains Mono',monospace}
+.kpis .kp .kv.w{color:#c0392b}
+.kpis .kp .kl{font-size:6.5px;color:#3a4860;margin-top:2px;text-transform:uppercase;letter-spacing:.5px}
+table{width:100%;border-collapse:collapse;font-size:10px;margin-bottom:12px}
+th{background:#0a0e20;color:#e0e8f8;padding:5px 8px;text-align:left;font-weight:600;font-size:9px}
+td{padding:4px 8px;border-bottom:1px solid #c8d0e8}
+tr:nth-child(even){background:#e8ecf8}
+.bar{display:flex;align-items:flex-end;gap:4px;height:60px;margin:8px 0;padding:6px 4px;background:#e4eaf8;border-radius:4px}
+.bar>div{flex:1;display:flex;flex-direction:column;align-items:center;height:100%}
+.bar>div>div{flex:1;width:60%;border-radius:3px 3px 0 0}
+.bar>div>span{font-size:6px;color:#3a4860;margin-top:2px}
+.tag{display:inline-block;padding:1px 6px;border-radius:2px;font-size:7.5px;font-weight:600}
+.tag.b{background:#d4e0ff;color:#2a4a8a}
+.tag.r{background:#f8d7da;color:#8a2a1a}
+.tag.y{background:#fff3cd;color:#7a6a2a}
+.tag.g{background:#d4edda;color:#1a6a3a}
+.gantt{position:relative;width:100%;height:32px;background:#e4eaf8;border-radius:4px;margin:4px 0 12px;overflow:hidden}
+.gantt .gt{position:absolute;height:12px;border-radius:3px;top:10px}
+.gantt .gt.l{background:#4a7aff;z-index:2}
+.gantt .gt.a{background:#2d8a4e;z-index:3}
+.gantt .gt.m{background:#f39c12;z-index:1}
+.gantt .gt.r{background:#e74c3c;z-index:1}
+.gantt .gl{position:absolute;top:2px;height:28px;border-left:1px dashed rgba(0,0,0,0.1);z-index:0}
+.sig-end{padding:28px 36px}
+.sig-end h2{font-size:15px;color:#0a0e20;margin-bottom:4px}
+.sig-end .se-sub{font-size:9px;color:#3a4860;margin-bottom:14px}
+.sig-end .rec{background:#e4eaf8;border-radius:4px;padding:10px 14px;margin-bottom:16px;font-size:10px;color:#1a1e30}
+.sig-end .rec li{margin-bottom:3px;margin-left:14px}
+.sig-boxes{display:flex;gap:20px;justify-content:center}
+.sig-boxes .sb{text-align:center;min-width:160px}
+.sig-boxes .sb .sl{width:70%;height:1px;background:#aabbcc;margin:4px auto;border-top:1px dashed #8a9aba}
+.sig-boxes .sb .sn{font-size:12px;font-weight:700;color:#0a0e20}
+.sig-boxes .sb .sr{font-size:7.5px;color:#3a4860}
+.sef{text-align:center;margin-top:12px;padding-top:10px;border-top:1px solid #c8d0e8;font-size:7.5px;color:#6a7a9a}
+@media print{body{background:#fff;padding:0}.page{box-shadow:none;margin:0;page-break-after:always}.fixed-foot{position:fixed;bottom:0!important;background:#0c1430!important;print-color-adjust:exact!important}.cover{min-height:100vh}}
+@media(max-width:768px){.cover .cb{padding:16px}.kpis{grid-template-columns:1fr 1fr}.cover .cm{grid-template-columns:1fr}.cards{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<!-- PAGE 1: COVER -->
+<div class="page" style="padding:0;background:transparent">
+<div class="cover">
+<div class="ct"><span class="ref">PSR-DAR-2022-002 | Rev. B</span><span class="cls">SCHEDULE DOCUMENT</span></div>
+<div class="cb">
+<div class="bge">PRIMAVERA P6 SCHEDULE REPORT</div>
+<h1>THE ZONE RESIDENTIAL COMPLEX<br><span class="sub">Integrated Project Schedule — Baseline vs. Current</span></h1>
+<div class="csub">Data Date: 30 June 2022 | Planned Completion: Q2 2023</div>
+<div class="cm">
+<div><div class="cml">Planned Duration</div><div class="cmv">24 Months</div></div>
+<div><div class="cml">Activities Total</div><div class="cmv">1,248</div></div>
+<div><div class="cml">% Complete (Weighted)</div><div class="cmv">38.5%</div></div>
+<div><div class="cml">Schedule Variance</div><div class="cmv" style="color:#c0392b">-45 Days</div></div>
+<div><div class="cml">Critical Path Lags</div><div class="cmv">22 Days</div></div>
+<div><div class="cml">Float (Total)</div><div class="cmv">18 Days</div></div>
+</div>
+<div class="csig"><div class="csn">Eng. Obieda Omari</div><div class="cst">Senior Planning & Cost Control Lead</div></div>
+</div>
+</div>
+<div class="pg" style="color:rgba(200,208,232,0.12);background:transparent">1 / 10</div>
+</div>
+
+<!-- PAGE 2: SUMMARY -->
+<div class="page">
+<div class="pad">
+<h2><span class="on">1</span> Schedule Executive Summary</h2>
+<p>Project schedule status as of June 30, 2022 (Data Date Week 26). The project is 38.5% complete against a planned 42.0%, resulting in a schedule delay of approximately 45 days. Critical path analysis shows 22 days of unmitigated lag concentrated in finishing and facade packages.</p>
+<div class="kpis">
+<div class="kp"><div class="kv">38.5%</div><div class="kl">Actual Complete</div></div>
+<div class="kp"><div class="kv">42.0%</div><div class="kl">Planned Complete</div></div>
+<div class="kp"><div class="kv w">-3.5%</div><div class="kl">Schedule Variance</div></div>
+<div class="kp"><div class="kv">0.92</div><div class="kl">SPI (Weighted)</div></div>
+<div class="kp"><div class="kv w">-45d</div><div class="kl">Delay (Days)</div></div>
+</div>
+<div style="background:#e4eaf8;border-radius:4px;padding:10px 14px;border-left:3px solid #4a7aff;font-size:10.5px;color:#1a1e30;margin-bottom:14px"><strong>Schedule Narrative:</strong> Structural works are 56% complete (vs. 57% planned — on track). MEP works at 40% complete (vs. 44% planned — slight lag). Finishing works at 25% (vs. 32% planned — 7% lag). Facade works at 20% (vs. 26% planned — primary delay driver). External works at 34% (on track). Recovery plan for finishing and facade is under development with target recovery of 25 days by Q1 2023.</div>
+<table>
+<thead><tr><th>Work Package</th><th>Activities</th><th>% Complete</th><th>Planned</th><th>Var %</th><th>Status</th></tr></thead>
+<tbody>
+<tr><td>Structural & Concrete</td><td>312</td><td>56.0%</td><td>57.0%</td><td>-1.0%</td><td><span class="tag g">On Track</span></td></tr>
+<tr><td>MEP Works</td><td>280</td><td>40.0%</td><td>44.0%</td><td>-4.0%</td><td><span class="tag y">Monitor</span></td></tr>
+<tr><td>Interior Finishing</td><td>348</td><td>25.0%</td><td>32.0%</td><td>-7.0%</td><td><span class="tag r">Behind</span></td></tr>
+<tr><td>Facade & Glazing</td><td>164</td><td>20.0%</td><td>26.0%</td><td>-6.0%</td><td><span class="tag r">Behind</span></td></tr>
+<tr><td>External Works</td><td>144</td><td>34.0%</td><td>34.0%</td><td>0.0%</td><td><span class="tag g">On Track</span></td></tr>
+<tr><td>Total</td><td>1,248</td><td>38.5%</td><td>42.0%</td><td>-3.5%</td><td><span class="tag y">Monitor</span></td></tr>
+</tbody>
+</table>
+</div>
+<div class="sb-bar"><span><span class="sbn">Eng. Obieda Omari</span> — Senior Planning & Cost Control Lead</span><span class="sbr">PSR-DAR-2022-002</span></div>
+<div class="pg">2 / 10</div>
+</div>
+
+<!-- PAGE 3: GANTT -->
+<div class="page">
+<div class="pad">
+<h2><span class="on">2</span> Baseline vs. Current Schedule — Gantt Summary</h2>
+<p>High-level Gantt bars showing planned vs. actual progress for major work packages. Data date: Week 26.</p>
+<h3>Structural & Concrete</h3>
+<div class="gantt">
+<div class="gt l" style="left:2%;width:55%"></div>
+<div class="gt a" style="left:2%;width:54%"></div>
+<div class="gl" style="left:42%"></div>
+</div>
+<div class="gantt" style="height:16px;margin-top:0"><div class="gl" style="left:42%"></div><div class="gt m" style="left:1%;width:48%;height:8px;top:4px;background:#888"></div></div>
+<h3>MEP Works</h3>
+<div class="gantt">
+<div class="gt l" style="left:4%;width:50%"></div>
+<div class="gt a" style="left:4%;width:46%"></div>
+<div class="gl" style="left:42%"></div>
+</div>
+<h3>Interior Finishing</h3>
+<div class="gantt">
+<div class="gt l" style="left:8%;width:48%"></div>
+<div class="gt a" style="left:8%;width:38%"></div>
+<div class="gl" style="left:42%"></div>
+</div>
+<h3>Facade & Glazing</h3>
+<div class="gantt">
+<div class="gt l" style="left:10%;width:42%"></div>
+<div class="gt a" style="left:10%;width:32%"></div>
+<div class="gl" style="left:42%"></div>
+</div>
+<div style="display:flex;gap:14px;justify-content:center;font-size:8px;color:#3a4860;margin:6px 0 10px"><span><span style="color:#4a7aff">■</span> Baseline</span><span><span style="color:#2d8a4e">■</span> Actual</span><span style="color:#888">■</span> Remaining</div>
+</div>
+<div class="sb-bar"><span><span class="sbn">Eng. Obieda Omari</span> — Senior Planning & Cost Control Lead</span><span class="sbr">PSR-DAR-2022-002</span></div>
+<div class="pg">3 / 10</div>
+</div>
+
+<!-- PAGE 4: CRITICAL PATH -->
+<div class="page">
+<div class="pad">
+<h2><span class="on">3</span> Critical Path Analysis</h2>
+<p>Detailed critical path from data date through project completion. The critical path runs through Finishing → MEP → Commissioning with 22 days of net lag.</p>
+<table>
+<thead><tr><th>Activity ID</th><th>Activity Description</th><th>Rem. Dur. (d)</th><th>Total Float</th><th>Free Float</th><th>Status</th></tr></thead>
+<tbody>
+<tr><td>STR-210</td><td>Concrete — Tower A Roof</td><td>12</td><td>0</td><td>0</td><td><span class="tag y">In Progress</span></td></tr>
+<tr><td>MEP-045</td><td>Main Riser Installation</td><td>18</td><td>0</td><td>0</td><td><span class="tag y">In Progress</span></td></tr>
+<tr><td>FIN-112</td><td>Plastering & Screeding — Level 4-8</td><td>22</td><td>0</td><td>0</td><td><span class="tag r">Started Late</span></td></tr>
+<tr><td>FIN-118</td><td>Ceiling Grid Installation</td><td>14</td><td>0</td><td>0</td><td><span class="tag r">Not Started</span></td></tr>
+<tr><td>FIN-124</td><td>Tiling & Flooring — Level 1-4</td><td>20</td><td>0</td><td>0</td><td><span class="tag r">Not Started</span></td></tr>
+<tr><td>MEP-088</td><td>HVAC Duct Final Connection</td><td>10</td><td>2</td><td>2</td><td><span class="tag y">Pending</span></td></tr>
+<tr><td>ELC-034</td><td>Main Electrical Termination</td><td>12</td><td>2</td><td>2</td><td><span class="tag y">Pending</span></td></tr>
+<tr><td>COM-001</td><td>Systems Commissioning</td><td>28</td><td>0</td><td>0</td><td><span class="tag r">Future</span></td></tr>
+<tr><td>COM-010</td><td>Handover Preparation</td><td>14</td><td>0</td><td>0</td><td><span class="tag r">Future</span></td></tr>
+</tbody>
+</table>
+<h3>Critical Path Float Profile</h3>
+<table>
+<thead><tr><th>Path Segment</th><th>Duration (d)</th><th>Float (d)</th><th>Risk Level</th></tr></thead>
+<tbody>
+<tr><td>Structural completion → MEP rough-in</td><td>45</td><td>5</td><td><span class="tag y">Medium</span></td></tr>
+<tr><td>MEP rough-in → Finishing start</td><td>30</td><td>3</td><td><span class="tag r">High</span></td></tr>
+<tr><td>Finishing → MEP final connection</td><td>55</td><td>2</td><td><span class="tag r">High</span></td></tr>
+<tr><td>MEP final → Commissioning</td><td>28</td><td>0</td><td><span class="tag r">Critical</span></td></tr>
+<tr><td>Commissioning → Handover</td><td>14</td><td>0</td><td><span class="tag r">Critical</span></td></tr>
+</tbody>
+</table>
+</div>
+<div class="sb-bar"><span><span class="sbn">Eng. Obieda Omari</span> — Senior Planning & Cost Control Lead</span><span class="sbr">PSR-DAR-2022-002</span></div>
+<div class="pg">4 / 10</div>
+</div>
+
+<!-- PAGE 5: MILESTONES -->
+<div class="page">
+<div class="pad">
+<h2><span class="on">4</span> Milestone Tracking</h2>
+<p>Key project milestones — baseline vs. current forecast with variance analysis.</p>
+<table>
+<thead><tr><th>Milestone</th><th>Baseline Date</th><th>Forecast Date</th><th>Variance (d)</th><th>Status</th></tr></thead>
+<tbody>
+<tr><td>Project Commencement</td><td>01-Jan-2021</td><td>01-Jan-2021</td><td>0</td><td><span class="tag g">Complete</span></td></tr>
+<tr><td>Foundation Complete</td><td>15-Mar-2021</td><td>20-Mar-2021</td><td>+5</td><td><span class="tag g">Complete</span></td></tr>
+<tr><td>Structural Framing — Tower A</td><td>30-Aug-2021</td><td>08-Sep-2021</td><td>+9</td><td><span class="tag g">Complete</span></td></tr>
+<tr><td>Structural Framing — Tower B</td><td>20-Oct-2021</td><td>30-Oct-2021</td><td>+10</td><td><span class="tag g">Complete</span></td></tr>
+<tr><td>Structural Framing — All</td><td>15-Jan-2022</td><td>28-Jan-2022</td><td>+13</td><td><span class="tag g">Complete</span></td></tr>
+<tr><td>MEP Rough-In Complete</td><td>30-May-2022</td><td>20-Jun-2022</td><td>+21</td><td><span class="tag y">Complete</span></td></tr>
+<tr><td>Facade Installation Start</td><td>01-Feb-2022</td><td>20-Feb-2022</td><td>+19</td><td><span class="tag y">Complete</span></td></tr>
+<tr><td>Finishing Works Start</td><td>01-Mar-2022</td><td>25-Mar-2022</td><td>+24</td><td><span class="tag y">Complete</span></td></tr>
+<tr><td>Finishing Works Complete</td><td>30-Nov-2022</td><td>15-Jan-2023</td><td>+46</td><td><span class="tag r">Behind</span></td></tr>
+<tr><td>Facade Complete</td><td>15-Feb-2023</td><td>10-Mar-2023</td><td>+23</td><td><span class="tag r">Behind</span></td></tr>
+<tr><td>Systems Commissioning</td><td>01-Apr-2023</td><td>25-Apr-2023</td><td>+24</td><td><span class="tag r">Behind</span></td></tr>
+<tr><td>Project Handover</td><td>15-May-2023</td><td>30-Jun-2023</td><td>+46</td><td><span class="tag r">At Risk</span></td></tr>
+</tbody>
+</table>
+<div style="background:#e4eaf8;border-radius:3px;padding:8px 12px;font-size:9.5px;color:#1a1e30;margin-top:6px"><strong>Key Concern:</strong> Finishing and facade milestones are driving a forecasted 46-day delay to project handover. Recovery plan targets 25-day recovery, reducing net delay to 21 days. Management review of acceleration options is required.</div>
+</div>
+<div class="sb-bar"><span><span class="sbn">Eng. Obieda Omari</span> — Senior Planning & Cost Control Lead</span><span class="sbr">PSR-DAR-2022-002</span></div>
+<div class="pg">5 / 10</div>
+</div>
+
+<!-- PAGE 6: RESOURCES -->
+<div class="page">
+<div class="pad">
+<h2><span class="on">5</span> Resource & Productivity Analysis</h2>
+<p>Labor productivity and resource utilization analysis across work packages.</p>
+<table>
+<thead><tr><th>Trade</th><th>Planned (HC)</th><th>Actual (HC)</th><th>Variance</th><th>Productivity</th><th>Status</th></tr></thead>
+<tbody>
+<tr><td>Concrete / Steel</td><td>85</td><td>82</td><td>-3</td><td>94%</td><td><span class="tag g">Good</span></td></tr>
+<tr><td>MEP Technicians</td><td>65</td><td>60</td><td>-5</td><td>88%</td><td><span class="tag y">Monitor</span></td></tr>
+<tr><td>Finishing Laborers</td><td>120</td><td>88</td><td>-32</td><td>72%</td><td><span class="tag r">Critical</span></td></tr>
+<tr><td>Facade Installers</td><td>40</td><td>28</td><td>-12</td><td>65%</td><td><span class="tag r">Critical</span></td></tr>
+<tr><td>External Works</td><td>35</td><td>34</td><td>-1</td><td>95%</td><td><span class="tag g">Good</span></td></tr>
+</tbody>
+</table>
+<h3>Critical Resource Shortfall — Finishing & Facade</h3>
+<div class="bar">
+<div><div style="height:80%;background:#4a7aff"></div><span>Planned</span></div>
+<div><div style="height:55%;background:#e74c3c"></div><span>Actual</span></div>
+<div><div style="height:80%;background:#4a7aff"></div><span>Planned</span></div>
+<div><div style="height:65%;background:#e74c3c"></div><span>Actual</span></div>
+</div>
+<div style="text-align:center;font-size:7.5px;color:#3a4860;margin-bottom:8px">Finishing (left two) & Facade (right two) — Planned vs. Actual Headcount</div>
+<div style="background:#f8d7da;border-radius:3px;padding:8px 12px;font-size:9.5px;color:#6a1a1a"><strong>Action Required:</strong> Finishing workforce is at 73% of planned (88 vs. 120). Facade workforce at 70% (28 vs. 40). Immediate recruitment/mobilization of 44 additional workers recommended to mitigate schedule impact.</div>
+</div>
+<div class="sb-bar"><span><span class="sbn">Eng. Obieda Omari</span> — Senior Planning & Cost Control Lead</span><span class="sbr">PSR-DAR-2022-002</span></div>
+<div class="pg">6 / 10</div>
+</div>
+
+<!-- PAGE 7: LOOKAHEAD -->
+<div class="page">
+<div class="pad">
+<h2><span class="on">6</span> Look-Ahead Schedule — Next 8 Weeks</h2>
+<p>Critical activities for the upcoming 8-week window (Weeks 27-34).</p>
+<table>
+<thead><tr><th>Activity</th><th>WBS</th><th>Start</th><th>Finish</th><th>Duration</th><th>Priority</th></tr></thead>
+<tbody>
+<tr><td>Core Casting — Level 12</td><td>STR-215</td><td>07-Jul</td><td>18-Jul</td><td>12</td><td><span class="tag r">Critical</span></td></tr>
+<tr><td>MEP Rough-In — Levels 5-8</td><td>MEP-050</td><td>07-Jul</td><td>25-Jul</td><td>19</td><td><span class="tag r">Critical</span></td></tr>
+<tr><td>Plastering — Levels 4-6</td><td>FIN-115</td><td>14-Jul</td><td>01-Aug</td><td>19</td><td><span class="tag r">Critical</span></td></tr>
+<tr><td>Facade Frame — East Elevation</td><td>FAC-022</td><td>10-Jul</td><td>28-Jul</td><td>19</td><td><span class="tag r">Critical</span></td></tr>
+<tr><td>Aluminum Glazing — Ground</td><td>FAC-031</td><td>21-Jul</td><td>04-Aug</td><td>15</td><td><span class="tag y">High</span></td></tr>
+<tr><td>Ceiling Grid — Level 2-3</td><td>FIN-118</td><td>28-Jul</td><td>08-Aug</td><td>12</td><td><span class="tag y">High</span></td></tr>
+<tr><td>Tiling & Flooring — Level 1</td><td>FIN-124</td><td>04-Aug</td><td>22-Aug</td><td>19</td><td><span class="tag y">High</span></td></tr>
+<tr><td>HVAC Ductwork — Levels 3-5</td><td>MEP-088</td><td>11-Aug</td><td>22-Aug</td><td>12</td><td><span class="tag y">High</span></td></tr>
+<tr><td>External Pavement</td><td>EXT-042</td><td>14-Jul</td><td>08-Aug</td><td>26</td><td><span class="tag g">Normal</span></td></tr>
+<tr><td>Landscaping Prep</td><td>EXT-055</td><td>21-Jul</td><td>15-Aug</td><td>26</td><td><span class="tag g">Normal</span></td></tr>
+</tbody>
+</table>
+<h3>Look-Ahead Resource Requirements</h3>
+<table>
+<thead><tr><th>Resource</th><th>Required (Week 27-34)</th><th>Available</th><th>Gap</th></tr></thead>
+<tbody>
+<tr><td>Finishing Skilled Laborers</td><td>140</td><td>88</td><td>-52</td></tr>
+<tr><td>Facade Installers</td><td>45</td><td>28</td><td>-17</td></tr>
+<tr><td>MEP Technicians</td><td>72</td><td>60</td><td>-12</td></tr>
+<tr><td>General Laborers</td><td>50</td><td>45</td><td>-5</td></tr>
+</tbody>
+</table>
+</div>
+<div class="sb-bar"><span><span class="sbn">Eng. Obieda Omari</span> — Senior Planning & Cost Control Lead</span><span class="sbr">PSR-DAR-2022-002</span></div>
+<div class="pg">7 / 10</div>
+</div>
+
+<!-- PAGE 8: EARNED SCHEDULE -->
+<div class="page">
+<div class="pad">
+<h2><span class="on">7</span> Earned Schedule & Performance Indices</h2>
+<p>Earned Schedule (ES) analysis provides time-based schedule performance metrics.</p>
+<div class="kpis" style="grid-template-columns:repeat(4,1fr)">
+<div class="kp"><div class="kv">ES = 23.2w</div><div class="kl">Earned Schedule</div></div>
+<div class="kp"><div class="kv">AT = 26.0w</div><div class="kl">Actual Time</div></div>
+<div class="kp"><div class="kv w">SV(t) = -2.8w</div><div class="kl">Schedule Var (Time)</div></div>
+<div class="kp"><div class="kv">SPI(t) = 0.89</div><div class="kl">Schedule Perf (Time)</div></div>
+</div>
+<table>
+<thead><tr><th>Metric</th><th>Value</th><th>Analysis</th></tr></thead>
+<tbody>
+<tr><td>Baseline Duration</td><td>104 weeks (24 months)</td><td>Q1 2021 — Q2 2023</td></tr>
+<tr><td>Actual Duration to Date</td><td>26 weeks (YTD 2022)</td><td>Jan 01 — Jun 30, 2022</td></tr>
+<tr><td>Planned % Complete (Time)</td><td>42.0%</td><td>Per P6 baseline</td></tr>
+<tr><td>Actual % Complete (Weighted)</td><td>38.5%</td><td>Quantity-based measurement</td></tr>
+<tr><td>Earned Schedule (ES)</td><td>23.2 weeks</td><td>Time equivalent of earned progress</td></tr>
+<tr><td>Actual Time (AT)</td><td>26.0 weeks</td><td>Weeks elapsed since Jan 01</td></tr>
+<tr><td>SV(t) = ES - AT</td><td>-2.8 weeks (-19.6 days)</td><td>Time delay</td></tr>
+<tr><td>SPI(t) = ES / AT</td><td>0.89</td><td>89% schedule efficiency</td></tr>
+<tr><td>IEAC(t) = BD / SPI(t)</td><td>116.9 weeks</td><td>Forecast duration at current efficiency</td></tr>
+<tr><td>Estimated Delay at Completion</td><td>~12.9 weeks (~90 days)</td><td>Without recovery measures</td></tr>
+<tr><td>Recovery Target (with acceleration)</td><td>~6 weeks (~42 days)</td><td>Net delay after 25-day recovery</td></tr>
+</tbody>
+</table>
+</div>
+<div class="sb-bar"><span><span class="sbn">Eng. Obieda Omari</span> — Senior Planning & Cost Control Lead</span><span class="sbr">PSR-DAR-2022-002</span></div>
+<div class="pg">8 / 10</div>
+</div>
+
+<!-- PAGE 9: RISKS -->
+<div class="page">
+<div class="pad">
+<h2><span class="on">8</span> Schedule Risk Assessment</h2>
+<table>
+<thead><tr><th>Risk ID</th><th>Risk Description</th><th>Probability</th><th>Impact (Days)</th><th>Expected Delay</th></tr></thead>
+<tbody>
+<tr><td>SR-01</td><td>Finishing labor shortage persists</td><td>High</td><td>35</td><td>24.5</td></tr>
+<tr><td>SR-02</td><td>Facade material delivery delay</td><td>Medium</td><td>28</td><td>14.0</td></tr>
+<tr><td>SR-03</td><td>MEP coordination rework</td><td>Medium</td><td>18</td><td>9.0</td></tr>
+<tr><td>SR-04</td><td>Inspection / approval delays</td><td>Low</td><td>14</td><td>4.2</td></tr>
+<tr><td>SR-05</td><td>Weather-related productivity loss</td><td>Low</td><td>10</td><td>2.0</td></tr>
+<tr><td colspan="4" style="text-align:right;font-weight:700">Total Expected Delay (P50)</td><td>53.7</td></tr>
+</tbody>
+</table>
+<h3>Mitigation Measures</h3>
+<table>
+<thead><tr><th>Measure</th><th>Target Risk</th><th>Expected Recovery (d)</th><th>Cost ($)</th></tr></thead>
+<tbody>
+<tr><td>Mobilize 44 additional finishing/facade workers</td><td>SR-01</td><td>18</td><td>140,000</td></tr>
+<tr><td>Facade material pre-ordering + air freight</td><td>SR-02</td><td>14</td><td>85,000</td></tr>
+<tr><td>Weekly BIM coordination meetings</td><td>SR-03</td><td>8</td><td>12,000</td></tr>
+<tr><td>Dedicated QA/QC inspector assignment</td><td>SR-04</td><td>6</td><td>18,000</td></tr>
+<tr><td>Night shift work for critical finishing tasks</td><td>SR-01/02</td><td>12</td><td>95,000</td></tr>
+<tr><td colspan="3" style="text-align:right;font-weight:700">Total Recovery Potential</td><td>58 days</td><td>350,000</td></tr>
+</tbody>
+</table>
+</div>
+<div class="sb-bar"><span><span class="sbn">Eng. Obieda Omari</span> — Senior Planning & Cost Control Lead</span><span class="sbr">PSR-DAR-2022-002</span></div>
+<div class="pg">9 / 10</div>
+</div>
+
+<!-- PAGE 10: SIG -->
+<div class="page">
+<div class="sig-end">
+<h2>Schedule Sign-off & Recommendations</h2>
+<div class="se-sub">Primavera P6 Schedule Report — Q2 2022 | The Zone Residential Complex</div>
+<div class="rec">
+<strong>Schedule Recovery Recommendations:</strong>
+<ol>
+<li>Immediately mobilize 44 additional workers for finishing and facade packages — target on-site by July 14.</li>
+<li>Pre-order facade materials with air freight allowance for critical items — approve $85K budget.</li>
+<li>Implement weekly BIM coordination sessions to reduce MEP rework risk.</li>
+<li>Authorize night shift for critical finishing activities — target 25-day schedule recovery.</li>
+<li>Update P6 schedule baseline and re-issue forecast completion by July 10.</li>
+<li>Conduct weekly critical path review meetings with all package managers.</li>
+</ol>
+</div>
+<div class="sig-boxes">
+<div class="sb"><div class="sn">Eng. Obieda Omari</div><div class="sl"></div><div class="sr">Senior Planning & Cost Control Lead</div></div>
+<div class="sb"><div class="sn">Project Manager</div><div class="sl"></div><div class="sr">Jadwa Contracting Co.</div></div>
+<div class="sb"><div class="sn">Client PM</div><div class="sl"></div><div class="sr">Takamul Real Estate Co.</div></div>
+</div>
+<div class="sef">PSR-DAR-2022-002 | Rev. B | Confidential — Schedule Document</div>
+</div>
+<div class="sb-bar" style="margin-top:8px"><span><span class="sbn">Eng. Obieda Omari</span> — Senior Planning & Cost Control Lead</span><span class="sbr">PSR-DAR-2022-002</span></div>
+<div class="pg">10 / 10</div>
+</div>
+
+<div class="fixed-foot"><div class="f-sig"><div class="f-dot"></div><strong>Eng. Obieda Omari</strong> — Sr. Planning & Cost Control Lead</div><span>PSR-DAR-2022-002 • Confidential</span></div>
+</body>
+</html>

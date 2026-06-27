@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Progress Report Sample | SPR-TKC-2026-003</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Inter',sans-serif;background:#2a2a2e;color:#1a1a1a;padding:20px;line-height:1.5}
+.page{max-width:210mm;margin:0 auto 24px;background:#fcfcf9;position:relative;page-break-after:always;overflow:hidden}
+.pg{position:absolute;bottom:8px;left:50%;transform:translateX(-50%);font-size:8px;color:#999;font-family:'Inter',sans-serif;direction:ltr;letter-spacing:.5px;background:rgba(255,255,255,0.85);padding:1px 10px;border-radius:8px}
+.fixed-foot{position:fixed;bottom:0;left:0;right:0;background:#1a1208;color:rgba(255,255,255,0.6);padding:3px 20px;display:flex;align-items:center;justify-content:space-between;font-size:8px;z-index:999;direction:ltr}
+.fixed-foot .f-sig{display:flex;align-items:center;gap:4px}
+.fixed-foot .f-sig .f-dot{width:5px;height:5px;background:#e87a20;border-radius:50%}
+.fixed-foot .f-sig strong{color:#e87a20;font-size:8.5px}
+/* COVER */
+.cover{background:linear-gradient(160deg,#1a1208,#3d2a14,#5c3d1e);min-height:100vh;padding:0;position:relative;display:flex;flex-direction:column}
+.cover .cv-top{display:flex;justify-content:space-between;padding:18px 32px;align-items:flex-start}
+.cover .cv-top .cv-ref{font-size:8.5px;color:rgba(255,255,255,0.15);letter-spacing:1px}
+.cover .cv-top .cv-class{padding:2px 12px;border:1px solid rgba(232,122,32,0.3);border-radius:2px;font-size:7.5px;letter-spacing:2px;color:#e87a20}
+.cover .cv-body{flex:1;display:flex;flex-direction:column;justify-content:center;padding:20px 50px 36px}
+.cover .strip{position:absolute;bottom:0;left:0;right:0;height:5px;background:linear-gradient(90deg,#e87a20,#f5a623,#e87a20)}
+.cover .logo{width:64px;height:64px;margin:0 0 28px;border:2px solid rgba(232,122,32,0.35);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:22px;color:#f5a623;font-weight:800}
+.cover h1{font-size:26px;font-weight:800;color:#f0e8d8;margin-bottom:4px;line-height:1.3}
+.cover h1 .sub{font-size:13px;font-weight:300;color:rgba(240,232,216,0.3);display:block;margin-top:2px}
+.cover .tagline{font-size:10px;color:rgba(240,232,216,0.2);letter-spacing:3px;margin-bottom:30px}
+.cover .c-meta{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:28px}
+.cover .c-meta div{padding:8px 16px;border:1px solid rgba(240,232,216,0.08);border-radius:3px;min-width:140px}
+.cover .c-meta .cml{font-size:7.5px;color:rgba(240,232,216,0.25);text-transform:uppercase;letter-spacing:2px}
+.cover .c-meta .cmv{font-size:11px;color:#f5a623;font-weight:600;margin-top:1px}
+.cover .cv-sig{border-top:1px solid rgba(240,232,216,0.05);padding-top:16px}
+.cover .cv-sig .csn{color:#f5a623;font-weight:700;font-size:13px}
+.cover .cv-sig .cst{color:rgba(240,232,216,0.2);font-size:9px}
+/* TOC */
+.toc{padding:32px 40px}
+.toc h2{font-size:16px;color:#3d2a14;margin-bottom:16px;border-bottom:3px solid #f5a623;padding-bottom:7px}
+.toc table{width:100%;border-collapse:collapse;font-size:11px}
+.toc td{padding:8px 6px;border-bottom:1px solid #e8e0d4}
+.toc td.num{width:28px;color:#e87a20;font-weight:700;text-align:center}
+.toc td.dots{color:#d0c8b8;letter-spacing:2px}
+.toc td.pg{width:32px;text-align:right;color:#999;font-family:'Inter',sans-serif}
+/* CONTENT */
+.content{padding:28px 40px}
+.content h2{font-size:15px;color:#3d2a14;margin-bottom:10px;border-bottom:3px solid #f5a623;padding-bottom:6px;display:flex;align-items:center;gap:8px}
+.content h2 .on{background:#e87a20;color:#fff;width:22px;height:22px;border-radius:3px;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700}
+.content h3{font-size:12px;color:#5c3d1e;margin:12px 0 6px}
+.content p{font-size:11px;color:#666;margin-bottom:8px}
+.tag{display:inline-block;padding:1px 7px;border-radius:2px;font-size:8px;font-weight:600}
+.tag.g{background:#e6f0e6;color:#2a6b3a}
+.tag.y{background:#f8f0d0;color:#7a6a2a}
+.tag.r{background:#f8e0d0;color:#8a3a2a}
+.stat-row{display:grid;grid-template-columns:repeat(6,1fr);gap:6px;margin-bottom:14px}
+.stat-row .sc{background:#f8f5f0;border-radius:4px;padding:10px 6px;text-align:center;border-bottom:3px solid #f5a623}
+.stat-row .sc .scv{font-size:17px;font-weight:800;color:#3d2a14}
+.stat-row .sc .scv.ok{color:#2a6b3a}
+.stat-row .sc .scv.wa{color:#b86a20}
+.stat-row .sc .scv.ng{color:#b33a2a}
+.stat-row .sc .scl{font-size:7.5px;color:#999;margin-top:2px}
+table.data{width:100%;border-collapse:collapse;font-size:10px;margin-bottom:12px}
+table.data th{background:#3d2a14;color:#f0e8d8;padding:5px 8px;text-align:left;font-weight:600;font-size:9px}
+table.data td{padding:4px 8px;border-bottom:1px solid #e8e0d4}
+table.data tr:nth-child(even){background:#faf8f5}
+.card-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px}
+.card-grid .cg{border:1px solid #e8e0d4;border-radius:4px;padding:10px;background:#fff}
+.card-grid .cg h4{font-size:10.5px;color:#3d2a14;margin-bottom:3px}
+.card-grid .cg p{font-size:9.5px;color:#666;margin:0}
+.card-grid .cg .badge{display:inline-block;padding:1px 6px;border-radius:2px;font-size:7.5px;font-weight:600;margin-bottom:3px}
+.card-grid .cg .badge.c1{background:#f8e0d0;color:#8a3a2a}
+.card-grid .cg .badge.c2{background:#f8f0d0;color:#7a6a2a}
+.card-grid .cg .badge.c3{background:#e6f0e6;color:#2a6b3a}
+.bar-track{display:flex;align-items:center;gap:8px;margin:4px 0}
+.bar-track .bt{flex:1;height:5px;background:#e8e0d4;border-radius:3px;overflow:hidden}
+.bar-track .bt .bf{height:100%;border-radius:3px}
+.bar-track .bl{font-size:9px;color:#999;min-width:30px;text-align:right}
+/* PAGE 6 CHART */
+.chart-area{background:#f8f5f0;border-radius:4px;padding:12px;margin-bottom:12px;border:1px solid #e8e0d4}
+.chart-area svg{width:100%;height:auto}
+.chart-area .ca-key{text-align:center;font-size:8px;color:#999;margin-top:8px}
+/* FINAL */
+.sig-wrap{padding:32px 40px}
+.sig-wrap h2{font-size:16px;color:#3d2a14;margin-bottom:4px}
+.sig-wrap .sig-sub{font-size:9.5px;color:#999;margin-bottom:14px}
+.sig-rec{background:#f8f5f0;border-radius:4px;padding:10px 14px;margin-bottom:16px}
+.sig-rec li{font-size:10px;color:#5a4a3a;margin-bottom:3px;margin-left:14px}
+.sig-boxes{display:flex;gap:24px;justify-content:center}
+.sig-boxes .sb{text-align:center;min-width:160px}
+.sig-boxes .sb .sb-line{width:70%;height:1px;background:#d0c8b8;margin:4px auto;border-top:1px dashed #bbb}
+.sig-boxes .sb .sb-name{font-size:12px;font-weight:700;color:#3d2a14}
+.sig-boxes .sb .sb-role{font-size:8px;color:#999}
+.sig-footer{text-align:center;margin-top:14px;padding-top:10px;border-top:1px solid #e8e0d4;font-size:8px;color:#bbb}
+.sb-bar{display:flex;justify-content:space-between;align-items:center;border-top:1px solid #e0d6c8;padding:4px 0 2px;margin-top:12px;font-size:7.5px;color:#999;font-family:'Inter',sans-serif}
+.sb-bar .sbb-name{color:#3d2a14;font-weight:600}
+.sb-bar .sbb-ref{color:#bbb;letter-spacing:.5px}
+@media print{body{background:#fff;padding:0}.page{box-shadow:none;margin:0;page-break-after:always}.fixed-foot{position:fixed;bottom:0!important;background:#1a1208!important;-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important}.cover{min-height:100vh}}
+@media(max-width:768px){body{padding:8px}.content{padding:16px}.cover .cv-body{padding:16px}.stat-row{grid-template-columns:repeat(3,1fr)}.card-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<!-- PAGE 1: COVER -->
+<div class="page" style="padding:0;background:transparent">
+<div class="cover">
+<div class="strip"></div>
+<div class="cv-top"><span class="cv-ref">SPR-TKC-2026-003 | Rev. A</span><span class="cv-class">SAMPLE DOCUMENT</span></div>
+<div class="cv-body">
+<div class="logo">TKC</div>
+<h1>SAMPLE PROGRESS REPORT<br><span class="sub">Residential & Commercial Complex — Project Overview</span></h1>
+<div class="tagline">FOR REVIEW PURPOSES • JUNE 2026</div>
+<div class="c-meta">
+<div><div class="cml">Contractor</div><div class="cmv">Jadwa Contracting Est.</div></div>
+<div><div class="cml">Project Type</div><div class="cmv">Mixed-Use Development</div></div>
+<div><div class="cml">Report Date</div><div class="cmv">June 25, 2026</div></div>
+</div>
+<div class="cv-sig">
+<div class="csn">Eng. Obieda Omari</div>
+<div class="cst">Planning & Progress Control Engineer</div>
+</div>
+</div>
+</div>
+<div class="pg" style="color:rgba(240,232,216,0.15);background:transparent">1 / 10</div>
+</div>
+
+<!-- PAGE 2: TOC -->
+<div class="page">
+<div class="toc">
+<h2>Table of Contents</h2>
+<table>
+<tr><td class="num">1</td><td>Report Summary</td><td class="dots">.....................................................................................................................</td><td class="pg">3</td></tr>
+<tr><td class="num">2</td><td>Project Scope & Definition</td><td class="dots">.....................................................................................................................</td><td class="pg">4</td></tr>
+<tr><td class="num">3</td><td>Structural Works Progress</td><td class="dots">.....................................................................................................................</td><td class="pg">5</td></tr>
+<tr><td class="num">4</td><td>MEP & Finishing Status</td><td class="dots">.....................................................................................................................</td><td class="pg">6</td></tr>
+<tr><td class="num">5</td><td>Progress S-Curve Analysis</td><td class="dots">.....................................................................................................................</td><td class="pg">7</td></tr>
+<tr><td class="num">6</td><td>Resources & Manpower</td><td class="dots">.....................................................................................................................</td><td class="pg">8</td></tr>
+<tr><td class="num">7</td><td>Quality & Safety Report</td><td class="dots">.....................................................................................................................</td><td class="pg">9</td></tr>
+<tr><td class="num">8</td><td>Recommendations & Signatures</td><td class="dots">.....................................................................................................................</td><td class="pg">10</td></tr>
+</table>
+</div>
+<div class="pg">2 / 10</div>
+</div>
+
+<!-- PAGE 3: SUMMARY -->
+<div class="page">
+<div class="content">
+<h2><span class="on">1</span> Report Summary</h2>
+<p>Overall project performance as of June 25, 2026. This report presents actual progress against baseline, analyzes deviations, and provides actionable recommendations.</p>
+<div class="stat-row">
+<div class="sc"><div class="scv wa">58.6%</div><div class="scl">Planned Progress</div></div>
+<div class="sc"><div class="scv wa">56.2%</div><div class="scl">Actual Progress</div></div>
+<div class="sc"><div class="scv ng">-2.4%</div><div class="scl">Schedule Variance</div></div>
+<div class="sc"><div class="scv ok">0.96</div><div class="scl">SPI</div></div>
+<div class="sc"><div class="scv">156</div><div class="scl">Total Workforce</div></div>
+<div class="sc"><div class="scv ok">0</div><div class="scl">LTI Incidents</div></div>
+</div>
+<div style="background:#f8ece0;border-radius:4px;padding:10px 14px;border-left:3px solid #f5a623;margin-bottom:12px;font-size:10.5px;color:#5c3d1e"><strong>Summary:</strong> Structural frame progress is strong at 70%. Finishing works lag at 32% due to workforce reallocation. MEP works on schedule at 48%. Overall variance -2.4% within contractual ±3% tolerance. Corrective actions in place to recover finishing delay.</div>
+<table class="data">
+<thead><tr><th>Work Section</th><th>Progress %</th><th>Status</th></tr></thead>
+<tbody>
+<tr><td>Structural Frame</td><td>70.0%</td><td><span class="tag y">On track — monitor</span></td></tr>
+<tr><td>MEP Works</td><td>48.0%</td><td><span class="tag y">On schedule</span></td></tr>
+<tr><td>Interior Finishing</td><td>32.0%</td><td><span class="tag r">Delayed — recovery plan</span></td></tr>
+<tr><td>Facade Works</td><td>20.0%</td><td><span class="tag y">Late start</span></td></tr>
+<tr><td>External Works</td><td>15.0%</td><td><span class="tag g">Planning phase</span></td></tr>
+</tbody>
+</table>
+</div>
+<div class="sb-bar"><span><span class="sbb-name">Eng. Obieda Omari</span> — Planning & Progress Control Engineer</span><span class="sbb-ref">SPR-TKC-2026-003</span></div>
+<div class="pg">3 / 10</div>
+</div>
+
+<!-- PAGE 4: SCOPE -->
+<div class="page">
+<div class="content">
+<h2><span class="on">2</span> Project Scope & Definition</h2>
+<table class="data">
+<thead><tr><th>Parameter</th><th>Detail</th></tr></thead>
+<tbody>
+<tr><td>Project Name</td><td>Rose Residential & Commercial Complex</td></tr>
+<tr><td>Location</td><td>Jeddah — Al Shati District, King Abdulaziz Road</td></tr>
+<tr><td>Client</td><td>Takamul Real Estate Co.</td></tr>
+<tr><td>Contractor</td><td>Jadwa Contracting Est.</td></tr>
+<tr><td>Consultant</td><td>Q Design Engineering Consultants</td></tr>
+<tr><td>Contract Value</td><td>$28,750,000 USD</td></tr>
+<tr><td>Duration</td><td>30 months (Aug 2024 — Jan 2027)</td></tr>
+<tr><td>Total Area</td><td>36,200 m²</td></tr>
+<tr><td>Components</td><td>Basement + 3 Commercial + 12 Residential (84 units) + Roof</td></tr>
+</tbody>
+</table>
+<h3>Scope Breakdown by Value</h3>
+<table class="data">
+<thead><tr><th>Package</th><th>Contract Value ($)</th><th>Weight %</th></tr></thead>
+<tbody>
+<tr><td>Structural & Concrete</td><td>9,775,000</td><td>34%</td></tr>
+<tr><td>MEP Works</td><td>7,187,500</td><td>25%</td></tr>
+<tr><td>Interior Finishing</td><td>5,750,000</td><td>20%</td></tr>
+<tr><td>Facade & Glazing</td><td>3,450,000</td><td>12%</td></tr>
+<tr><td>External & Infrastructure</td><td>2,587,500</td><td>9%</td></tr>
+<tr><td style="font-weight:700">Total</td><td style="font-weight:700">28,750,000</td><td style="font-weight:700">100%</td></tr>
+</tbody>
+</table>
+</div>
+<div class="sb-bar"><span><span class="sbb-name">Eng. Obieda Omari</span> — Planning & Progress Control Engineer</span><span class="sbb-ref">SPR-TKC-2026-003</span></div>
+<div class="pg">4 / 10</div>
+</div>
+
+<!-- PAGE 5: STRUCTURAL -->
+<div class="page">
+<div class="content">
+<h2><span class="on">3</span> Structural Works Progress</h2>
+<table class="data">
+<thead><tr><th>Element</th><th>Location</th><th>Planned %</th><th>Actual %</th><th>Variance</th><th>Status</th></tr></thead>
+<tbody>
+<tr><td>Slab & Columns — Comm. G+1</td><td>Level G+1</td><td>100%</td><td>100%</td><td>0%</td><td><span class="tag g">Complete</span></td></tr>
+<tr><td>Slab & Columns — Comm. G+2</td><td>Level G+2</td><td>100%</td><td>100%</td><td>0%</td><td><span class="tag g">Complete</span></td></tr>
+<tr><td>Slab & Columns — Comm. G+3</td><td>Level G+3</td><td>100%</td><td>100%</td><td>0%</td><td><span class="tag g">Complete</span></td></tr>
+<tr><td>Residential Level 04</td><td>Level 04</td><td>100%</td><td>100%</td><td>0%</td><td><span class="tag g">Complete</span></td></tr>
+<tr><td>Residential Level 05</td><td>Level 05</td><td>100%</td><td>100%</td><td>0%</td><td><span class="tag g">Complete</span></td></tr>
+<tr><td>Residential Level 06</td><td>Level 06</td><td>100%</td><td>100%</td><td>0%</td><td><span class="tag g">Complete</span></td></tr>
+<tr><td>Residential Level 07</td><td>Level 07</td><td>100%</td><td>95%</td><td>-5%</td><td><span class="tag y">Pour in progress</span></td></tr>
+<tr><td>Residential Level 08</td><td>Level 08</td><td>80%</td><td>65%</td><td>-15%</td><td><span class="tag r">Delayed</span></td></tr>
+<tr><td>Residential Level 09</td><td>Level 09</td><td>40%</td><td>25%</td><td>-15%</td><td><span class="tag r">Delayed</span></td></tr>
+<tr><td>Shear Walls — Core</td><td>Core</td><td>90%</td><td>90%</td><td>0%</td><td><span class="tag g">Good</span></td></tr>
+</tbody>
+</table>
+<p style="font-size:9.5px;color:#999">Delays on Levels 08-09 due to carpenter and steel fixer shortage. 6 additional workers assigned effective June 24.</p>
+</div>
+<div class="sb-bar"><span><span class="sbb-name">Eng. Obieda Omari</span> — Planning & Progress Control Engineer</span><span class="sbb-ref">SPR-TKC-2026-003</span></div>
+<div class="pg">5 / 10</div>
+</div>
+
+<!-- PAGE 6: MEP -->
+<div class="page">
+<div class="content">
+<h2><span class="on">4</span> MEP & Finishing Status</h2>
+<h3>MEP Systems Progress</h3>
+<table class="data">
+<thead><tr><th>System</th><th>Location</th><th>Progress %</th><th>Status</th></tr></thead>
+<tbody>
+<tr><td>HVAC Ductwork — Commercial</td><td>G+1 to G+3</td><td>85%</td><td><span class="tag g">Good</span></td></tr>
+<tr><td>HVAC Ductwork — Residential</td><td>Level 4-8</td><td>55%</td><td><span class="tag y">In progress</span></td></tr>
+<tr><td>Electrical Conduits</td><td>Lvl G+1 to 6</td><td>72%</td><td><span class="tag y">Good</span></td></tr>
+<tr><td>Plumbing — Water & Drainage</td><td>Lvl G+1 to 6</td><td>68%</td><td><span class="tag y">Good</span></td></tr>
+<tr><td>Fire Protection (Sprinklers)</td><td>Lvl G+1 to 4</td><td>60%</td><td><span class="tag y">In progress</span></td></tr>
+<tr><td>Elevators</td><td>Core</td><td>25%</td><td><span class="tag y">Installation</span></td></tr>
+</tbody>
+</table>
+<h3>Interior Finishing</h3>
+<table class="data">
+<thead><tr><th>Activity</th><th>Location</th><th>Progress %</th><th>Remarks</th></tr></thead>
+<tbody>
+<tr><td>Plastering</td><td>Level 4-7</td><td>60%</td><td>In progress</td></tr>
+<tr><td>Tiling & Ceramic</td><td>Level 4-5</td><td>25%</td><td>Late start</td></tr>
+<tr><td>Painting</td><td>Level 4</td><td>15%</td><td>In progress</td></tr>
+<tr><td>False Ceiling</td><td>Level G+1</td><td>20%</td><td>Installation</td></tr>
+<tr><td>Carpentry & Joinery</td><td>Level 4-5</td><td>10%</td><td>Awaiting materials</td></tr>
+</tbody>
+</table>
+</div>
+<div class="sb-bar"><span><span class="sbb-name">Eng. Obieda Omari</span> — Planning & Progress Control Engineer</span><span class="sbb-ref">SPR-TKC-2026-003</span></div>
+<div class="pg">6 / 10</div>
+</div>
+
+<!-- PAGE 7: S-CURVE -->
+<div class="page">
+<div class="content">
+<h2><span class="on">5</span> Progress S-Curve Analysis</h2>
+<div class="chart-area">
+<svg viewBox="0 0 500 160">
+<rect x="20" y="8" width="460" height="130" rx="3" fill="#faf8f5" stroke="#e0d8cc" stroke-width="0.5"/>
+<line x1="60" y1="20" x2="60" y2="130" stroke="#e8e0d4" stroke-width="0.5"/>
+<line x1="150" y1="20" x2="150" y2="130" stroke="#e8e0d4" stroke-width="0.5"/>
+<line x1="240" y1="20" x2="240" y2="130" stroke="#e8e0d4" stroke-width="0.5"/>
+<line x1="330" y1="20" x2="330" y2="130" stroke="#e8e0d4" stroke-width="0.5"/>
+<line x1="420" y1="20" x2="420" y2="130" stroke="#e8e0d4" stroke-width="0.5"/>
+<line x1="20" y1="40" x2="480" y2="40" stroke="#e8e0d4" stroke-width="0.5"/>
+<line x1="20" y1="70" x2="480" y2="70" stroke="#e8e0d4" stroke-width="0.5"/>
+<line x1="20" y1="100" x2="480" y2="100" stroke="#e8e0d4" stroke-width="0.5"/>
+<polyline points="60,128 120,118 180,105 240,88 300,66 360,42 420,28" fill="none" stroke="#3d2a14" stroke-width="2.5" stroke-linecap="round"/>
+<polyline points="60,128 120,120 180,108 240,92 300,72 360,48 420,34" fill="none" stroke="#f5a623" stroke-width="2.5" stroke-dasharray="5,3" stroke-linecap="round"/>
+<text x="20" y="44" font-family="Inter" font-size="6.5" fill="#999">60%</text>
+<text x="20" y="74" font-family="Inter" font-size="6.5" fill="#999">40%</text>
+<text x="20" y="104" font-family="Inter" font-size="6.5" fill="#999">20%</text>
+<text x="60" y="144" font-family="Inter" font-size="6.5" fill="#999" text-anchor="middle">Jan</text>
+<text x="150" y="144" font-family="Inter" font-size="6.5" fill="#999" text-anchor="middle">Feb</text>
+<text x="240" y="144" font-family="Inter" font-size="6.5" fill="#999" text-anchor="middle">Mar</text>
+<text x="330" y="144" font-family="Inter" font-size="6.5" fill="#999" text-anchor="middle">Apr</text>
+<text x="420" y="144" font-family="Inter" font-size="6.5" fill="#999" text-anchor="middle">May</text>
+</svg>
+<div class="ca-key"><span style="color:#3d2a14">■</span> Planned <span style="color:#f5a623;margin-right:12px">■</span> Actual</div>
+</div>
+<p style="font-size:10px;color:#999">Monthly cumulative progress comparison. The gap stabilized at 2-3% per month. Note increasing gap in May/June due to finishing delays.</p>
+</div>
+<div class="sb-bar"><span><span class="sbb-name">Eng. Obieda Omari</span> — Planning & Progress Control Engineer</span><span class="sbb-ref">SPR-TKC-2026-003</span></div>
+<div class="pg">7 / 10</div>
+</div>
+
+<!-- PAGE 8: RESOURCES -->
+<div class="page">
+<div class="content">
+<h2><span class="on">6</span> Resources & Manpower</h2>
+<div class="card-grid">
+<div class="cg"><div class="badge c3">Full</div><h4>Concrete & Steel Workers</h4><div class="bar-track"><div class="bt"><div class="bf" style="width:78%;background:#2a6b3a"></div></div><div class="bl">42</div></div><p>Target: 50 — Shortfall: 8</p></div>
+<div class="cg"><div class="badge c2">Partial</div><h4>MEP Workers</h4><div class="bar-track"><div class="bt"><div class="bf" style="width:85%;background:#b86a20"></div></div><div class="bl">34</div></div><p>Target: 40 — Shortfall: 6</p></div>
+<div class="cg"><div class="badge c1">Critical</div><h4>Finishing Workers</h4><div class="bar-track"><div class="bt"><div class="bf" style="width:50%;background:#b33a2a"></div></div><div class="bl">20</div></div><p>Target: 40 — Shortfall: 20</p></div>
+<div class="cg"><div class="badge c3">Full</div><h4>Engineers & Technicians</h4><div class="bar-track"><div class="bt"><div class="bf" style="width:100%;background:#2a6b3a"></div></div><div class="bl">18</div></div><p>Target: 18 — Complete</p></div>
+</div>
+<h3>Equipment Summary</h3>
+<table class="data">
+<thead><tr><th>Equipment</th><th>Qty</th><th>Hours</th><th>Status</th></tr></thead>
+<tbody>
+<tr><td>Tower Crane</td><td>1</td><td>360 hrs</td><td><span class="tag g">Good</span></td></tr>
+<tr><td>Mast Climber</td><td>2</td><td>280 hrs</td><td><span class="tag g">Good</span></td></tr>
+<tr><td>Concrete Mixer</td><td>2</td><td>120 hrs</td><td><span class="tag g">Good</span></td></tr>
+<tr><td>Concrete Pump</td><td>1</td><td>60 hrs</td><td><span class="tag y">Scheduled service</span></td></tr>
+<tr><td>Forklift</td><td>2</td><td>160 hrs</td><td><span class="tag g">Good</span></td></tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sb-bar"><span><span class="sbb-name">Eng. Obieda Omari</span> — Planning & Progress Control Engineer</span><span class="sbb-ref">SPR-TKC-2026-003</span></div>
+<div class="pg">8 / 10</div>
+</div>
+
+<!-- PAGE 9: HSE -->
+<div class="page">
+<div class="content">
+<h2><span class="on">7</span> Quality & Safety Report</h2>
+<h3>Safety Statistics — June 2026</h3>
+<div class="stat-row">
+<div class="sc"><div class="scv ok">0</div><div class="scl">LTI Incidents</div></div>
+<div class="sc"><div class="scv ok">412</div><div class="scl">LTI-Free Days</div></div>
+<div class="sc"><div class="scv wa">2</div><div class="scl">Near Misses</div></div>
+<div class="sc"><div class="scv">8</div><div class="scl">Safety Tours</div></div>
+<div class="sc"><div class="scv">42</div><div class="scl">STOP Cards</div></div>
+<div class="sc"><div class="scv">3</div><div class="scl">Violations</div></div>
+</div>
+<h3>Safety Violations — June 2026</h3>
+<table class="data">
+<thead><tr><th>Date</th><th>Location</th><th>Description</th><th>Action</th><th>Status</th></tr></thead>
+<tbody>
+<tr><td>Jun 05</td><td>Level 06</td><td>Safety harness not worn</td><td>Worker suspended + training</td><td><span class="tag g">Closed</span></td></tr>
+<tr><td>Jun 12</td><td>Level 07</td><td>Scaffolding not secured</td><td>Scaffold stopped + re-erected</td><td><span class="tag g">Closed</span></td></tr>
+<tr><td>Jun 18</td><td>Ground Floor</td><td>Missing warning signs</td><td>Signs installed</td><td><span class="tag g">Closed</span></td></tr>
+</tbody>
+</table>
+<h3>Quality Test Results — June 2026</h3>
+<table class="data">
+<thead><tr><th>Test Type</th><th>Qty</th><th>Pass</th><th>Fail</th><th>Pass Rate</th></tr></thead>
+<tbody>
+<tr><td>Concrete Cylinder (7-day)</td><td>36</td><td>35</td><td>1</td><td>97%</td></tr>
+<tr><td>Concrete Cylinder (28-day)</td><td>24</td><td>24</td><td>0</td><td>100%</td></tr>
+<tr><td>Rebar Tensile Test</td><td>12</td><td>12</td><td>0</td><td>100%</td></tr>
+<tr><td>MEP Pressure Test</td><td>18</td><td>18</td><td>0</td><td>100%</td></tr>
+<tr><td>Soil Compaction Test</td><td>8</td><td>8</td><td>0</td><td>100%</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sb-bar"><span><span class="sbb-name">Eng. Obieda Omari</span> — Planning & Progress Control Engineer</span><span class="sbb-ref">SPR-TKC-2026-003</span></div>
+<div class="pg">9 / 10</div>
+</div>
+
+<!-- PAGE 10: SIGNATURES -->
+<div class="page">
+<div class="sig-wrap">
+<h2>Recommendations & Signatures</h2>
+<div class="sig-sub">Sample Progress Report — Rose Residential & Commercial Complex</div>
+<div class="sig-rec">
+<strong style="font-size:10.5px;color:#3d2a14">Key Recommendations:</strong>
+<ol style="margin-top:4px">
+<li>Reinforce finishing and facade workforce immediately to close schedule gap.</li>
+<li>Expedite facade material and elevator delivery with penalty clauses as per contract.</li>
+<li>Re-sequence MEP activities to avoid spatial conflicts with finishing works.</li>
+<li>Intensify safety inspections during new worker mobilization period.</li>
+<li>Follow up on pending RFIs with Q Design consultant to avoid design hold-ups.</li>
+</ol>
+</div>
+<div class="sig-boxes">
+<div class="sb"><div class="sb-name">Eng. Obieda Omari</div><div class="sb-line"></div><div class="sb-role">Planning & Progress Control Engineer</div></div>
+<div class="sb"><div class="sb-name">Project Management</div><div class="sb-line"></div><div class="sb-role">Project Manager — Jadwa Contracting</div></div>
+</div>
+<div class="sig-footer">SPR-TKC-2026-003 | Rev. A | This document is a sample for review — not an official approved report</div>
+</div>
+<div class="pg">10 / 10</div>
+</div>
+
+<div class="fixed-foot"><div class="f-sig"><div class="f-dot"></div><strong>Eng. Obieda Omari</strong> — Planning & Progress Control Engineer</div><span>SPR-TKC-2026-003 • For Review</span></div>
+</body>
+</html>

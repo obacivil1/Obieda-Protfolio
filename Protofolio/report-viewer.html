@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>تقرير — م. عبيدة العمري</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:#e8eaed;color:#222;direction:rtl;overflow:hidden;height:100vh}
+body.en{direction:ltr}
+.top-bar{background:linear-gradient(135deg,#0b1a2e,#1a3a5c);color:#fff;padding:12px 24px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;height:52px;flex-shrink:0}
+.top-bar.gold{background:linear-gradient(135deg,#080F1E,#1E2A4A)}
+.sig{display:flex;align-items:center;gap:12px;font-size:14px}
+.sig-bar{width:3px;height:28px;background:#00d4aa;border-radius:2px;flex-shrink:0}
+.gold .sig-bar{background:#C9A84C}
+.sig strong{color:#00d4aa}
+.gold .sig strong{color:#C9A84C}
+.sig .sub{color:#8892b0;font-size:12px}
+.actions{display:flex;gap:8px;align-items:center}
+.btn{display:inline-flex;align-items:center;gap:6px;padding:6px 16px;border-radius:6px;font-size:13px;font-weight:600;text-decoration:none;border:1px solid rgba(255,255,255,0.2);color:#fff;background:rgba(255,255,255,0.08);cursor:pointer;transition:all 0.2s}
+.btn:hover{background:rgba(255,255,255,0.15)}
+.wrapper{display:flex;flex-direction:column;height:100vh}
+.pdf-area{flex:1;position:relative;overflow:hidden;background:#c4c7cc}
+.pdf-area embed,.pdf-area iframe{width:100%;height:100%;border:none;display:block}
+.footer-overlay{position:absolute;bottom:0;left:0;right:0;background:linear-gradient(135deg,rgba(11,26,46,0.92),rgba(26,58,92,0.88));color:#fff;padding:6px 24px;display:flex;align-items:center;justify-content:space-between;font-size:11px;z-index:10;backdrop-filter:blur(4px);direction:rtl;pointer-events:none}
+.gold .footer-overlay{background:linear-gradient(135deg,rgba(8,15,30,0.92),rgba(30,42,74,0.88))}
+.footer-overlay .fo-sig{display:flex;align-items:center;gap:8px}
+.footer-overlay .fo-bar{width:2px;height:16px;background:#00d4aa;border-radius:2px}
+.gold .footer-overlay .fo-bar{background:#C9A84C}
+.footer-overlay .fo-sig strong{color:#00d4aa;font-size:12px}
+.gold .footer-overlay .fo-sig strong{color:#C9A84C}
+.footer-overlay .fo-sig span{color:#8892b0;font-size:10px}
+.watermark-bg{position:absolute;top:0;left:0;right:0;bottom:44px;display:flex;align-items:center;justify-content:center;pointer-events:none;z-index:5;overflow:hidden}
+.watermark-bg .wm-text{font-size:clamp(40px,8vw,90px);font-weight:900;color:rgba(0,212,170,0.04);white-space:nowrap;user-select:none;transform:rotate(-25deg);letter-spacing:6px;text-align:center;line-height:1.4}
+.gold .watermark-bg .wm-text{color:rgba(201,168,76,0.04)}
+@media(max-width:768px){.top-bar{padding:10px 16px;height:auto;flex-direction:column;text-align:center}.sig{flex-wrap:wrap;justify-content:center}.footer-overlay{padding:4px 12px;font-size:10px;flex-wrap:wrap}}
+</style>
+</head>
+<body>
+<div class="wrapper">
+  <div class="top-bar" id="topBar">
+    <div class="sig">
+      <div class="sig-bar"></div>
+      <span>إعداد: <strong>م. عبيدة العمري</strong> <span class="sub">— كبير مهندسي التخطيط ومراقبة التكاليف</span></span>
+    </div>
+    <div class="actions">
+      <a class="btn" id="downloadBtn" download><i class="fa-solid fa-download"></i> <span>تحميل</span></a>
+      <a class="btn" href="javascript:window.close()"><i class="fa-solid fa-xmark"></i> <span>إغلاق</span></a>
+    </div>
+  </div>
+  <div class="pdf-area" id="pdfArea">
+    <div class="watermark-bg"><div class="wm-text">م. عبيدة العمري<br>Eng. Obieda Omari</div></div>
+    <embed id="pdfEmbed" type="application/pdf" src="">
+    <div class="footer-overlay" id="footerOverlay">
+      <div class="fo-sig"><div class="fo-bar"></div><strong>م. عبيدة العمري</strong> <span>— كبير مهندسي التخطيط ومراقبة التكاليف</span></div>
+      <div style="color:rgba(255,255,255,0.3);font-size:10px">Eng. Obieda Omari</div>
+    </div>
+  </div>
+</div>
+<script>
+const params=new URLSearchParams(location.search);
+const file=params.get('file')||'';
+const theme=params.get('theme')||'teal';
+if(theme==='gold'){document.getElementById('topBar').classList.add('gold');document.getElementById('pdfArea').classList.add('gold');document.getElementById('footerOverlay').classList.add('gold')}
+if(file){document.getElementById('pdfEmbed').src=file;document.getElementById('downloadBtn').href=file}
+else document.getElementById('pdfEmbed').outerHTML='<div style="padding:40px;text-align:center;color:#999">No file specified</div>';
+</script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</body>
+</html>

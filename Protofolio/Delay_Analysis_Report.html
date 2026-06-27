@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Delay Analysis Report | Obieda Omari</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&family=Inter:wght@400;500;600;700&display=swap');
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Cairo','Inter',sans-serif;background:#f4f4f6;color:#1a1a2e;padding:40px;line-height:1.7}
+.report{max-width:1000px;margin:0 auto;background:#fff;border-radius:12px;box-shadow:0 4px 40px rgba(0,0,0,0.08);padding:48px 56px}
+.header{display:flex;justify-content:space-between;align-items:flex-start;border-bottom:3px solid #C9A84C;padding-bottom:20px;margin-bottom:32px}
+.header h1{font-size:22px;color:#C9A84C;font-weight:700}
+.header .meta{text-align:left;direction:ltr;font-size:12px;color:#666;font-family:'Inter',sans-serif;line-height:1.6}
+.header .sig{display:flex;align-items:center;gap:10px;margin-top:8px;font-size:12px;color:#555}
+.header .sig-bar{width:3px;height:24px;background:#C9A84C;border-radius:2px}
+.badge{display:inline-block;background:#C9A84C;color:#fff;padding:4px 16px;border-radius:4px;font-size:12px;font-weight:600;margin-bottom:16px}
+h2{font-size:18px;margin-bottom:16px;color:#1a1a2e;font-weight:700;border-right:4px solid #C9A84C;padding-right:12px}
+h3{font-size:15px;margin-bottom:10px;color:#333;font-weight:600}
+.summary-cards{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:32px}
+.card{background:#f8f9fc;border-radius:8px;padding:16px;text-align:center;border:1px solid #e8e8ee}
+.card .val{font-size:24px;font-weight:700;color:#1a1a2e}
+.card .val.gold{color:#C9A84C}
+.card .val.red{color:#c0392b}
+.card .lbl{font-size:11px;color:#888;margin-top:4px}
+table{width:100%;border-collapse:collapse;margin-bottom:32px;font-size:13px}
+th{background:#1a1a2e;color:#fff;padding:10px 14px;text-align:right;font-weight:600}
+td{padding:10px 14px;border-bottom:1px solid #e8e8ee}
+tr:nth-child(even){background:#f8f9fc}
+.timeline{margin-bottom:32px}
+.timeline-item{position:relative;padding-right:24px;margin-bottom:20px;border-right:2px solid #C9A84C;padding-right:20px}
+.timeline-item:last-child{border-color:transparent}
+.timeline-item .dot{position:absolute;right:-5px;top:4px;width:10px;height:10px;border-radius:50%;background:#C9A84C;border:2px solid #fff;box-shadow:0 0 0 2px #C9A84C}
+.timeline-item .date{font-size:11px;color:#C9A84C;font-weight:600}
+.timeline-item h4{font-size:14px;margin:2px 0 4px}
+.timeline-item p{font-size:12px;color:#666}
+.impact-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-bottom:32px}
+.impact-box{background:#f8f9fc;border-radius:8px;padding:16px;border:1px solid #e8e8ee}
+.impact-box h4{font-size:13px;color:#C9A84C;margin-bottom:6px}
+.impact-box p{font-size:12px;color:#666}
+.footer{margin-top:40px;padding-top:20px;border-top:1px solid #e8e8ee;display:flex;justify-content:space-between;align-items:center;font-size:12px;color:#888}
+.sticky-footer{position:fixed;bottom:0;left:0;right:0;background:linear-gradient(135deg,rgba(8,15,30,0.95),rgba(30,42,74,0.92));color:#fff;padding:6px 24px;display:flex;align-items:center;justify-content:space-between;font-size:11px;z-index:999;direction:rtl;backdrop-filter:blur(4px);box-shadow:0 -2px 12px rgba(0,0,0,0.15)}
+.sticky-footer .sf-sig{display:flex;align-items:center;gap:8px}
+.sticky-footer .sf-bar{width:2px;height:16px;background:#C9A84C;border-radius:2px}
+.sticky-footer .sf-sig strong{color:#C9A84C;font-size:12px}
+.sticky-footer .sf-sig span{color:#8892b0;font-size:10px}
+@media print{body{background:#fff;padding:0;padding-bottom:40px}.report{box-shadow:none;padding:32px}.sticky-footer{position:fixed;bottom:0;left:0;right:0;background:#1a1a2e!important;color:#fff!important;-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important}.sticky-footer .sf-sig strong{color:#C9A84C!important}}
+@media(max-width:768px){body{padding:16px;padding-bottom:50px}.report{padding:24px}.summary-cards{grid-template-columns:repeat(2,1fr)}.impact-grid{grid-template-columns:1fr}.header{flex-direction:column;gap:8px;align-items:flex-start}}
+</style>
+</head>
+<body>
+<div class="report">
+<div class="header">
+<div>
+<h1>Delay Analysis Report</h1>
+<div class="badge">تقرير تحليل التأخير | Forensic Delay Analysis</div>
+<div class="sig"><div class="sig-bar"></div><span>إعداد: <strong>م. عبيدة العمري</strong> — كبير مهندسي التخطيط ومراقبة التكاليف</span></div>
+</div>
+<div class="meta">
+<div>Reference: DAR-2025-001</div>
+<div>Date: March 2025</div>
+<div>Project: Dallah Hospital Medical Complex</div>
+<div style="margin-top:4px;color:#C9A84C;font-weight:600">Prepared by: Eng. Obieda Omari</div>
+</div>
+</div>
+
+<div class="summary-cards">
+<div class="card"><div class="val gold">187</div><div class="lbl">Total Delay (Days)</div></div>
+<div class="card"><div class="val">93</div><div class="lbl">Employer Risk (Days)</div></div>
+<div class="card"><div class="val">62</div><div class="lbl">Contractor Risk (Days)</div></div>
+<div class="card"><div class="val">32</div><div class="lbl">Neutral / Force Majeure (Days)</div></div>
+</div>
+
+<h2>Delay Event Timeline</h2>
+<div class="timeline">
+<div class="timeline-item"><div class="dot"></div><div class="date">Day 45 — Feb 2024</div><h4>Design Approval Delay</h4><p>Late issuance of architectural drawing approvals by consultant caused 28-day delay to foundation works commencement.</p></div>
+<div class="timeline-item"><div class="dot"></div><div class="date">Day 98 — Apr 2024</div><h4>Utility Relocation</h4><p>Existing underground utility lines not identified in contract documents required redesign and relocation, impacting site preparation by 35 days.</p></div>
+<div class="timeline-item"><div class="dot"></div><div class="date">Day 156 — Jun 2024</div><h4>Material Procurement Delay</h4><p>Steel reinforcement supply chain disruption due to global market conditions caused 22-day delay to superstructure works.</p></div>
+<div class="timeline-item"><div class="dot"></div><div class="date">Day 210 — Aug 2024</div><h4>Weather / Force Majeure</h4><p>Exceptional rainfall events (above historical average) halted exterior works for 18 days across two separate events.</p></div>
+<div class="timeline-item"><div class="dot"></div><div class="date">Day 298 — Nov 2024</div><h4>MEP Coordination</h4><p>Clash between HVAC ductwork and fire protection systems required redesign coordination, impacting Zone B completion by 15 days.</p></div>
+<div class="timeline-item"><div class="dot"></div><div class="date">Day 380 — Feb 2025</div><h4>Client Variations</h4><p>Additional architectural finishes requested by client for ground floor retail areas — 30-day impact approved via variation order.</p></div>
+</div>
+
+<h2>Delay Impact by Work Package</h2>
+<table>
+<thead><tr><th>Work Package</th><th>Original Duration</th><th>Delay (Days)</th><th>Impacted Duration</th><th>Delay Cause</th><th>Responsibility</th></tr></thead>
+<tbody>
+<tr><td>Foundation & Substructure</td><td>90</td><td>35</td><td>125</td><td>Design approval / Utility relocation</td><td>Employer</td></tr>
+<tr><td>Superstructure — Concrete</td><td>120</td><td>42</td><td>162</td><td>Material procurement / Redesign</td><td>Shared</td></tr>
+<tr><td>Facade & Glazing</td><td>75</td><td>28</td><td>103</td><td>Weather / Coordination</td><td>Neutral</td></tr>
+<tr><td>MEP Services</td><td>150</td><td>38</td><td>188</td><td>Coordination / Variations</td><td>Employer</td></tr>
+<tr><td>Interior Finishes</td><td>100</td><td>44</td><td>144</td><td>Variations / Resequencing</td><td>Employer</td></tr>
+<tr><td>External Works</td><td>60</td><td>32</td><td>92</td><td>Weather / Utility works</td><td>Neutral</td></tr>
+</tbody>
+</table>
+
+<h2>Impact Analysis</h2>
+<div class="impact-grid">
+<div class="impact-box"><h4>Critical Path Impact</h4><p>Delay to foundation and superstructure activities directly impacted the project critical path, extending the overall completion date by 187 days.</p></div>
+<div class="impact-box"><h4>Cost Impact</h4><p>Total cost impact estimated at $1.85M including extended site overheads, escalation, and disruption costs. Employer-responsible delays account for ~$1.1M.</p></div>
+<div class="impact-box"><h4>Mitigation Measures</h4><p>Recovery schedule implemented with 35-day compression through overtime, additional resources, and sequence optimization. Target recovery: 45% of total delay.</p></div>
+<div class="impact-box"><h4>Recommendations</h4><p>Early design freeze protocol, weekly coordination meetings, and buffer management system recommended for future project phases.</p></div>
+</div>
+
+<div class="footer">
+<div style="display:flex;align-items:center;gap:12px"><div style="width:3px;height:30px;background:#C9A84C;border-radius:2px"></div><div><strong style="color:#C9A84C">Eng. Obieda Omari</strong><br><span style="font-size:11px;color:#999">Sr. Planning & Cost Control Engineer</span></div></div>
+<div>سرّي | Confidential — Delay Analysis Report</div>
+</div>
+</div>
+<div class="sticky-footer"><div class="sf-sig"><div class="sf-bar"></div><strong>م. عبيدة العمري</strong> <span>— كبير مهندسي التخطيط ومراقبة التكاليف</span></div><div style="color:rgba(255,255,255,0.3);font-size:10px">Delay Analysis Report</div></div>
+</body>
+</html>

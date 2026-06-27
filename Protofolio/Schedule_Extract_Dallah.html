@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Schedule Extract | DAH-BL-R01 | Obieda Omari</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Inter',sans-serif;background:#1a2332;color:#1e2a3a;padding:20px;line-height:1.5}
+.page{max-width:210mm;margin:0 auto 24px;background:#fff;position:relative;page-break-after:always;overflow:hidden}
+.pad{padding:32px 40px}
+.pg{position:absolute;bottom:10px;left:50%;transform:translateX(-50%);font-size:8.5px;color:#8a9aa8;font-family:'Inter',sans-serif;direction:ltr;letter-spacing:.5px;background:rgba(255,255,255,0.85);padding:1px 10px;border-radius:10px}
+.fixed-foot{position:fixed;bottom:0;left:0;right:0;background:#0f1a28;color:rgba(255,255,255,0.7);padding:3px 20px;display:flex;align-items:center;justify-content:space-between;font-size:8.5px;z-index:999;direction:ltr}
+.fixed-foot .f-sig{display:flex;align-items:center;gap:4px}
+.fixed-foot .f-sig .f-dot{width:5px;height:5px;background:#00d4aa;border-radius:50%}
+.fixed-foot .f-sig strong{color:#00d4aa;font-size:9px}
+.cover-wrap{background:linear-gradient(135deg,#0b1a2e,#142a42,#1d3a56);min-height:100vh;padding:0;position:relative;display:flex;flex-direction:column}
+.cover-wrap .cv-top{display:flex;justify-content:space-between;padding:20px 36px;align-items:flex-start}
+.cover-wrap .cv-top .cv-ref{font-family:'Inter',sans-serif;font-size:9px;color:rgba(255,255,255,0.2);letter-spacing:1px}
+.cover-wrap .cv-top .cv-class{padding:3px 14px;border:1px solid rgba(0,212,170,0.3);border-radius:2px;font-size:8px;letter-spacing:2px;color:#00d4aa}
+.cover-wrap .cv-body{flex:1;display:flex;flex-direction:column;justify-content:center;padding:20px 56px 40px}
+.cover-wrap .cv-badge{display:inline-block;background:rgba(0,212,170,0.12);border:1px solid rgba(0,212,170,0.2);padding:5px 22px;font-size:11px;color:#00d4aa;letter-spacing:3px;margin-bottom:32px;width:fit-content}
+.cover-wrap h1{font-size:30px;font-weight:800;color:#fff;margin-bottom:6px;line-height:1.3}
+.cover-wrap h1 .sub{font-size:15px;font-weight:300;color:rgba(255,255,255,0.3);display:block;margin-top:4px}
+.cover-wrap .cv-sub{font-size:14px;color:rgba(255,255,255,0.35);margin-bottom:36px}
+.cover-wrap .cv-meta{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;max-width:620px;margin-bottom:32px}
+.cover-wrap .cv-meta div{padding:10px 14px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.06)}
+.cover-wrap .cv-meta .cvl{font-size:8px;color:rgba(255,255,255,0.3);margin-bottom:2px;text-transform:uppercase;letter-spacing:1px}
+.cover-wrap .cv-meta .cvv{font-size:13px;color:#fff;font-weight:600}
+.cover-wrap .cv-sig{border-top:1px solid rgba(255,255,255,0.06);padding-top:16px;margin-top:auto}
+.cover-wrap .cv-sig .cs-name{color:#00d4aa;font-weight:700;font-size:13px}
+.cover-wrap .cv-sig .cs-title{color:rgba(255,255,255,0.25);font-size:9px}
+h2{font-size:16px;color:#0b1a2e;margin-bottom:10px;display:flex;align-items:center;gap:8px}
+h2 .on{border:2px solid #0b1a2e;width:22px;height:22px;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700}
+h3{font-size:12px;color:#0b1a2e;margin:14px 0 6px}
+table{width:100%;border-collapse:collapse;font-size:9px;margin-bottom:12px}
+thead th{background:#0b1a2e;color:#fff;padding:5px 7px;text-align:left;font-weight:600;font-size:8px;white-space:nowrap}
+td{padding:4px 7px;border-bottom:1px solid #e0e6ec}
+tr:nth-child(even){background:#f8fafc}
+tr.critical{background:#fff0f0}
+tr.critical td{color:#991b1b;font-weight:600}
+.tag{display:inline-block;padding:1px 6px;border-radius:2px;font-size:7.5px;font-weight:600}
+.tag.cr{background:#f8d7da;color:#991b1b}
+.tag.wa{background:#fff3cd;color:#854d0e}
+.tag.ok{background:#d4edda;color:#166534}
+.sb-bar{display:flex;justify-content:space-between;align-items:center;border-top:1px solid #e0e6ec;padding:4px 0 2px;margin-top:12px;font-size:7.5px;color:#8a9aa8}
+.sb-bar .sbb-name{color:#0b1a2e;font-weight:600}
+.sb-bar .sbb-ref{color:#b0bcc8;letter-spacing:.5px}
+.wbs-tree{font-size:9px;line-height:1.7}
+.wbs-tree .wt-l1{font-weight:700;color:#0b1a2e;font-size:10px;margin-top:6px}
+.wbs-tree .wt-l2{padding-left:16px;color:#3a4a5a}
+.wbs-tree .wt-l3{padding-left:32px;color:#6a7a8a;font-size:8.5px}
+.gantt-wrap{width:100%;overflow-x:auto;padding:8px 0}
+.gantt{display:flex;flex-direction:column;gap:2px;min-width:600px}
+.gantt-row{display:flex;align-items:center;height:18px;font-size:7.5px}
+.gantt-row .gl{width:120px;text-align:right;padding-right:8px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:#5a6a7a}
+.gantt-row .gb{flex:1;position:relative;height:14px;background:#e8edf2;border-radius:2px}
+.gantt-row .gb .bar{position:absolute;height:10px;top:2px;border-radius:2px;min-width:2px}
+.gantt-row .gb .bar.crit{background:#dc2626}
+.gantt-row .gb .bar.norm{background:#3b82f6}
+.gantt-row .gb .bar.mile{background:#f59e0b;width:6px!important;height:14px;top:0;border-radius:1px}
+.gantt-labels{display:flex;font-size:7px;color:#8a9aa8;margin-bottom:4px;min-width:600px}
+.gantt-labels .gl-period{flex:1;text-align:center}
+.sig-wrap{padding:28px 40px}
+.sig-wrap h2{font-size:16px;color:#0b1a2e;margin-bottom:4px}
+.sig-wrap .sig-sub{font-size:9.5px;color:#8a9aa8;margin-bottom:14px}
+.sig-boxes{display:flex;gap:24px;justify-content:center}
+.sig-boxes .sb{text-align:center;min-width:160px}
+.sig-boxes .sb .sb-line{width:70%;height:1px;background:#d0c8b8;margin:4px auto;border-top:1px dashed #bbb}
+.sig-boxes .sb .sb-name{font-size:12px;font-weight:700;color:#0b1a2e}
+.sig-boxes .sb .sb-role{font-size:8px;color:#8a9aa8}
+.sig-footer{text-align:center;margin-top:14px;padding-top:10px;border-top:1px solid #e0e6ec;font-size:8px;color:#b0bcc8}
+@media print{body{background:#fff;padding:0}.page{box-shadow:none;margin:0;page-break-after:always}.fixed-foot{position:fixed;bottom:0!important;background:#0f1a28!important;-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important}.cover-wrap{min-height:100vh}}
+</style>
+</head>
+<body>
+<div class="page" style="padding:0;background:transparent">
+<div class="cover-wrap">
+<div class="cv-top"><span class="cv-ref">DAH-BL-R01 | Rev. A</span><span class="cv-class">SCHEDULE EXTRACT</span></div>
+<div class="cv-body">
+<div class="cv-badge">PRIMAVERA P6 SCHEDULE</div>
+<h1>DALLAH HOSPITAL MEDICAL COMPLEX<br><span class="sub">Project Baseline Schedule — Extract from P6</span></h1>
+<div class="cv-sub">Planning Period: Jul 2024 – Jul 2026 | Data Date: Sep 3, 2025</div>
+<div class="cv-meta">
+<div><div class="cvl">Contract Value</div><div class="cvv">$48,500,000</div></div>
+<div><div class="cvl">Total Activities</div><div class="cvv">4,880</div></div>
+<div><div class="cvl">Critical Path</div><div class="cvv">499 Activities</div></div>
+<div><div class="cvl">Project Start</div><div class="cvv">Jul 15, 2024</div></div>
+<div><div class="cvl">Project Finish</div><div class="cvv">Jul 14, 2026</div></div>
+<div><div class="cvl">Total Duration</div><div class="cvv">24 Months</div></div>
+</div>
+<div class="cv-sig">
+<div class="cs-name">Eng. Obieda Omari</div>
+<div class="cs-title">Sr. Planning & Cost Control Engineer</div>
+</div>
+</div>
+</div>
+<div class="pg" style="color:rgba(255,255,255,0.25);background:transparent">1 / 13</div>
+</div>
+
+<div class="page">
+<div class="pad">
+<h2><span class="on">1</span> Work Breakdown Structure (WBS)</h2>
+<div style="font-size:9px;color:#6a7a8a;margin-bottom:12px">The project is structured into 9 primary work areas with 4,880 total activities across the baseline schedule.</div>
+<div class="wbs-tree">
+<div class="wt-l1">PMS — Project Milestones  <span style="font-weight:400;color:#6a7a8a">(11 activities, 5 critical)</span></div><div class="wt-l2">CMS — Contractual Milestones <span style="color:#8a9aa8">(7 activities)</span></div><div class="wt-l2">KMS — Key Milestones <span style="color:#8a9aa8">(4 activities)</span></div><div class="wt-l1">AA — Authority Approvals  <span style="font-weight:400;color:#6a7a8a">(7 activities, 1 critical)</span></div><div class="wt-l1">MO — Moblization  <span style="font-weight:400;color:#6a7a8a">(4 activities, 4 critical)</span></div><div class="wt-l2">1 — Moblization (site offices and temporary fence) <span style="color:#8a9aa8">(1 activities)</span></div><div class="wt-l2">2 — Site Operation (Tower crane,etc) <span style="color:#8a9aa8">(2 activities)</span></div><div class="wt-l2">3 — Demoblization <span style="color:#8a9aa8">(1 activities)</span></div><div class="wt-l1">MU — MockUps  <span style="font-weight:400;color:#6a7a8a">(50 activities, 0 critical)</span></div><div class="wt-l2">9 — ER Treatment GF-03 - ER-GR-46 - ID1623B <span style="color:#8a9aa8">(5 activities)</span></div><div class="wt-l2">8 — Clinic - GF ID1621B <span style="color:#8a9aa8">(5 activities)</span></div><div class="wt-l2">4 — Corridor - In front of Patient Room <span style="color:#8a9aa8">(5 activities)</span></div><div class="wt-l2">6 — Renal Dialysis Treatment L01-011-ID1625B <span style="color:#8a9aa8">(5 activities)</span></div><div class="wt-l2">2 — Physiotherapy Treatment FF-L01-026 - MEQ380 <span style="color:#8a9aa8">(5 activities)</span></div><div class="wt-l2">7 — ICU - L02 MEQ 406 <span style="color:#8a9aa8">(5 activities)</span></div><div class="wt-l2">10 — Waiting L03 - ID1631B <span style="color:#8a9aa8">(5 activities)</span></div><div class="wt-l2">3 — LDR -  ID1630B-L03 <span style="color:#8a9aa8">(5 activities)</span></div><div class="wt-l2">5 — Nurse Station - L04 ID1634A & B <span style="color:#8a9aa8">(5 activities)</span></div><div class="wt-l2">1 — Patient Room with Toilet - L04 - 057 and L04 - 056 <span style="color:#8a9aa8">(5 activities)</span></div><div class="wt-l1">SD — Engineering  <span style="font-weight:400;color:#6a7a8a">(798 activities, 0 critical)</span></div><div class="wt-l2">CV — Civil Drawings <span style="color:#8a9aa8">(WBS Summary)</span></div><div class="wt-l3">SU — Submission</div><div class="wt-l3">AP — Approval</div><div class="wt-l2">AR — Architectural Drawings <span style="color:#8a9aa8">(WBS Summary)</span></div><div class="wt-l3">SU — Submission</div><div class="wt-l3">AP — Approval</div><div class="wt-l2">ME — Mechanical Drawings <span style="color:#8a9aa8">(WBS Summary)</span></div><div class="wt-l3">SU — Submission</div><div class="wt-l3">AP — Approval</div><div class="wt-l2">EL — Electrical Drawings <span style="color:#8a9aa8">(WBS Summary)</span></div><div class="wt-l3">SU — Submission</div><div class="wt-l3">AP — Approval</div><div class="wt-l2">BI — Biomedical System Drawings <span style="color:#8a9aa8">(WBS Summary)</span></div><div class="wt-l3">1 — Submission</div><div class="wt-l3">2 — Approval</div><div class="wt-l1">PR — Procurement  <span style="font-weight:400;color:#6a7a8a">(908 activities, 0 critical)</span></div><div class="wt-l2">LL — Long Lead Items <span style="color:#8a9aa8">(WBS Summary)</span></div><div class="wt-l3">CV — Civil Material</div><div class="wt-l3">AR — Arch Material</div><div class="wt-l3">ME — Mechanical Material</div><div class="wt-l3">EL — Electrical Material</div><div class="wt-l2">NL — Short Lead Items <span style="color:#8a9aa8">(WBS Summary)</span></div><div class="wt-l3">CV — CIVIL Material</div><div class="wt-l3">AR — ARCH Material</div><div class="wt-l3">ME — Mechanical Material</div><div class="wt-l3">EL — Electrical Material</div><div class="wt-l1">CO — Construction  <span style="font-weight:400;color:#6a7a8a">(3046 activities, 462 critical)</span></div><div class="wt-l2">1 — Z1 - Main Building <span style="color:#8a9aa8">(WBS Summary)</span></div><div class="wt-l3">12 — MB - Main Building</div><div class="wt-l2">2 — Z2 -  Parking <span style="color:#8a9aa8">(WBS Summary)</span></div><div class="wt-l3">12 — PA - Parking</div><div class="wt-l2">3 — Z3 - CUP Building <span style="color:#8a9aa8">(WBS Summary)</span></div><div class="wt-l3">12 — CUP - CUP Building</div><div class="wt-l2">4 — Z4 - Landscape Area <span style="color:#8a9aa8">(WBS Summary)</span></div><div class="wt-l3">1 — LND - Landscape</div><div class="wt-l2">CS — Conveying System <span style="color:#8a9aa8">(WBS Summary)</span></div><div class="wt-l3">1 — Elevators</div><div class="wt-l3">2 — Escalators</div><div class="wt-l2">9 — Equipments <span style="color:#8a9aa8">(WBS Summary)</span></div><div class="wt-l3">2 — Mechanical equipments</div><div class="wt-l3">3 — Electrical Equipments</div><div class="wt-l3">1 — Medical Equipments</div><div class="wt-l3">4 — Facility Maintenance Equipment (1 activities)</div><div class="wt-l1">TC — Testing & Commissioning  <span style="font-weight:400;color:#6a7a8a">(36 activities, 17 critical)</span></div><div class="wt-l2">1 — Mechanical Systems <span style="color:#8a9aa8">(12 activities)</span></div><div class="wt-l2">2 — Electrical Systems <span style="color:#8a9aa8">(23 activities)</span></div><div class="wt-l2">3 — Biomedical System <span style="color:#8a9aa8">(1 activities)</span></div><div class="wt-l1">HO — Hand Over & Close Out  <span style="font-weight:400;color:#6a7a8a">(20 activities, 10 critical)</span></div><div class="wt-l2">1 — Snagging & De Snagging <span style="color:#8a9aa8">(WBS Summary)</span></div><div class="wt-l3">1 — Structural Snagging & De-Snagging (1 activities)</div><div class="wt-l3">2 — Architectural Snagging & De-Snagging (1 activities)</div><div class="wt-l3">3 — Mechanical Snagging & De-Snagging (1 activities)</div><div class="wt-l3">4 — Electrical Snagging & De-Snagging (1 activities)</div><div class="wt-l3">5 — Biomedical Snagging & De-Snagging (1 activities)</div><div class="wt-l2">2 — As-Built Drawings <span style="color:#8a9aa8">(WBS Summary)</span></div><div class="wt-l3">1 — Structural As-Built Drawings (1 activities)</div><div class="wt-l3">ABD — Architectural As-Built Drawings (1 activities)</div><div class="wt-l3">ABD1 — Mechanical As-Built Drawings (1 activities)</div><div class="wt-l3">ABD2 — Electrical As-Built Drawings (1 activities)</div><div class="wt-l3">ABD3 — Biomedical As-Built Drawings (1 activities)</div><div class="wt-l2">COD — Close-Out Documentation <span style="color:#8a9aa8">(WBS Summary)</span></div><div class="wt-l3">1 — O & M Manuals</div><div class="wt-l3">3 — Warranty Certificates</div>
+</div>
+</div>
+<div class="sb-bar"><span><span class="sbb-name">Eng. Obieda Omari</span> — Sr. Planning & Cost Control Engineer</span><span class="sbb-ref">DAH-BL-R01</span></div>
+<div class="pg">2 / 13</div>
+</div>
+
+<div class="page">
+<div class="pad">
+<h2><span class="on">3</span> PMS — Project Milestones</h2>
+<div style="font-size:9px;color:#6a7a8a;margin-bottom:10px">Total: 11 activities | Critical: 5 | Showing 11 key activities</div>
+<table>
+<thead><tr><th>Activity ID</th><th>Activity Name</th><th>Orig Dur</th><th>Planned Start</th><th>Planned Finish</th><th>Total Float</th><th>Status</th></tr></thead>
+<tbody>
+<tr class="critical"><td>DA-KMS-010</td><td>Project Start</td><td>-</td><td>2024-07-15</td><td>2024-07-15</td><td>0d</td><td><span class="tag cr">Not Started</span></td></tr>
+<tr class="critical"><td>DA-KMS-080</td><td>Testing, Commissioning, and Hand Over of Systems Completion</td><td>-</td><td>2026-07-07</td><td>2026-07-07</td><td>0d</td><td><span class="tag cr">Not Started</span></td></tr>
+<tr class="critical"><td>DA-KMS-150</td><td>Closing Documents</td><td>-</td><td>2026-07-07</td><td>2026-07-07</td><td>0d</td><td><span class="tag cr">Not Started</span></td></tr>
+<tr class="critical"><td>DA-KMS-090</td><td>Project Finish</td><td>-</td><td>2026-07-14</td><td>2026-07-14</td><td>0d</td><td><span class="tag cr">Not Started</span></td></tr>
+<tr class="critical"><td>DA-KMS-140</td><td>Initial Handing Over of Project Completion</td><td>-</td><td>2026-07-14</td><td>2026-07-14</td><td>0d</td><td><span class="tag cr">Not Started</span></td></tr>
+<tr><td>DA-KMS-030</td><td>Mock-Up Rooms</td><td>-</td><td>2024-10-14</td><td>2024-10-14</td><td>944d</td><td><span class="tag" style="background:#e8edf2;color:#5a6a7a">Not Started</span></td></tr>
+<tr><td>DA-KMS-040</td><td>Submissions And  Approvals Of Shop Drawings Completion</td><td>-</td><td>2025-04-13</td><td>2025-04-13</td><td>592d</td><td><span class="tag" style="background:#e8edf2;color:#5a6a7a">Not Started</span></td></tr>
+<tr><td>DA-KMS-110</td><td>Submission and Approval of Material Submittals for Long Lead Items Com</td><td>-</td><td>2025-04-28</td><td>2025-04-28</td><td>800d</td><td><span class="tag" style="background:#e8edf2;color:#5a6a7a">Not Started</span></td></tr>
+<tr><td>DA-KMS-120</td><td>Issuing a Purchase Order (PO) for long lead items</td><td>-</td><td>2025-05-15</td><td>2025-05-15</td><td>720d</td><td><span class="tag" style="background:#e8edf2;color:#5a6a7a">Not Started</span></td></tr>
+<tr><td>DA-KMS-100</td><td>Main Building Concrete Slabs Finish Date</td><td>-</td><td>2025-09-30</td><td>2025-09-30</td><td>256d</td><td><span class="tag" style="background:#e8edf2;color:#5a6a7a">Not Started</span></td></tr>
+<tr><td>DA-KMS-050</td><td>Delivery of Long Lead Items Completion</td><td>-</td><td>2026-03-21</td><td>2026-03-21</td><td>744d</td><td><span class="tag" style="background:#e8edf2;color:#5a6a7a">Not Started</span></td></tr>
+
+</tbody>
+</table>
+</div>
+<div class="sb-bar"><span><span class="sbb-name">Eng. Obieda Omari</span> — Sr. Planning & Cost Control Engineer</span><span class="sbb-ref">DAH-BL-R01</span></div>
+<div class="pg">3 / 13</div>
+</div>
+
+<div class="page">
+<div class="pad">
+<h2><span class="on">4</span> AA — Authority Approvals</h2>
+<div style="font-size:9px;color:#6a7a8a;margin-bottom:10px">Total: 7 activities | Critical: 1 | Showing 7 key activities</div>
+<table>
+<thead><tr><th>Activity ID</th><th>Activity Name</th><th>Orig Dur</th><th>Planned Start</th><th>Planned Finish</th><th>Total Float</th><th>Status</th></tr></thead>
+<tbody>
+<tr class="critical"><td>DA-KMS-020</td><td>Mobilization Completion</td><td>-</td><td>2024-08-05</td><td>2024-08-05</td><td>0d</td><td><span class="tag cr">Not Started</span></td></tr>
+<tr><td>DA-AUTH-010</td><td>MODON Municipality Permit</td><td>8d</td><td>2024-07-15</td><td>2024-07-23</td><td>8d</td><td><span class="tag" style="background:#e8edf2;color:#5a6a7a">Not Started</span></td></tr>
+<tr><td>DA-AUTH-020</td><td>CIVIL Defence Permit</td><td>5d</td><td>2024-07-18</td><td>2024-07-23</td><td>8d</td><td><span class="tag" style="background:#e8edf2;color:#5a6a7a">Not Started</span></td></tr>
+<tr><td>DA-AUTH-030</td><td>SWOC Saudi Water Company Authority Approval</td><td>8d</td><td>2026-06-14</td><td>2026-06-22</td><td>104d</td><td><span class="tag" style="background:#e8edf2;color:#5a6a7a">Not Started</span></td></tr>
+<tr><td>DA-AUTH-050</td><td>SFDA Saudi Food &amp; Drug Authority Approval</td><td>8d</td><td>2026-06-14</td><td>2026-06-22</td><td>104d</td><td><span class="tag" style="background:#e8edf2;color:#5a6a7a">Not Started</span></td></tr>
+<tr><td>DA-AUTH-060</td><td>ECMC Erie County Medical Cener Authority Approval</td><td>8d</td><td>2026-06-14</td><td>2026-06-22</td><td>104d</td><td><span class="tag" style="background:#e8edf2;color:#5a6a7a">Not Started</span></td></tr>
+<tr><td>DA-AUTH-040</td><td>SCECO Saudi Electricity Company Authority Approval</td><td>8d</td><td>2026-06-15</td><td>2026-06-23</td><td>96d</td><td><span class="tag" style="background:#e8edf2;color:#5a6a7a">Not Started</span></td></tr>
+
+</tbody>
+</table>
+</div>
+<div class="sb-bar"><span><span class="sbb-name">Eng. Obieda Omari</span> — Sr. Planning & Cost Control Engineer</span><span class="sbb-ref">DAH-BL-R01</span></div>
+<div class="pg">4 / 13</div>
+</div>
+
+<div class="page">
+<div class="pad">
+<h2><span class="on">5</span> MO — Moblization</h2>
+<div style="font-size:9px;color:#6a7a8a;margin-bottom:10px">Total: 4 activities | Critical: 4 | Showing 4 key activities</div>
+<table>
+<thead><tr><th>Activity ID</th><th>Activity Name</th><th>Orig Dur</th><th>Planned Start</th><th>Planned Finish</th><th>Total Float</th><th>Status</th></tr></thead>
+<tbody>
+<tr class="critical"><td>DA-GR-OP-AP-010</td><td>Portal Cabinets for Site Offices</td><td>11d</td><td>2024-07-21</td><td>2024-08-01</td><td>0d</td><td><span class="tag cr">Not Started</span></td></tr>
+<tr class="critical"><td>DA-GR-DE-AP-010</td><td>Tower Crane Installation</td><td>10d</td><td>2024-07-25</td><td>2024-08-05</td><td>0d</td><td><span class="tag cr">Not Started</span></td></tr>
+<tr class="critical"><td>DA-GR-DE-AP-020</td><td>Site Operation</td><td>606d</td><td>2024-07-25</td><td>2026-07-14</td><td>0d</td><td><span class="tag cr">Not Started</span></td></tr>
+<tr class="critical"><td>DA-GR-DE-AP-030</td><td>De-Mobilization</td><td>6d</td><td>2026-07-08</td><td>2026-07-14</td><td>0d</td><td><span class="tag cr">Not Started</span></td></tr>
+
+</tbody>
+</table>
+</div>
+<div class="sb-bar"><span><span class="sbb-name">Eng. Obieda Omari</span> — Sr. Planning & Cost Control Engineer</span><span class="sbb-ref">DAH-BL-R01</span></div>
+<div class="pg">5 / 13</div>
+</div>
+
+<div class="page">
+<div class="pad">
+<h2><span class="on">6</span> MU — MockUps</h2>
+<div style="font-size:9px;color:#6a7a8a;margin-bottom:10px">Total: 50 activities | Critical: 0 | Showing 50 key activities</div>
+<table>
+<thead><tr><th>Activity ID</th><th>Activity Name</th><th>Orig Dur</th><th>Planned Start</th><th>Planned Finish</th><th>Total Float</th><th>Status</th></tr></thead>
+<tbody>
+<tr><td>DA-EN-MUP-COR-SU-10</td><td>Enlarged Drawings Corridor - In front of Patient Room Submission</td><td>10d</td><td>2024-08-03</td><td>2024-08-13</td><td>968d</td><td><span class="tag" style="background:#e8edf2;color:#5a6a7a">Not Started</span></td></tr>
+<tr><td>DA-EN-MUP-ERT-SU-10</td><td>Enlarged Drawings ER Treatment GF-03 - ER-GR-46 - ID1623B Submission</td><td>10d</td><td>2024-08-03</td><td>2024-08-13</td><td>944d</td><td><span class="tag" style="background:#e8edf2;color:#5a6a7a">Not Started</span></td></tr>
+<tr><td>DA-EN-MUP-CLN-SU-10</td><td>Enlarged Drawings Clinic - GF ID1621B Submission</td><td>10d</td><td>2024-08-04</td><td>2024-08-14</td><td>976d</td><td><span class="tag" style="background:#e8edf2;color:#5a6a7a">Not Started</span></td></tr>
+<tr><td>DA-EN-MUP-ERT-AP-20</td><td>Enlarged Drawings ER Treatment GF-03 - ER-GR-46 - ID1623B Approval</td><td>10d</td><td>2024-08-05</td><td>2024-08-15</td><td>1088d</td><td><span class="tag" style="background:#e8edf2;color:#5a6a7a">Not Started</span></td></tr>
+<tr><td>DA-EN-MUP-COR-AP-20</td><td>Enlarged Drawings Corridor - In front of Patient Room Approval</td><td>10d</td><td>2024-08-07</td><td>2024-08-18</td><td>1048d</td><td><span class="tag" style="background:#e8edf2;color:#5a6a7a">Not Started</span></td></tr>
+<tr><td>DA-PRO-MUP-ERT-SU-10</td><td>Material ER Treatment GF-03 - ER-GR-46 - ID1623B Submission</td><td>10d</td><td>2024-08-08</td><td>2024-08-19</td><td>1000d</td><td><span class="tag" style="background:#e8edf2;color:#5a6a7a">Not Started</span></td></tr>
+<tr><td>DA-EN-MUP-CLN-AP-20</td><td>Enlarged Drawings Clinic - GF ID1621B Approval</td><td>10d</td><td>2024-08-10</td><td>2024-08-20</td><td>1056d</td><td><span class="tag" style="background:#e8edf2;color:#5a6a7a">Not Started</span></td></tr>
+<tr><td>DA-EN-MUP-PHY-SU-10</td><td>Enlarged Drawings LDR -  ID1630B-L03 Submission</td><td>10d</td><td>2024-08-10</td><td>2024-08-20</td><td>944d</td><td><span class="tag" style="background:#e8edf2;color:#5a6a7a">Not Started</span></td></tr>
+<tr><td>DA-EN-MUP-RDT-SU-10</td><td>Enlarged Drawings Renal Dialysis Treatment L01-011-ID1625B Submission</td><td>10d</td><td>2024-08-10</td><td>2024-08-20</td><td>960d</td><td><span class="tag" style="background:#e8edf2;color:#5a6a7a">Not Started</span></td></tr>
+<tr><td>DA-PRO-MUP-COR-SU-10</td><td>Material Corridor - In front of Patient Room Submission</td><td>10d</td><td>2024-08-11</td><td>2024-08-21</td><td>968d</td><td><span class="tag" style="background:#e8edf2;color:#5a6a7a">Not Started</span></td></tr>
+<tr><td>DA-EN-MUP-ICU-SU-10</td><td>Enlarged Drawings ICU - L02 MEQ 406 Submission</td><td>10d</td><td>2024-08-12</td><td>2024-08-22</td><td>944d</td><td><span class="tag" style="background:#e8edf2;color:#5a6a7a">Not Started</span></td></tr>
+<tr><td>DA-EN-MUP-PHY-AP-20</td><td>Enlarged Drawings LDR -  ID1630B-L03 Approval</td><td>10d</td><td>2024-08-12</td><td>2024-08-22</td><td>976d</td><td><span class="tag" style="background:#e8edf2;color:#5a6a7a">Not Started</span></td></tr>
+<tr><td>DA-EN-MUP-WAT-SU-10</td><td>Enlarged Drawings Waiting L03 - ID1631B Submission</td><td>10d</td><td>2024-08-12</td><td>2024-08-22</td><td>944d</td><td><span class="tag" style="background:#e8edf2;color:#5a6a7a">Not Started</span></td></tr>
+<tr><td>DA-PRO-MUP-CLN-SU-10</td><td>Material Clinic - GF ID1621B Submission</td><td>10d</td><td>2024-08-13</td><td>2024-08-24</td><td>976d</td><td><span class="tag" style="background:#e8edf2;color:#5a6a7a">Not Started</span></td></tr>
+<tr><td>DA-PRO-MUP-ERT-AP-20</td><td>Material ER Treatment GF-03 - ER-GR-46 - ID1623B Approval</td><td>10d</td><td>2024-08-13</td><td>2024-08-24</td><td>1040d</td><td><span class="tag" style="background:#e8edf2;color:#5a6a7a">Not Started</span></td></tr>
+<tr><td>DA-EN-MUP-LDR-SU-10</td><td>Enlarged Drawings LDR -  ID1630B-L03 Submission</td><td>10d</td><td>2024-08-14</td><td>2024-08-25</td><td>952d</td><td><span class="tag" style="background:#e8edf2;color:#5a6a7a">Not Started</span></td></tr>
+<tr><td>DA-EN-MUP-RDT-AP-20</td><td>Enlarged Drawings Renal Dialysis Treatment L01-011-ID1625B Approval</td><td>10d</td><td>2024-08-14</td><td>2024-08-25</td><td>1040d</td><td><span class="tag" style="background:#e8edf2;color:#5a6a7a">Not Started</span></td></tr>
+<tr><td>DA-PRO-MUP-ICU-SU-10</td><td>Material ICU - L02 MEQ 406 Submission</td><td>10d</td><td>2024-08-14</td><td>2024-08-25</td><td>976d</td><td><span class="tag" style="background:#e8edf2;color:#5a6a7a">Not Started</span></td></tr>
+<tr><td>DA-EN-MUP-ICU-AP-20</td><td>Enlarged Drawings ICU - L02 MEQ 406 Approval</td><td>10d</td><td>2024-08-15</td><td>2024-08-26</td><td>1032d</td><td><span class="tag" style="background:#e8edf2;color:#5a6a7a">Not Started</span></td></tr>
+<tr><td>DA-PRO-MUP-PHY-SU-10</td><td>Material  LDR -  ID1630B-L03 Submission</td><td>10d</td><td>2024-08-15</td><td>2024-08-26</td><td>992d</td><td><span class="tag" style="background:#e8edf2;color:#5a6a7a">Not Started</span></td></tr>
+<tr><td>DA-EN-MUP-WAT-AP-20</td><td>Enlarged Drawings Waiting L03 - ID1631B Approval</td><td>10d</td><td>2024-08-17</td><td>2024-08-27</td><td>1072d</td><td><span class="tag" style="background:#e8edf2;color:#5a6a7a">Not Started</span></td></tr>
+<tr><td>DA-PRO-MUP-COR-AP-20</td><td>Material Corridor - In front of Patient Room Approval</td><td>10d</td><td>2024-08-17</td><td>2024-08-27</td><td>968d</td><td><span class="tag" style="background:#e8edf2;color:#5a6a7a">Not Started</span></td></tr>
+<tr><td>DA-PRO-MUP-ICU-AP-20</td><td>Material ICU - L02 MEQ 406 Approval</td><td>10d</td><td>2024-08-17</td><td>2024-08-27</td><td>1024d</td><td><span class="tag" style="background:#e8edf2;color:#5a6a7a">Not Started</span></td></tr>
+<tr><td>DA-PRO-MUP-RDT-SU-10</td><td>Material Renal Dialysis Treatment L01-011-ID1625B Submission</td><td>10d</td><td>2024-08-17</td><td>2024-08-27</td><td>1000d</td><td><span class="tag" style="background:#e8edf2;color:#5a6a7a">Not Started</span></td></tr>
+<tr><td>DA-EN-MUP-LDR-AP-20</td><td>Enlarged Drawings LDR -  ID1630B-L03 Approval</td><td>10d</td><td>2024-08-18</td><td>2024-08-28</td><td>1032d</td><td><span class="tag" style="background:#e8edf2;color:#5a6a7a">Not Started</span></td></tr>
+<tr><td>DA-C-MUP-ERT-30</td><td>Mockup ER Treatment GF-03 - ER-GR-46 - ID1623B Excusion</td><td>30d</td><td>2024-08-20</td><td>2024-09-24</td><td>1000d</td><td><span class="tag" style="background:#e8edf2;color:#5a6a7a">Not Started</span></td></tr>
+<tr><td>DA-EN-MUP-PAR-SU-10</td><td>Enlarged Drawings Patient Room with Toilet - L04 - 057 and L04 - 056 S</td><td>10d</td><td>2024-08-20</td><td>2024-08-31</td><td>968d</td><td><span class="tag" style="background:#e8edf2;color:#5a6a7a">Not Started</span></td></tr>
+<tr><td>DA-PRO-MUP-LDR-SU-10</td><td>Material  LDR -  ID1630B-L03 Submission</td><td>10d</td><td>2024-08-20</td><td>2024-08-31</td><td>952d</td><td><span class="tag" style="background:#e8edf2;color:#5a6a7a">Not Started</span></td></tr>
+<tr><td>DA-PRO-MUP-RDT-AP-20</td><td>Material Renal Dialysis Treatment L01-011-ID1625B Approval</td><td>10d</td><td>2024-08-20</td><td>2024-08-31</td><td>1000d</td><td><span class="tag" style="background:#e8edf2;color:#5a6a7a">Not Started</span></td></tr>
+<tr><td>DA-PRO-MUP-WAT-SU-10</td><td>Material ER Waiting L03 - ID1631B Submission</td><td>10d</td><td>2024-08-20</td><td>2024-08-31</td><td>1032d</td><td><span class="tag" style="background:#e8edf2;color:#5a6a7a">Not Started</span></td></tr>
+<tr><td>DA-PRO-MUP-CLN-AP-20</td><td>Material Clinic - GF ID1621B 406 Approval</td><td>10d</td><td>2024-08-21</td><td>2024-09-01</td><td>976d</td><td><span class="tag" style="background:#e8edf2;color:#5a6a7a">Not Started</span></td></tr>
+<tr><td>DA-PRO-MUP-PHY-AP-10</td><td>Material LDR -  ID1630B-L03 Approval</td><td>10d</td><td>2024-08-21</td><td>2024-09-01</td><td>992d</td><td><span class="tag" style="background:#e8edf2;color:#5a6a7a">Not Started</span></td></tr>
+<tr><td>DA-PRO-MUP-WAT-AP-20</td><td>Material ER Waiting L03 - ID1631B Approval</td><td>10d</td><td>2024-08-22</td><td>2024-09-02</td><td>1032d</td><td><span class="tag" style="background:#e8edf2;color:#5a6a7a">Not Started</span></td></tr>
+<tr><td>DA-EN-MUP-NUS-SU-10</td><td>Enlarged Drawings Nurse Station - L04 ID1634A &amp; B Submission</td><td>10d</td><td>2024-08-24</td><td>2024-09-03</td><td>944d</td><td><span class="tag" style="background:#e8edf2;color:#5a6a7a">Not Started</span></td></tr>
+<tr><td>DA-PRO-MUP-LDR-AP-20</td><td>Material LDR -  ID1630B-L03 Approval</td><td>10d</td><td>2024-08-24</td><td>2024-09-03</td><td>992d</td><td><span class="tag" style="background:#e8edf2;color:#5a6a7a">Not Started</span></td></tr>
+<tr><td>DA-C-MUP-COR-30</td><td>Mockup Corridor - In front of Patient Room Excusion</td><td>30d</td><td>2024-08-25</td><td>2024-09-29</td><td>968d</td><td><span class="tag" style="background:#e8edf2;color:#5a6a7a">Not Started</span></td></tr>
+<tr><td>DA-EN-MUP-PAR-AP-20</td><td>Enlarged Drawings Patient Room with Toilet - L04 - 057 and L04 - 056 A</td><td>10d</td><td>2024-08-25</td><td>2024-09-04</td><td>1032d</td><td><span class="tag" style="background:#e8edf2;color:#5a6a7a">Not Started</span></td></tr>
+<tr><td>DA-C-MUP-CLN-30</td><td>Mockup Clinic - GF ID1621B Excusion</td><td>30d</td><td>2024-08-26</td><td>2024-09-30</td><td>976d</td><td><span class="tag" style="background:#e8edf2;color:#5a6a7a">Not Started</span></td></tr>
+<tr><td>DA-C-MUP-RDT-30</td><td>Mockup Renal Dialysis Treatment L01-011-ID1625B Excusion</td><td>30d</td><td>2024-08-26</td><td>2024-09-30</td><td>976d</td><td><span class="tag" style="background:#e8edf2;color:#5a6a7a">Not Started</span></td></tr>
+<tr><td>DA-EN-MUP-NUS-AP-20</td><td>Enlarged Drawings Nurse Station - L04 ID1634A &amp; B Approval</td><td>10d</td><td>2024-08-26</td><td>2024-09-05</td><td>1024d</td><td><span class="tag" style="background:#e8edf2;color:#5a6a7a">Not Started</span></td></tr>
+<tr><td>DA-C-MUP-ICU-30</td><td>Mockup ICU - L02 MEQ 406 Excusion</td><td>30d</td><td>2024-08-27</td><td>2024-10-01</td><td>968d</td><td><span class="tag" style="background:#e8edf2;color:#5a6a7a">Not Started</span></td></tr>
+<tr><td>DA-C-MUP-PHY-30</td><td>Mockup LDR -  ID1630B-L03 Excusion</td><td>30d</td><td>2024-08-27</td><td>2024-10-01</td><td>968d</td><td><span class="tag" style="background:#e8edf2;color:#5a6a7a">Not Started</span></td></tr>
+<tr><td>DA-PRO-MUP-NUS-SU-10</td><td>Material Nurse Station - L04 ID1634A &amp; B Submission</td><td>10d</td><td>2024-08-28</td><td>2024-09-08</td><td>944d</td><td><span class="tag" style="background:#e8edf2;color:#5a6a7a">Not Started</span></td></tr>
+<tr><td>DA-PROMUP-PAR-SU-10</td><td>Material  Patient Room with Toilet - L04 - 057 and L04 - 056 Submissio</td><td>10d</td><td>2024-08-28</td><td>2024-09-08</td><td>968d</td><td><span class="tag" style="background:#e8edf2;color:#5a6a7a">Not Started</span></td></tr>
+<tr><td>DA-C-MUP-WAT-30</td><td>Mockup Waiting L03 - ID1631B Excusion</td><td>30d</td><td>2024-08-29</td><td>2024-10-03</td><td>1000d</td><td><span class="tag" style="background:#e8edf2;color:#5a6a7a">Not Started</span></td></tr>
+<tr><td>DA-PRO-MUP-NUS-AP-20</td><td>Material Nurse Station - L04 ID1634A &amp; B Approval</td><td>10d</td><td>2024-08-31</td><td>2024-09-10</td><td>992d</td><td><span class="tag" style="background:#e8edf2;color:#5a6a7a">Not Started</span></td></tr>
+<tr><td>DA-C-MUP-LDR-30</td><td>Mockup LDR -  ID1630B-L03 Excusion</td><td>30d</td><td>2024-09-01</td><td>2024-10-06</td><td>952d</td><td><span class="tag" style="background:#e8edf2;color:#5a6a7a">Not Started</span></td></tr>
+<tr><td>DA-PROMUP-PAR-AP-20</td><td>Material  Patient Room with Toilet - L04 - 057 and L04 - 056 Approval</td><td>10d</td><td>2024-09-03</td><td>2024-09-14</td><td>968d</td><td><span class="tag" style="background:#e8edf2;color:#5a6a7a">Not Started</span></td></tr>
+<tr><td>DA-C-MUP-PAR-30</td><td>Mockup Enlarged Drawings Patient Room with Toilet - L04 - 057 and L04 </td><td>30d</td><td>2024-09-08</td><td>2024-10-13</td><td>952d</td><td><span class="tag" style="background:#e8edf2;color:#5a6a7a">Not Started</span></td></tr>
+<tr><td>DA-C-MUP-NUS-30</td><td>Mockup Nurse Station - L04 ID1634A &amp; B Excusion</td><td>30d</td><td>2024-09-09</td><td>2024-10-14</td><td>944d</td><td><span class="tag" style="background:#e8edf2;color:#5a6a7a">Not Started</span></td></tr>
+
+</tbody>
+</table>
+</div>
+<div class="sb-bar"><span><span class="sbb-name">Eng. Obieda Omari</span> — Sr. Planning & Cost Control Engineer</span><span class="sbb-ref">DAH-BL-R01</span></div>
+<div class="pg">6 / 13</div>
+</div>
+
+<div class="page">
+<div class="pad">
+<h2><span class="on">7</span> SD — Engineering</h2>
+<div style="font-size:9px;color:#6a7a8a;margin-bottom:10px">Total: 798 activities | Critical: 0 | Showing 50 key activities</div>
+<table>
+<thead><tr><th>Activity ID</th><th>Activity Name</th><th>Orig Dur</th><th>Planned Start</th><th>Planned Finish</th><th>Total Float</th><th>Status</th></tr></thead>
+<tbody>
+<tr><td>DA-EN-AR-SU-010</td><td>Site Mobilization Plan_Shop Drawings Submittal</td><td>4d</td><td>2024-07-15</td><td>2024-07-18</td><td>8d</td><td><span class="tag" style="background:#e8edf2;color:#5a6a7a">Not Started</span></td></tr>
+<tr><td>DA-EN-AR-SU-020</td><td>Site Offices Layout_Shop Drawings Submittal</td><td>4d</td><td>2024-07-15</td><td>2024-07-18</td><td>8d</td><td><span class="tag" style="background:#e8edf2;color:#5a6a7a">Not Started</span></td></tr>
+<tr><td>DA-EN-CV-SU-010</td><td>Tower Crane Foundation Plan - Master_Shop Drawings Submittal</td><td>3d</td><td>2024-07-15</td><td>2024-07-17</td><td>8d</td><td><span class="tag" style="background:#e8edf2;color:#5a6a7a">Not Started</span></td></tr>
+<tr><td>DA-EN-AR-AP-010</td><td>Site Mobilization Plan_Shop Drawings Approval</td><td>3d</td><td>2024-07-16</td><td>2024-07-18</td><td>8d</td><td><span class="tag" style="background:#e8edf2;color:#5a6a7a">Not Started</span></td></tr>
+<tr><td>DA-EN-AR-AP-020</td><td>Site Offices Layout_Shop Drawings Approval</td><td>3d</td><td>2024-07-16</td><td>2024-07-18</td><td>8d</td><td><span class="tag" style="background:#e8edf2;color:#5a6a7a">Not Started</span></td></tr>
+<tr><td>DA-EN-CV-AP-010</td><td>Tower Crane Foundation Plan - Master_Shop Drawings Approval</td><td>7d</td><td>2024-07-18</td><td>2024-07-25</td><td>8d</td><td><span class="tag" style="background:#e8edf2;color:#5a6a7a">Not Started</span></td></tr>
+<tr><td>DA-EN-CV-SU-030</td><td>Foundation Plan - Master_Shop Drawings Submittal</td><td>7d</td><td>2024-07-20</td><td>2024-07-27</td><td>16d</td><td><span class="tag" style="background:#e8edf2;color:#5a6a7a">Not Started</span></td></tr>
+<tr><td>DA-EN-CV-AP-030</td><td>Foundation Plan - Master_Shop Drawings Approval</td><td>5d</td><td>2024-07-28</td><td>2024-08-01</td><td>16d</td><td><span class="tag" style="background:#e8edf2;color:#5a6a7a">Not Started</span></td></tr>
+<tr><td>DA-EN-CV-SU-040</td><td>Columns Layout @ Basement 2 _Shop Drawings Submittal</td><td>7d</td><td>2024-07-28</td><td>2024-08-04</td><td>368d</td><td><span class="tag" style="background:#e8edf2;color:#5a6a7a">Not Started</span></td></tr>
+<tr><td>DA-EN-AR-SU-040</td><td>Dimension Plan - Master @ Basement 2 _Shop Drawings Submittal</td><td>7d</td><td>2024-08-03</td><td>2024-08-10</td><td>40d</td><td><span class="tag" style="background:#e8edf2;color:#5a6a7a">Not Started</span></td></tr>
+<tr><td>DA-EN-AR-SU-1100</td><td>Medical &amp; Non-Medical Furniture Plan Layout - Master @ Basement 2 _Sho</td><td>7d</td><td>2024-08-03</td><td>2024-08-10</td><td>104d</td><td><span class="tag" style="background:#e8edf2;color:#5a6a7a">Not Started</span></td></tr>
+<tr><td>DA-EN-AR-SU-1110</td><td>Medical &amp; Non-Medical Furniture Plan Layout - Master @ Basement 1_Shop</td><td>7d</td><td>2024-08-03</td><td>2024-08-10</td><td>104d</td><td><span class="tag" style="background:#e8edf2;color:#5a6a7a">Not Started</span></td></tr>
+<tr><td>DA-EN-AR-SU-1120</td><td>Medical &amp; Non-Medical Furniture Plan Layout - Master @ GROund _Shop Dr</td><td>7d</td><td>2024-08-03</td><td>2024-08-10</td><td>104d</td><td><span class="tag" style="background:#e8edf2;color:#5a6a7a">Not Started</span></td></tr>
+<tr><td>DA-EN-AR-SU-1130</td><td>Medical &amp; Non-Medical Furniture Plan Layout - Master @ First _Shop Dra</td><td>7d</td><td>2024-08-03</td><td>2024-08-10</td><td>104d</td><td><span class="tag" style="background:#e8edf2;color:#5a6a7a">Not Started</span></td></tr>
+<tr><td>DA-EN-CV-AP-040</td><td>Columns Layout @ Basement 2 _Shop Drawings Approval</td><td>7d</td><td>2024-08-05</td><td>2024-08-12</td><td>368d</td><td><span class="tag" style="background:#e8edf2;color:#5a6a7a">Not Started</span></td></tr>
+<tr><td>DA-EN-AR-AP-040</td><td>Dimension Plan - Master @ Basement 2 _Shop Drawings Approval</td><td>7d</td><td>2024-08-11</td><td>2024-08-18</td><td>40d</td><td><span class="tag" style="background:#e8edf2;color:#5a6a7a">Not Started</span></td></tr>
+<tr><td>DA-EN-AR-AP-1100</td><td>Medical &amp; Non-Medical Furniture Plan Layout - Master @ Basement 2 _Sho</td><td>7d</td><td>2024-08-11</td><td>2024-08-18</td><td>384d</td><td><span class="tag" style="background:#e8edf2;color:#5a6a7a">Not Started</span></td></tr>
+<tr><td>DA-EN-AR-AP-1110</td><td>Medical &amp; Non-Medical Furniture Plan Layout - Master @ Basement 1_Shop</td><td>7d</td><td>2024-08-11</td><td>2024-08-18</td><td>112d</td><td><span class="tag" style="background:#e8edf2;color:#5a6a7a">Not Started</span></td></tr>
+<tr><td>DA-EN-AR-AP-1120</td><td>Medical &amp; Non-Medical Furniture Plan Layout - Master @ GROund _Shop Dr</td><td>7d</td><td>2024-08-11</td><td>2024-08-18</td><td>160d</td><td><span class="tag" style="background:#e8edf2;color:#5a6a7a">Not Started</span></td></tr>
+<tr><td>DA-EN-AR-AP-1130</td><td>Medical &amp; Non-Medical Furniture Plan Layout - Master @ First _Shop Dra</td><td>7d</td><td>2024-08-11</td><td>2024-08-18</td><td>104d</td><td><span class="tag" style="background:#e8edf2;color:#5a6a7a">Not Started</span></td></tr>
+<tr><td>DA-EN-AR-SU-050</td><td>Wall Types Plan - Master @ Basement 2 _Shop Drawings Submittal</td><td>7d</td><td>2024-08-11</td><td>2024-08-18</td><td>48d</td><td><span class="tag" style="background:#e8edf2;color:#5a6a7a">Not Started</span></td></tr>
+<tr><td>DA-EN-AR-SU-060</td><td>Dimension Plan - Master @ Basement 1_Shop Drawings Submittal</td><td>7d</td><td>2024-08-11</td><td>2024-08-18</td><td>96d</td><td><span class="tag" style="background:#e8edf2;color:#5a6a7a">Not Started</span></td></tr>
+<tr><td>DA-EN-AR-SU-1140</td><td>Medical &amp; Non-Medical Furniture Plan Layout - Master @ Second _Shop Dr</td><td>7d</td><td>2024-08-11</td><td>2024-08-18</td><td>104d</td><td><span class="tag" style="background:#e8edf2;color:#5a6a7a">Not Started</span></td></tr>
+<tr><td>DA-EN-AR-SU-1150</td><td>Medical &amp; Non-Medical Furniture Plan Layout - Master @ Third _Shop Dra</td><td>7d</td><td>2024-08-11</td><td>2024-08-18</td><td>104d</td><td><span class="tag" style="background:#e8edf2;color:#5a6a7a">Not Started</span></td></tr>
+<tr><td>DA-EN-AR-SU-680</td><td>Reflected Ceiling Plan Layout - Master @ Basement 2 _Shop Drawings Sub</td><td>7d</td><td>2024-08-11</td><td>2024-08-18</td><td>376d</td><td><span class="tag" style="background:#e8edf2;color:#5a6a7a">Not Started</span></td></tr>
+<tr><td>DA-EN-EL-SU-2010</td><td>PIPe Sleeves @ Basement 2 _Shop Drawings Submittal</td><td>7d</td><td>2024-08-11</td><td>2024-08-18</td><td>104d</td><td><span class="tag" style="background:#e8edf2;color:#5a6a7a">Not Started</span></td></tr>
+<tr><td>DA-EN-CV-SU-050</td><td>Slabs Layout @ Basement 2 _Shop Drawings Submittal</td><td>7d</td><td>2024-08-14</td><td>2024-08-21</td><td>504d</td><td><span class="tag" style="background:#e8edf2;color:#5a6a7a">Not Started</span></td></tr>
+<tr><td>DA-EN-AR-AP-050</td><td>Wall Types Plan - Master @ Basement 2 _Shop Drawings Approval</td><td>7d</td><td>2024-08-19</td><td>2024-08-26</td><td>320d</td><td><span class="tag" style="background:#e8edf2;color:#5a6a7a">Not Started</span></td></tr>
+<tr><td>DA-EN-AR-AP-060</td><td>Dimension Plan - Master @ Basement 1_Shop Drawings Approval</td><td>7d</td><td>2024-08-19</td><td>2024-08-26</td><td>232d</td><td><span class="tag" style="background:#e8edf2;color:#5a6a7a">Not Started</span></td></tr>
+<tr><td>DA-EN-AR-AP-1140</td><td>Medical &amp; Non-Medical Furniture Plan Layout - Master @ Second _Shop Dr</td><td>7d</td><td>2024-08-19</td><td>2024-08-26</td><td>160d</td><td><span class="tag" style="background:#e8edf2;color:#5a6a7a">Not Started</span></td></tr>
+<tr><td>DA-EN-AR-AP-1150</td><td>Medical &amp; Non-Medical Furniture Plan Layout - Master @ Third _Shop Dra</td><td>7d</td><td>2024-08-19</td><td>2024-08-26</td><td>104d</td><td><span class="tag" style="background:#e8edf2;color:#5a6a7a">Not Started</span></td></tr>
+<tr><td>DA-EN-AR-AP-680</td><td>Reflected Ceiling Plan Layout - Master @ Basement 2 _Shop Drawings App</td><td>7d</td><td>2024-08-19</td><td>2024-08-26</td><td>384d</td><td><span class="tag" style="background:#e8edf2;color:#5a6a7a">Not Started</span></td></tr>
+<tr><td>DA-EN-AR-SU-070</td><td>Wall Types Plan - Master @ Basement 1_Shop Drawings Submittal</td><td>7d</td><td>2024-08-19</td><td>2024-08-26</td><td>48d</td><td><span class="tag" style="background:#e8edf2;color:#5a6a7a">Not Started</span></td></tr>
+<tr><td>DA-EN-AR-SU-080</td><td>Dimension Plan - Master @ GROund _Shop Drawings Submittal</td><td>7d</td><td>2024-08-19</td><td>2024-08-26</td><td>96d</td><td><span class="tag" style="background:#e8edf2;color:#5a6a7a">Not Started</span></td></tr>
+<tr><td>DA-EN-AR-SU-1160</td><td>Medical &amp; Non-Medical Furniture Plan Layout - Master @ Fourth _Shop Dr</td><td>7d</td><td>2024-08-19</td><td>2024-08-26</td><td>104d</td><td><span class="tag" style="background:#e8edf2;color:#5a6a7a">Not Started</span></td></tr>
+<tr><td>DA-EN-AR-SU-1170</td><td>Medical &amp; Non-Medical Furniture Plan Layout - Master @ Fifth _Shop Dra</td><td>7d</td><td>2024-08-19</td><td>2024-08-26</td><td>160d</td><td><span class="tag" style="background:#e8edf2;color:#5a6a7a">Not Started</span></td></tr>
+<tr><td>DA-EN-AR-SU-710</td><td>Reflected Ceiling Plan Layout - Master @ Basement 1_Shop Drawings Subm</td><td>7d</td><td>2024-08-19</td><td>2024-08-26</td><td>488d</td><td><span class="tag" style="background:#e8edf2;color:#5a6a7a">Not Started</span></td></tr>
+<tr><td>DA-EN-EL-AP-2010</td><td>PIPe Sleeves @ Basement 2 _Shop Drawings Approval</td><td>7d</td><td>2024-08-19</td><td>2024-08-26</td><td>240d</td><td><span class="tag" style="background:#e8edf2;color:#5a6a7a">Not Started</span></td></tr>
+<tr><td>DA-EN-EL-SU-2020</td><td>PIPe Sleeves @ Basement 1 _Shop Drawings Submittal</td><td>7d</td><td>2024-08-19</td><td>2024-08-26</td><td>520d</td><td><span class="tag" style="background:#e8edf2;color:#5a6a7a">Not Started</span></td></tr>
+<tr><td>DA-EN-EL-SU-230</td><td>Earthing @ Basement 2 _Shop Drawings Submittal</td><td>7d</td><td>2024-08-19</td><td>2024-08-26</td><td>104d</td><td><span class="tag" style="background:#e8edf2;color:#5a6a7a">Not Started</span></td></tr>
+<tr><td>DA-EN-EL-SU-770</td><td>Data &amp; Telephonestructure Cabling @ Basement 2 _Shop Drawings Submitta</td><td>7d</td><td>2024-08-19</td><td>2024-08-26</td><td>104d</td><td><span class="tag" style="background:#e8edf2;color:#5a6a7a">Not Started</span></td></tr>
+<tr><td>DA-EN-EL-SU-780</td><td>Data &amp; Telephonestructure Cabling @ Basement 1_Shop Drawings Submittal</td><td>7d</td><td>2024-08-19</td><td>2024-08-26</td><td>104d</td><td><span class="tag" style="background:#e8edf2;color:#5a6a7a">Not Started</span></td></tr>
+<tr><td>DA-EN-ME-SU-130</td><td>Fire Fighting System Calculation_Shop Drawings Submittal</td><td>7d</td><td>2024-08-19</td><td>2024-08-26</td><td>576d</td><td><span class="tag" style="background:#e8edf2;color:#5a6a7a">Not Started</span></td></tr>
+<tr><td>DA-EN-ME-SU-235</td><td>Smoke Management Calculation_Shop Drawings Submittal</td><td>7d</td><td>2024-08-19</td><td>2024-08-26</td><td>1040d</td><td><span class="tag" style="background:#e8edf2;color:#5a6a7a">Not Started</span></td></tr>
+<tr><td>DA-EN-ME-SU-340</td><td>Water Supply System Calculation_Shop Drawings Submittal</td><td>7d</td><td>2024-08-19</td><td>2024-08-26</td><td>120d</td><td><span class="tag" style="background:#e8edf2;color:#5a6a7a">Not Started</span></td></tr>
+<tr><td>DA-EN-ME-SU-445</td><td>Drainage System Calculation _Shop Drawings Submittal</td><td>7d</td><td>2024-08-19</td><td>2024-08-26</td><td>40d</td><td><span class="tag" style="background:#e8edf2;color:#5a6a7a">Not Started</span></td></tr>
+<tr><td>DA-EN-CV-AP-050</td><td>Slabs Layout @ Basement 2 _Shop Drawings Approval</td><td>7d</td><td>2024-08-22</td><td>2024-08-29</td><td>504d</td><td><span class="tag" style="background:#e8edf2;color:#5a6a7a">Not Started</span></td></tr>
+<tr><td>DA-EN-CV-SU-060</td><td>Columns Layout @ Basement 1_Shop Drawings Submittal</td><td>7d</td><td>2024-08-22</td><td>2024-08-29</td><td>552d</td><td><span class="tag" style="background:#e8edf2;color:#5a6a7a">Not Started</span></td></tr>
+<tr><td>DA-EN-AR-AP-070</td><td>Wall Types Plan - Master @ Basement 1_Shop Drawings Approval</td><td>7d</td><td>2024-08-27</td><td>2024-09-03</td><td>544d</td><td><span class="tag" style="background:#e8edf2;color:#5a6a7a">Not Started</span></td></tr>
+<tr><td>DA-EN-AR-AP-080</td><td>Dimension Plan - Master @ GROund _Shop Drawings Approval</td><td>7d</td><td>2024-08-27</td><td>2024-09-03</td><td>144d</td><td><span class="tag" style="background:#e8edf2;color:#5a6a7a">Not Started</span></td></tr>
+
+</tbody>
+</table>
+</div>
+<div class="sb-bar"><span><span class="sbb-name">Eng. Obieda Omari</span> — Sr. Planning & Cost Control Engineer</span><span class="sbb-ref">DAH-BL-R01</span></div>
+<div class="pg">7 / 13</div>
+</div>
+
+<div class="page">
+<div class="pad">
+<h2><span class="on">8</span> PR — Procurement</h2>
+<div style="font-size:9px;color:#6a7a8a;margin-bottom:10px">Total: 908 activities | Critical: 0 | Showing 50 key activities</div>
+<table>
+<thead><tr><th>Activity ID</th><th>Activity Name</th><th>Orig Dur</th><th>Planned Start</th><th>Planned Finish</th><th>Total Float</th><th>Status</th></tr></thead>
+<tbody>
+<tr><td>DA-PR-NL-EL-SU-180</td><td>UPVC PIPe &amp; Fitting Sleeve Class 3 Greater Than For Equal To 50M_Mater</td><td>7d</td><td>2024-07-18</td><td>2024-07-25</td><td>40d</td><td><span class="tag" style="background:#e8edf2;color:#5a6a7a">Not Started</span></td></tr>
+<tr><td>DA-PR-NL-CV-SU-140</td><td>Polyethylene_Material Submission</td><td>4d</td><td>2024-07-22</td><td>2024-07-25</td><td>8d</td><td><span class="tag" style="background:#e8edf2;color:#5a6a7a">Not Started</span></td></tr>
+<tr><td>DA-PR-NL-CV-SU-150</td><td>Filler Board_Material Submission</td><td>4d</td><td>2024-07-22</td><td>2024-07-25</td><td>64d</td><td><span class="tag" style="background:#e8edf2;color:#5a6a7a">Not Started</span></td></tr>
+<tr><td>DA-PR-NL-CV-SU-180</td><td>Waterproofing Membrane_Material Submission</td><td>4d</td><td>2024-07-22</td><td>2024-07-25</td><td>8d</td><td><span class="tag" style="background:#e8edf2;color:#5a6a7a">Not Started</span></td></tr>
+<tr><td>DA-PR-NL-CV-SU-190</td><td>Fluid Membrane_Material Submission</td><td>4d</td><td>2024-07-22</td><td>2024-07-25</td><td>104d</td><td><span class="tag" style="background:#e8edf2;color:#5a6a7a">Not Started</span></td></tr>
+<tr><td>DA-PR-NL-CV-SU-200</td><td>Waterproofing Primer_Material Submission</td><td>4d</td><td>2024-07-22</td><td>2024-07-25</td><td>64d</td><td><span class="tag" style="background:#e8edf2;color:#5a6a7a">Not Started</span></td></tr>
+<tr><td>DA-PR-NL-CV-AP-140</td><td>Polyethylene_Material Approval</td><td>5d</td><td>2024-07-27</td><td>2024-07-31</td><td>1024d</td><td><span class="tag" style="background:#e8edf2;color:#5a6a7a">Not Started</span></td></tr>
+<tr><td>DA-PR-NL-CV-AP-150</td><td>Filler Board_Material Approval</td><td>5d</td><td>2024-07-27</td><td>2024-07-31</td><td>504d</td><td><span class="tag" style="background:#e8edf2;color:#5a6a7a">Not Started</span></td></tr>
+<tr><td>DA-PR-NL-CV-AP-180</td><td>WaterpROofing Membrane_Material Approval</td><td>5d</td><td>2024-07-27</td><td>2024-07-31</td><td>8d</td><td><span class="tag" style="background:#e8edf2;color:#5a6a7a">Not Started</span></td></tr>
+<tr><td>DA-PR-NL-CV-AP-190</td><td>Fluid Membrane_Material Approval</td><td>5d</td><td>2024-07-27</td><td>2024-07-31</td><td>104d</td><td><span class="tag" style="background:#e8edf2;color:#5a6a7a">Not Started</span></td></tr>
+<tr><td>DA-PR-NL-CV-AP-200</td><td>WaterpROofing Primer_Material Approval</td><td>5d</td><td>2024-07-27</td><td>2024-07-31</td><td>72d</td><td><span class="tag" style="background:#e8edf2;color:#5a6a7a">Not Started</span></td></tr>
+<tr><td>DA-PR-NL-EL-AP-180</td><td>UPVC PIPe &amp; Fitting Sleeve Class 3 Greater Than For Equal To 50M_Mater</td><td>15d</td><td>2024-07-27</td><td>2024-08-12</td><td>240d</td><td><span class="tag" style="background:#e8edf2;color:#5a6a7a">Not Started</span></td></tr>
+<tr><td>DA-PR-NL-EL-SU-150</td><td>Earthing System Grounding (Furse)_Material Submission</td><td>7d</td><td>2024-07-27</td><td>2024-08-03</td><td>40d</td><td><span class="tag" style="background:#e8edf2;color:#5a6a7a">Not Started</span></td></tr>
+<tr><td>DA-PR-NL-EL-SU-170</td><td>Bare Copper Cables (Bahra Cables)_Material Submission</td><td>7d</td><td>2024-07-27</td><td>2024-08-03</td><td>40d</td><td><span class="tag" style="background:#e8edf2;color:#5a6a7a">Not Started</span></td></tr>
+<tr><td>DA-PR-NL-CV-PO-140</td><td>Polyethylene_Purchase Order</td><td>5d</td><td>2024-08-01</td><td>2024-08-06</td><td>1024d</td><td><span class="tag" style="background:#e8edf2;color:#5a6a7a">Not Started</span></td></tr>
+<tr><td>DA-PR-NL-CV-PO-150</td><td>Filler Board_Purchase Order</td><td>5d</td><td>2024-08-01</td><td>2024-08-06</td><td>504d</td><td><span class="tag" style="background:#e8edf2;color:#5a6a7a">Not Started</span></td></tr>
+<tr><td>DA-PR-NL-CV-PO-180</td><td>WaterpROofing Membrane_Purchase Order</td><td>4d</td><td>2024-08-01</td><td>2024-08-05</td><td>8d</td><td><span class="tag" style="background:#e8edf2;color:#5a6a7a">Not Started</span></td></tr>
+<tr><td>DA-PR-NL-CV-PO-190</td><td>Fluid Membrane_Purchase Order</td><td>2d</td><td>2024-08-01</td><td>2024-08-03</td><td>104d</td><td><span class="tag" style="background:#e8edf2;color:#5a6a7a">Not Started</span></td></tr>
+<tr><td>DA-PR-NL-CV-PO-200</td><td>WaterpROofing Primer_Purchase Order</td><td>3d</td><td>2024-08-01</td><td>2024-08-04</td><td>72d</td><td><span class="tag" style="background:#e8edf2;color:#5a6a7a">Not Started</span></td></tr>
+<tr><td>DA-PR-NL-CV-MD-200</td><td>WaterpROofing Primer_Material Delivery</td><td>3d</td><td>2024-08-03</td><td>2024-08-05</td><td>72d</td><td><span class="tag" style="background:#e8edf2;color:#5a6a7a">Not Started</span></td></tr>
+<tr><td>DA-PR-NL-CV-SU-110</td><td>Mortar For Concrete Repairing_Material Submission</td><td>4d</td><td>2024-08-03</td><td>2024-08-06</td><td>16d</td><td><span class="tag" style="background:#e8edf2;color:#5a6a7a">Not Started</span></td></tr>
+<tr><td>DA-PR-NL-CV-MD-180</td><td>WaterpROofing Membrane_Material Delivery</td><td>10d</td><td>2024-08-04</td><td>2024-08-14</td><td>8d</td><td><span class="tag" style="background:#e8edf2;color:#5a6a7a">Not Started</span></td></tr>
+<tr><td>DA-PR-NL-EL-AP-150</td><td>Earthing System GROunding (Furse)_Material Approval</td><td>15d</td><td>2024-08-04</td><td>2024-08-20</td><td>40d</td><td><span class="tag" style="background:#e8edf2;color:#5a6a7a">Not Started</span></td></tr>
+<tr><td>DA-PR-NL-EL-AP-170</td><td>Bare Copper Cables (Bahra Cables)_Material Approval</td><td>15d</td><td>2024-08-04</td><td>2024-08-20</td><td>40d</td><td><span class="tag" style="background:#e8edf2;color:#5a6a7a">Not Started</span></td></tr>
+<tr><td>DA-PR-NL-EL-SU-200</td><td>Electrical UPVC Conduit _Material Submission</td><td>7d</td><td>2024-08-04</td><td>2024-08-11</td><td>312d</td><td><span class="tag" style="background:#e8edf2;color:#5a6a7a">Not Started</span></td></tr>
+<tr><td>DA-PR-NL-CV-MD-190</td><td>Fluid Membrane_Material Delivery</td><td>10d</td><td>2024-08-06</td><td>2024-08-17</td><td>104d</td><td><span class="tag" style="background:#e8edf2;color:#5a6a7a">Not Started</span></td></tr>
+<tr><td>DA-PR-NL-CV-AP-110</td><td>Mortar For Concrete Repairing_Material Approval</td><td>5d</td><td>2024-08-07</td><td>2024-08-12</td><td>592d</td><td><span class="tag" style="background:#e8edf2;color:#5a6a7a">Not Started</span></td></tr>
+<tr><td>DA-PR-NL-CV-SU-120</td><td>Concrete Curing Compound_Material Submission</td><td>5d</td><td>2024-08-07</td><td>2024-08-12</td><td>16d</td><td><span class="tag" style="background:#e8edf2;color:#5a6a7a">Not Started</span></td></tr>
+<tr><td>DA-PR-NL-AR-SU-370</td><td>Painting_Material Submission</td><td>7d</td><td>2024-08-11</td><td>2024-08-18</td><td>584d</td><td><span class="tag" style="background:#e8edf2;color:#5a6a7a">Not Started</span></td></tr>
+<tr><td>DA-PR-NL-EL-AP-200</td><td>Electrical UPVC Conduit _Material Approval</td><td>15d</td><td>2024-08-12</td><td>2024-08-28</td><td>312d</td><td><span class="tag" style="background:#e8edf2;color:#5a6a7a">Not Started</span></td></tr>
+<tr><td>DA-PR-NL-CV-AP-120</td><td>Concrete Curing Compound_Material Approval</td><td>5d</td><td>2024-08-13</td><td>2024-08-18</td><td>712d</td><td><span class="tag" style="background:#e8edf2;color:#5a6a7a">Not Started</span></td></tr>
+<tr><td>DA-PR-NL-CV-MD-110</td><td>Mortar For Concrete Repairing_Material Delivery</td><td>30d</td><td>2024-08-13</td><td>2024-09-16</td><td>592d</td><td><span class="tag" style="background:#e8edf2;color:#5a6a7a">Not Started</span></td></tr>
+<tr><td>DA-PR-NL-CV-PO-110</td><td>Mortar For Concrete Repairing_Purchase Order</td><td>5d</td><td>2024-08-13</td><td>2024-08-18</td><td>592d</td><td><span class="tag" style="background:#e8edf2;color:#5a6a7a">Not Started</span></td></tr>
+<tr><td>DA-PR-NL-CV-SU-130</td><td>Steel Bar_Material Submission</td><td>5d</td><td>2024-08-13</td><td>2024-08-18</td><td>16d</td><td><span class="tag" style="background:#e8edf2;color:#5a6a7a">Not Started</span></td></tr>
+<tr><td>DA-PR-NL-EL-PO-180</td><td>UPVC PIPe &amp; Fitting Sleeve Class 3 Greater Than For Equal To 50M_Purch</td><td>7d</td><td>2024-08-13</td><td>2024-08-20</td><td>240d</td><td><span class="tag" style="background:#e8edf2;color:#5a6a7a">Not Started</span></td></tr>
+<tr><td>DA-PR-NL-AR-AP-370</td><td>Painting_Material Approval</td><td>15d</td><td>2024-08-19</td><td>2024-09-04</td><td>840d</td><td><span class="tag" style="background:#e8edf2;color:#5a6a7a">Not Started</span></td></tr>
+<tr><td>DA-PR-NL-AR-SU-450</td><td>Glue For Fiber Mesh Paint _Material Submission</td><td>7d</td><td>2024-08-19</td><td>2024-08-26</td><td>1216d</td><td><span class="tag" style="background:#e8edf2;color:#5a6a7a">Not Started</span></td></tr>
+<tr><td>DA-PR-NL-AR-SU-470</td><td>Access Panel For Ceiling _Material Submission</td><td>7d</td><td>2024-08-19</td><td>2024-08-26</td><td>584d</td><td><span class="tag" style="background:#e8edf2;color:#5a6a7a">Not Started</span></td></tr>
+<tr><td>DA-PR-NL-CV-AP-130</td><td>Steel Bar_Material Approval</td><td>5d</td><td>2024-08-19</td><td>2024-08-24</td><td>16d</td><td><span class="tag" style="background:#e8edf2;color:#5a6a7a">Not Started</span></td></tr>
+<tr><td>DA-PR-NL-CV-PO-120</td><td>Concrete Curing Compound_Purchase Order</td><td>5d</td><td>2024-08-19</td><td>2024-08-24</td><td>712d</td><td><span class="tag" style="background:#e8edf2;color:#5a6a7a">Not Started</span></td></tr>
+<tr><td>DA-PR-NL-EL-PO-150</td><td>Earthing System GROunding (Furse)_Purchase Order</td><td>3d</td><td>2024-08-21</td><td>2024-08-24</td><td>40d</td><td><span class="tag" style="background:#e8edf2;color:#5a6a7a">Not Started</span></td></tr>
+<tr><td>DA-PR-NL-EL-PO-170</td><td>Bare Copper Cables (Bahra Cables)_Purchase Order</td><td>3d</td><td>2024-08-21</td><td>2024-08-24</td><td>40d</td><td><span class="tag" style="background:#e8edf2;color:#5a6a7a">Not Started</span></td></tr>
+<tr><td>DA-PR-NL-CV-MD-120</td><td>Concrete Curing Compound_Material Delivery</td><td>5d</td><td>2024-08-25</td><td>2024-08-29</td><td>712d</td><td><span class="tag" style="background:#e8edf2;color:#5a6a7a">Not Started</span></td></tr>
+<tr><td>DA-PR-NL-CV-MD-130</td><td>Steel Bar_Material Delivery</td><td>5d</td><td>2024-08-25</td><td>2024-08-29</td><td>16d</td><td><span class="tag" style="background:#e8edf2;color:#5a6a7a">Not Started</span></td></tr>
+<tr><td>DA-PR-NL-CV-PO-130</td><td>Steel Bar_Purchase Order</td><td>5d</td><td>2024-08-25</td><td>2024-08-29</td><td>16d</td><td><span class="tag" style="background:#e8edf2;color:#5a6a7a">Not Started</span></td></tr>
+<tr><td>DA-PR-NL-AR-AP-450</td><td>Glue For Fiber Mesh Paint _Material Approval</td><td>15d</td><td>2024-08-27</td><td>2024-09-12</td><td>1216d</td><td><span class="tag" style="background:#e8edf2;color:#5a6a7a">Not Started</span></td></tr>
+<tr><td>DA-PR-NL-AR-AP-470</td><td>Access Panel For Ceiling _Material Approval</td><td>15d</td><td>2024-08-27</td><td>2024-09-12</td><td>1216d</td><td><span class="tag" style="background:#e8edf2;color:#5a6a7a">Not Started</span></td></tr>
+<tr><td>DA-PR-NL-AR-SU-280</td><td>Gypsum Board_Material Submission</td><td>7d</td><td>2024-08-27</td><td>2024-09-03</td><td>728d</td><td><span class="tag" style="background:#e8edf2;color:#5a6a7a">Not Started</span></td></tr>
+<tr><td>DA-PR-NL-EL-PO-200</td><td>Electrical UPVC Conduit _Purchase Order</td><td>7d</td><td>2024-08-29</td><td>2024-09-05</td><td>312d</td><td><span class="tag" style="background:#e8edf2;color:#5a6a7a">Not Started</span></td></tr>
+<tr><td>DA-PR-NL-EL-MD-150</td><td>Earthing System GROunding (Furse)_Material Delivery</td><td>10d</td><td>2024-09-02</td><td>2024-09-12</td><td>40d</td><td><span class="tag" style="background:#e8edf2;color:#5a6a7a">Not Started</span></td></tr>
+
+</tbody>
+</table>
+</div>
+<div class="sb-bar"><span><span class="sbb-name">Eng. Obieda Omari</span> — Sr. Planning & Cost Control Engineer</span><span class="sbb-ref">DAH-BL-R01</span></div>
+<div class="pg">8 / 13</div>
+</div>
+
+<div class="page">
+<div class="pad">
+<h2><span class="on">9</span> CO — Construction</h2>
+<div style="font-size:9px;color:#6a7a8a;margin-bottom:10px">Total: 3046 activities | Critical: 462 | Showing 50 key activities</div>
+<table>
+<thead><tr><th>Activity ID</th><th>Activity Name</th><th>Orig Dur</th><th>Planned Start</th><th>Planned Finish</th><th>Total Float</th><th>Status</th></tr></thead>
+<tbody>
+<tr class="critical"><td>DA-C-M1-B02-S-P2-31</td><td>Excavation Part 2</td><td>10d</td><td>2024-08-06</td><td>2024-08-17</td><td>0d</td><td><span class="tag cr">Not Started</span></td></tr>
+<tr class="critical"><td>DA-C-M1-B02-S-P2-20</td><td>Anti Termite for Raft Foundation - Part 2</td><td>2d</td><td>2024-08-08</td><td>2024-08-10</td><td>0d</td><td><span class="tag cr">Not Started</span></td></tr>
+<tr class="critical"><td>DA-C-M1-B02-S-P1-31</td><td>Excavation Part 1</td><td>10d</td><td>2024-08-12</td><td>2024-08-22</td><td>0d</td><td><span class="tag cr">Not Started</span></td></tr>
+<tr class="critical"><td>DA-C-M1-B02-S-P2-10</td><td>Plain Concrete Form Work - Part 2</td><td>2d</td><td>2024-08-12</td><td>2024-08-13</td><td>0d</td><td><span class="tag cr">Not Started</span></td></tr>
+<tr class="critical"><td>DA-C-M1-B02-S-P2-30</td><td>Plain Concrete Pouring - Part 2</td><td>1d</td><td>2024-08-14</td><td>2024-08-14</td><td>0d</td><td><span class="tag cr">Not Started</span></td></tr>
+<tr class="critical"><td>DA-C-M1-B02-S-P2-40</td><td>Plain Concrete De-Shuttering - Part 2</td><td>1d</td><td>2024-08-15</td><td>2024-08-15</td><td>0d</td><td><span class="tag cr">Not Started</span></td></tr>
+<tr class="critical"><td>DA-C-M1-B02-S-P2-50</td><td>Water Proofing Under Raft Foundation - Part 2</td><td>11d</td><td>2024-08-17</td><td>2024-08-28</td><td>0d</td><td><span class="tag cr">Not Started</span></td></tr>
+<tr class="critical"><td>DA-C-M1-B02-S-P4-31</td><td>Excavation Part 4</td><td>10d</td><td>2024-08-18</td><td>2024-08-28</td><td>0d</td><td><span class="tag cr">Not Started</span></td></tr>
+<tr class="critical"><td>DA-C-M1-B02-S-P3-31</td><td>Excavation Part 3</td><td>10d</td><td>2024-08-24</td><td>2024-09-03</td><td>0d</td><td><span class="tag cr">Not Started</span></td></tr>
+<tr class="critical"><td>DA-C-M1-B02-S-P4-10</td><td>Anti Termite for Raft Foundation - Part 4</td><td>2d</td><td>2024-08-24</td><td>2024-08-25</td><td>0d</td><td><span class="tag cr">Not Started</span></td></tr>
+<tr class="critical"><td>DA-C-M1-B02-S-P3-10</td><td>Anti Termite for Raft Foundation - Part 3</td><td>1d</td><td>2024-08-26</td><td>2024-08-26</td><td>0d</td><td><span class="tag cr">Not Started</span></td></tr>
+<tr class="critical"><td>DA-C-M1-B02-S-P3-20</td><td>Plain Concrete Form Work - Part 3</td><td>3d</td><td>2024-08-27</td><td>2024-08-29</td><td>0d</td><td><span class="tag cr">Not Started</span></td></tr>
+<tr class="critical"><td>DA-C-M1-B02-S-P2-60</td><td>Raft Foundation Form work - Part 2</td><td>15d</td><td>2024-08-29</td><td>2024-09-15</td><td>0d</td><td><span class="tag cr">Not Started</span></td></tr>
+<tr class="critical"><td>DA-C-M1-B02-S-P5-31</td><td>Excavation Part 5</td><td>8d</td><td>2024-08-29</td><td>2024-09-07</td><td>0d</td><td><span class="tag cr">Not Started</span></td></tr>
+<tr class="critical"><td>DA-C-M1-B02-S-P3-30</td><td>Plain Concrete Pouring - Part 3</td><td>1d</td><td>2024-08-31</td><td>2024-08-31</td><td>0d</td><td><span class="tag cr">Not Started</span></td></tr>
+<tr class="critical"><td>DA-C-M1-B02-S-P3-40</td><td>Plain Concrete De-Shuttering - Part 3</td><td>1d</td><td>2024-09-01</td><td>2024-09-01</td><td>0d</td><td><span class="tag cr">Not Started</span></td></tr>
+<tr class="critical"><td>DA-C-M1-B02-S-P5-10</td><td>Plain Concrete Form Work - Part 5</td><td>1d</td><td>2024-09-01</td><td>2024-09-01</td><td>0d</td><td><span class="tag cr">Not Started</span></td></tr>
+<tr class="critical"><td>DA-C-M1-B02-S-P5-20</td><td>Anti Termite for Raft Foundation - Part 5</td><td>1d</td><td>2024-09-01</td><td>2024-09-01</td><td>0d</td><td><span class="tag cr">Not Started</span></td></tr>
+<tr class="critical"><td>DA-C-M1-B02-S-P2-70</td><td>Raft Foundation Rebar - Part 2</td><td>15d</td><td>2024-09-02</td><td>2024-09-18</td><td>0d</td><td><span class="tag cr">Not Started</span></td></tr>
+<tr class="critical"><td>DA-C-M1-B02-S-P5-30</td><td>Plain Concrete Pouring - Part 5</td><td>1d</td><td>2024-09-02</td><td>2024-09-02</td><td>0d</td><td><span class="tag cr">Not Started</span></td></tr>
+<tr class="critical"><td>DA-C-M1-B02-S-P5-40</td><td>Plain Concrete De-Shuttering - Part 5</td><td>1d</td><td>2024-09-03</td><td>2024-09-03</td><td>0d</td><td><span class="tag cr">Not Started</span></td></tr>
+<tr class="critical"><td>DA-C-M1-B02-S-P5-50</td><td>Water Proofing Under Raft Foundation - Part 5</td><td>7d</td><td>2024-09-04</td><td>2024-09-11</td><td>0d</td><td><span class="tag cr">Not Started</span></td></tr>
+<tr class="critical"><td>DA-C-M1-B02-S-P3-50</td><td>Water Proofing Under Raft Foundation - Part 3</td><td>8d</td><td>2024-09-05</td><td>2024-09-14</td><td>0d</td><td><span class="tag cr">Not Started</span></td></tr>
+<tr class="critical"><td>DA-C-M1-B02-S-P6-31</td><td>Excavation Part 6</td><td>10d</td><td>2024-09-08</td><td>2024-09-18</td><td>0d</td><td><span class="tag cr">Not Started</span></td></tr>
+<tr class="critical"><td>DA-C-M1-B02-S-P6-10</td><td>Anti Termite for Raft Foundation - Part 6</td><td>2d</td><td>2024-09-10</td><td>2024-09-11</td><td>0d</td><td><span class="tag cr">Not Started</span></td></tr>
+<tr class="critical"><td>DA-C-M1-B02-S-P5-60</td><td>Raft Foundation Form work - Part 5</td><td>10d</td><td>2024-09-12</td><td>2024-09-24</td><td>0d</td><td><span class="tag cr">Not Started</span></td></tr>
+<tr class="critical"><td>DA-C-M1-B02-S-P6-20</td><td>Plain Concrete Form Work - Part 6</td><td>2d</td><td>2024-09-12</td><td>2024-09-14</td><td>0d</td><td><span class="tag cr">Not Started</span></td></tr>
+<tr class="critical"><td>DA-C-M1-B02-S-P6-30</td><td>Plain Concrete Pouring - Part 6</td><td>2d</td><td>2024-09-12</td><td>2024-09-14</td><td>0d</td><td><span class="tag cr">Not Started</span></td></tr>
+<tr class="critical"><td>DA-C-M1-B02-S-P5-70</td><td>Raft Foundation Rebar - Part 5</td><td>10d</td><td>2024-09-14</td><td>2024-09-25</td><td>0d</td><td><span class="tag cr">Not Started</span></td></tr>
+<tr class="critical"><td>DA-C-M1-B02-S-P3-60</td><td>Raft Foundation Form work - Part 3</td><td>13d</td><td>2024-09-15</td><td>2024-09-30</td><td>0d</td><td><span class="tag cr">Not Started</span></td></tr>
+<tr class="critical"><td>DA-C-M1-B02-S-P6-40</td><td>Plain Concrete De-Shuttering - Part 6</td><td>1d</td><td>2024-09-15</td><td>2024-09-15</td><td>0d</td><td><span class="tag cr">Not Started</span></td></tr>
+<tr class="critical"><td>DA-C-M1-B02-S-P3-70</td><td>Raft Foundation Rebar - Part 3</td><td>13d</td><td>2024-09-16</td><td>2024-10-01</td><td>0d</td><td><span class="tag cr">Not Started</span></td></tr>
+<tr class="critical"><td>DA-C-M1-B02-S-P2-80</td><td>Sleeves Fixing For Raft - Part 2</td><td>6d</td><td>2024-09-19</td><td>2024-09-26</td><td>0d</td><td><span class="tag cr">Not Started</span></td></tr>
+<tr class="critical"><td>DA-C-M1-B02-S-P2-90</td><td>Earthing and Grounding for Building - Part 2</td><td>6d</td><td>2024-09-19</td><td>2024-09-26</td><td>0d</td><td><span class="tag cr">Not Started</span></td></tr>
+<tr class="critical"><td>DA-C-M1-B02-S-P6-50</td><td>Water Proofing Under Raft Foundation - Part 6</td><td>5d</td><td>2024-09-19</td><td>2024-09-25</td><td>0d</td><td><span class="tag cr">Not Started</span></td></tr>
+<tr class="critical"><td>DA-C-M1-B02-S-P7-31</td><td>Excavation Part 7</td><td>12d</td><td>2024-09-19</td><td>2024-10-03</td><td>0d</td><td><span class="tag cr">Not Started</span></td></tr>
+<tr class="critical"><td>DA-C-M1-B02-S-P5-80</td><td>Earthing and Grounding for Building - Part 5</td><td>6d</td><td>2024-09-26</td><td>2024-10-02</td><td>0d</td><td><span class="tag cr">Not Started</span></td></tr>
+<tr class="critical"><td>DA-C-M1-B02-S-P5-90</td><td>Sleeves Fixing For Raft - Part 5</td><td>6d</td><td>2024-09-26</td><td>2024-10-02</td><td>0d</td><td><span class="tag cr">Not Started</span></td></tr>
+<tr class="critical"><td>DA-C-M1-B02-S-P6-60</td><td>Raft Foundation Form work - Part 6</td><td>11d</td><td>2024-09-26</td><td>2024-10-08</td><td>0d</td><td><span class="tag cr">Not Started</span></td></tr>
+<tr class="critical"><td>DA-C-M1-B02-S-P2-100</td><td>Raft Foundation Concrete Pouring - Part 2</td><td>4d</td><td>2024-09-28</td><td>2024-10-01</td><td>0d</td><td><span class="tag cr">Not Started</span></td></tr>
+<tr class="critical"><td>DA-C-M1-B02-S-P6-70</td><td>Raft Foundation Rebar - Part 6</td><td>11d</td><td>2024-09-28</td><td>2024-10-09</td><td>0d</td><td><span class="tag cr">Not Started</span></td></tr>
+<tr class="critical"><td>DA-C-M1-B02-S-P2-110</td><td>Raft Foundation De-Shuttering - Part 2</td><td>4d</td><td>2024-10-02</td><td>2024-10-06</td><td>0d</td><td><span class="tag cr">Not Started</span></td></tr>
+<tr class="critical"><td>DA-C-M1-B02-S-P3-80</td><td>Earthing and Grounding for Building - Part 3</td><td>8d</td><td>2024-10-02</td><td>2024-10-10</td><td>0d</td><td><span class="tag cr">Not Started</span></td></tr>
+<tr class="critical"><td>DA-C-M1-B02-S-P5-100</td><td>Raft Foundation Concrete Pouring - Part 5</td><td>2d</td><td>2024-10-03</td><td>2024-10-05</td><td>0d</td><td><span class="tag cr">Not Started</span></td></tr>
+<tr class="critical"><td>DA-C-M1-B02-S-P6-80</td><td>Earthing and Grounding for Building - Part 6</td><td>6d</td><td>2024-10-03</td><td>2024-10-09</td><td>0d</td><td><span class="tag cr">Not Started</span></td></tr>
+<tr class="critical"><td>DA-C-M1-B02-S-P6-90</td><td>Sleeves Fixing For Raft - Part 6</td><td>6d</td><td>2024-10-03</td><td>2024-10-09</td><td>0d</td><td><span class="tag cr">Not Started</span></td></tr>
+<tr class="critical"><td>DA-C-M1-B02-S-P5-110</td><td>Raft Foundation De-Shuttering - Part 5</td><td>1d</td><td>2024-10-06</td><td>2024-10-06</td><td>0d</td><td><span class="tag cr">Not Started</span></td></tr>
+<tr class="critical"><td>DA-C-M1-B02-S-P2-120</td><td>Second Basement Columns Rebar - Part 2</td><td>13d</td><td>2024-10-07</td><td>2024-10-21</td><td>0d</td><td><span class="tag cr">Not Started</span></td></tr>
+<tr class="critical"><td>DA-C-M1-B02-S-P2-130</td><td>Second Basement Retaining Wall Rebar - Part 2</td><td>14d</td><td>2024-10-07</td><td>2024-10-22</td><td>0d</td><td><span class="tag cr">Not Started</span></td></tr>
+<tr class="critical"><td>DA-C-M1-B02-S-P2-140</td><td>Second Basement Shear Walls Rebar - Part 2</td><td>13d</td><td>2024-10-07</td><td>2024-10-21</td><td>0d</td><td><span class="tag cr">Not Started</span></td></tr>
+
+</tbody>
+</table>
+</div>
+<div class="sb-bar"><span><span class="sbb-name">Eng. Obieda Omari</span> — Sr. Planning & Cost Control Engineer</span><span class="sbb-ref">DAH-BL-R01</span></div>
+<div class="pg">9 / 13</div>
+</div>
+
+<div class="page">
+<div class="pad">
+<h2><span class="on">10</span> TC — Testing & Commissioning</h2>
+<div style="font-size:9px;color:#6a7a8a;margin-bottom:10px">Total: 36 activities | Critical: 17 | Showing 36 key activities</div>
+<table>
+<thead><tr><th>Activity ID</th><th>Activity Name</th><th>Orig Dur</th><th>Planned Start</th><th>Planned Finish</th><th>Total Float</th><th>Status</th></tr></thead>
+<tbody>
+<tr class="critical"><td>DA-T&C-ME-015</td><td>Testing Commissioning for HVAC System</td><td>63d</td><td>2026-04-14</td><td>2026-06-25</td><td>0d</td><td><span class="tag cr">Not Started</span></td></tr>
+<tr class="critical"><td>DA-T&C-ME-016</td><td>Testing Commissioning for Water Supply</td><td>63d</td><td>2026-04-14</td><td>2026-06-25</td><td>0d</td><td><span class="tag cr">Not Started</span></td></tr>
+<tr class="critical"><td>DA-T&C-ME-017</td><td>Testing Commissioning for Fire Suppression and Protection Systems</td><td>63d</td><td>2026-04-14</td><td>2026-06-25</td><td>0d</td><td><span class="tag cr">Not Started</span></td></tr>
+<tr class="critical"><td>DA-T&C-ME-020</td><td>Testing Commissioning for Fuel Pipe System</td><td>63d</td><td>2026-04-14</td><td>2026-06-25</td><td>0d</td><td><span class="tag cr">Not Started</span></td></tr>
+<tr class="critical"><td>DA-T&C-ME-013</td><td>Testing Commissioning for Elevators</td><td>60d</td><td>2026-04-18</td><td>2026-06-25</td><td>0d</td><td><span class="tag cr">Not Started</span></td></tr>
+<tr class="critical"><td>DA-T&C-ME-014</td><td>Testing Commissioning for Equipment's</td><td>60d</td><td>2026-04-18</td><td>2026-06-25</td><td>0d</td><td><span class="tag cr">Not Started</span></td></tr>
+<tr class="critical"><td>DA-T&C-ME-018</td><td>Testing Commissioning for Medical Gas System</td><td>60d</td><td>2026-04-18</td><td>2026-06-25</td><td>0d</td><td><span class="tag cr">Not Started</span></td></tr>
+<tr class="critical"><td>DA-T&C-ME-019</td><td>Testing Commissioning for Pneumatic System</td><td>60d</td><td>2026-04-18</td><td>2026-06-25</td><td>0d</td><td><span class="tag cr">Not Started</span></td></tr>
+<tr class="critical"><td>DA-T&C-ME-021</td><td>Testing Commissioning for Smoke Managment System</td><td>60d</td><td>2026-04-18</td><td>2026-06-25</td><td>0d</td><td><span class="tag cr">Not Started</span></td></tr>
+<tr class="critical"><td>DA-T&C-ELE-021</td><td>Testing Commissioning for  Public Address System</td><td>65d</td><td>2026-04-23</td><td>2026-07-07</td><td>0d</td><td><span class="tag cr">Not Started</span></td></tr>
+<tr class="critical"><td>DA-T&C-ELE-019</td><td>Testing Commissioning for  Master Clock System</td><td>61d</td><td>2026-04-28</td><td>2026-07-07</td><td>0d</td><td><span class="tag cr">Not Started</span></td></tr>
+<tr class="critical"><td>DA-T&C-ELE-020</td><td>Testing Commissioning for  Nurse Call System</td><td>60d</td><td>2026-04-29</td><td>2026-07-07</td><td>0d</td><td><span class="tag cr">Not Started</span></td></tr>
+<tr class="critical"><td>DA-T&C-ELE-022</td><td>Testing Commissioning for  BMS System</td><td>60d</td><td>2026-04-29</td><td>2026-07-07</td><td>0d</td><td><span class="tag cr">Not Started</span></td></tr>
+<tr class="critical"><td>DA-T&C-ELE-023</td><td>Testing Commissioning for  Digital Signage System</td><td>60d</td><td>2026-04-29</td><td>2026-07-07</td><td>0d</td><td><span class="tag cr">Not Started</span></td></tr>
+<tr class="critical"><td>DA-T&C-ELE-024</td><td>Testing Commissioning for  Intercom System</td><td>60d</td><td>2026-04-29</td><td>2026-07-07</td><td>0d</td><td><span class="tag cr">Not Started</span></td></tr>
+<tr class="critical"><td>DA-T&C-ELE-025</td><td>Testing Commissioning for  IPCS System</td><td>60d</td><td>2026-04-29</td><td>2026-07-07</td><td>0d</td><td><span class="tag cr">Not Started</span></td></tr>
+<tr class="critical"><td>DA-T&C-ELE-040</td><td>Testing Commissioning for  KNX System</td><td>60d</td><td>2026-04-29</td><td>2026-07-07</td><td>0d</td><td><span class="tag cr">Not Started</span></td></tr>
+<tr><td>DA-T&C-ELE-010</td><td>Testing Commissioning for  EV Charger System</td><td>60d</td><td>2025-11-26</td><td>2026-02-03</td><td>1048d</td><td><span class="tag" style="background:#e8edf2;color:#5a6a7a">Not Started</span></td></tr>
+<tr><td>DA-T&C-ELE-011</td><td>Testing Commissioning for  Car Parking System</td><td>90d</td><td>2025-11-26</td><td>2026-03-11</td><td>808d</td><td><span class="tag" style="background:#e8edf2;color:#5a6a7a">Not Started</span></td></tr>
+<tr><td>DA-T&C-ELE-012</td><td>Testing Commissioning for  Audio - Video System</td><td>60d</td><td>2026-01-08</td><td>2026-03-19</td><td>752d</td><td><span class="tag" style="background:#e8edf2;color:#5a6a7a">Not Started</span></td></tr>
+<tr><td>DA-T&C-ME-011</td><td>Testing Commissioning for Irrigation System</td><td>60d</td><td>2026-02-01</td><td>2026-04-12</td><td>512d</td><td><span class="tag" style="background:#e8edf2;color:#5a6a7a">Not Started</span></td></tr>
+<tr><td>DA-T&C-ELE-015</td><td>Testing Commissioning for  Earthing System</td><td>60d</td><td>2026-02-04</td><td>2026-04-15</td><td>568d</td><td><span class="tag" style="background:#e8edf2;color:#5a6a7a">Not Started</span></td></tr>
+<tr><td>DA-T&C-ELE-013</td><td>Testing Commissioning for  Real Time Location</td><td>90d</td><td>2026-02-18</td><td>2026-06-03</td><td>232d</td><td><span class="tag" style="background:#e8edf2;color:#5a6a7a">Not Started</span></td></tr>
+<tr><td>DA-T&C-ELE-018</td><td>Testing Commissioning for  Lightning System</td><td>60d</td><td>2026-03-25</td><td>2026-06-02</td><td>240d</td><td><span class="tag" style="background:#e8edf2;color:#5a6a7a">Not Started</span></td></tr>
+<tr><td>DA-T&C-ME-010</td><td>Testing Commissioning for Drainage</td><td>60d</td><td>2026-04-05</td><td>2026-06-13</td><td>88d</td><td><span class="tag" style="background:#e8edf2;color:#5a6a7a">Not Started</span></td></tr>
+<tr><td>DA-T&C-ELE-016</td><td>Testing Commissioning for  Power System</td><td>60d</td><td>2026-04-06</td><td>2026-06-14</td><td>96d</td><td><span class="tag" style="background:#e8edf2;color:#5a6a7a">Not Started</span></td></tr>
+<tr><td>DA-T&C-ME-012</td><td>Testing Commissioning for Escalators</td><td>60d</td><td>2026-04-07</td><td>2026-06-15</td><td>72d</td><td><span class="tag" style="background:#e8edf2;color:#5a6a7a">Not Started</span></td></tr>
+<tr><td>DA-T&C-BIO-010</td><td>Testing Commissioning for Biomedical Systems</td><td>60d</td><td>2026-04-14</td><td>2026-06-22</td><td>104d</td><td><span class="tag" style="background:#e8edf2;color:#5a6a7a">Not Started</span></td></tr>
+<tr><td>DA-T&C-ELE-017</td><td>Testing Commissioning for  Lighting System</td><td>60d</td><td>2026-04-19</td><td>2026-06-27</td><td>72d</td><td><span class="tag" style="background:#e8edf2;color:#5a6a7a">Not Started</span></td></tr>
+<tr><td>DA-T&C-ELE-026</td><td>Testing Commissioning for  IPTV System</td><td>60d</td><td>2026-04-23</td><td>2026-07-01</td><td>40d</td><td><span class="tag" style="background:#e8edf2;color:#5a6a7a">Not Started</span></td></tr>
+<tr><td>DA-T&C-ELE-014</td><td>Testing Commissioning for  Queue System</td><td>60d</td><td>2026-04-26</td><td>2026-07-04</td><td>24d</td><td><span class="tag" style="background:#e8edf2;color:#5a6a7a">Not Started</span></td></tr>
+<tr><td>DA-T&C-ELE-027</td><td>Testing Commissioning for  Solar System</td><td>60d</td><td>2026-04-26</td><td>2026-07-04</td><td>24d</td><td><span class="tag" style="background:#e8edf2;color:#5a6a7a">Not Started</span></td></tr>
+<tr><td>DA-T&C-ELE-028</td><td>Testing Commissioning for  CCTV System</td><td>60d</td><td>2026-04-26</td><td>2026-07-04</td><td>24d</td><td><span class="tag" style="background:#e8edf2;color:#5a6a7a">Not Started</span></td></tr>
+<tr><td>DA-T&C-ELE-029</td><td>Testing Commissioning for  Fire Alarm System</td><td>60d</td><td>2026-04-26</td><td>2026-07-04</td><td>24d</td><td><span class="tag" style="background:#e8edf2;color:#5a6a7a">Not Started</span></td></tr>
+<tr><td>DA-T&C-ELE-030</td><td>Testing Commissioning for  Access Control System</td><td>60d</td><td>2026-04-26</td><td>2026-07-04</td><td>24d</td><td><span class="tag" style="background:#e8edf2;color:#5a6a7a">Not Started</span></td></tr>
+<tr><td>DA-T&C-ELE-031</td><td>Testing Commissioning for  DATA &amp; TELEPHONE Structure Cabling</td><td>60d</td><td>2026-04-26</td><td>2026-07-04</td><td>24d</td><td><span class="tag" style="background:#e8edf2;color:#5a6a7a">Not Started</span></td></tr>
+
+</tbody>
+</table>
+</div>
+<div class="sb-bar"><span><span class="sbb-name">Eng. Obieda Omari</span> — Sr. Planning & Cost Control Engineer</span><span class="sbb-ref">DAH-BL-R01</span></div>
+<div class="pg">10 / 13</div>
+</div>
+
+<div class="page">
+<div class="pad">
+<h2><span class="on">11</span> HO — Hand Over & Close Out</h2>
+<div style="font-size:9px;color:#6a7a8a;margin-bottom:10px">Total: 20 activities | Critical: 10 | Showing 20 key activities</div>
+<table>
+<thead><tr><th>Activity ID</th><th>Activity Name</th><th>Orig Dur</th><th>Planned Start</th><th>Planned Finish</th><th>Total Float</th><th>Status</th></tr></thead>
+<tbody>
+<tr class="critical"><td>DA-ABD-MECH-10</td><td>Mechanical As-Built Drawings</td><td>85d</td><td>2026-03-19</td><td>2026-06-25</td><td>0d</td><td><span class="tag cr">Not Started</span></td></tr>
+<tr class="critical"><td>DA-O&M-MECH-010</td><td>Mechanical O &amp; M Manuals</td><td>85d</td><td>2026-03-19</td><td>2026-06-25</td><td>0d</td><td><span class="tag cr">Not Started</span></td></tr>
+<tr class="critical"><td>DA-ABD-ARCH-10</td><td>Architectural As-Built Drawings</td><td>90d</td><td>2026-03-24</td><td>2026-07-06</td><td>0d</td><td><span class="tag cr">Not Started</span></td></tr>
+<tr class="critical"><td>DA-SN&DS-ARCH-10</td><td>Architectural Snaging &amp; De-Snagging</td><td>90d</td><td>2026-03-24</td><td>2026-07-06</td><td>0d</td><td><span class="tag cr">Not Started</span></td></tr>
+<tr class="critical"><td>DA-ABD-ELE-10</td><td>Electrical As-Built Drawings</td><td>90d</td><td>2026-03-25</td><td>2026-07-07</td><td>0d</td><td><span class="tag cr">Not Started</span></td></tr>
+<tr class="critical"><td>DA-O&M-ELE-010</td><td>Electrical O &amp; M Manuals</td><td>90d</td><td>2026-03-25</td><td>2026-07-07</td><td>0d</td><td><span class="tag cr">Not Started</span></td></tr>
+<tr class="critical"><td>DA-SN&DS-ELE-10</td><td>Electrical O &amp; M Manuals</td><td>90d</td><td>2026-03-25</td><td>2026-07-07</td><td>0d</td><td><span class="tag cr">Not Started</span></td></tr>
+<tr class="critical"><td>DA-WAR-ARCH-010</td><td>Architectural Warranty Snagging &amp; De Snagging</td><td>90d</td><td>2026-03-25</td><td>2026-07-07</td><td>0d</td><td><span class="tag cr">Not Started</span></td></tr>
+<tr class="critical"><td>DA-WAR-ELE-010</td><td>Electrical Warranty Snagging &amp; De Snagging</td><td>90d</td><td>2026-03-25</td><td>2026-07-07</td><td>0d</td><td><span class="tag cr">Not Started</span></td></tr>
+<tr class="critical"><td>DA-WAR-MECH-010</td><td>Mechanical Warranty Snagging &amp; De Snagging</td><td>90d</td><td>2026-03-25</td><td>2026-07-07</td><td>0d</td><td><span class="tag cr">Not Started</span></td></tr>
+<tr><td>DA-O&M-ARCH-010</td><td>Architectural O &amp; M Manuals</td><td>100d</td><td>2025-12-09</td><td>2026-04-05</td><td>640d</td><td><span class="tag" style="background:#e8edf2;color:#5a6a7a">Not Started</span></td></tr>
+<tr><td>DA-ABD-CIVIL-010</td><td>Structural As-Built Drawings</td><td>120d</td><td>2026-01-26</td><td>2026-06-15</td><td>152d</td><td><span class="tag" style="background:#e8edf2;color:#5a6a7a">Not Started</span></td></tr>
+<tr><td>DA-O&M-STRU-010</td><td>Structural O &amp; M Manuals</td><td>100d</td><td>2026-01-26</td><td>2026-05-23</td><td>152d</td><td><span class="tag" style="background:#e8edf2;color:#5a6a7a">Not Started</span></td></tr>
+<tr><td>DA-SN&DS-STRU-10</td><td>Structural Snaging &amp; De-Snagging</td><td>110d</td><td>2026-01-26</td><td>2026-06-03</td><td>152d</td><td><span class="tag" style="background:#e8edf2;color:#5a6a7a">Not Started</span></td></tr>
+<tr><td>DA-WAR-CIVIL-010</td><td>Structural Warranty Snagging &amp; De Snagging</td><td>110d</td><td>2026-02-03</td><td>2026-06-11</td><td>176d</td><td><span class="tag" style="background:#e8edf2;color:#5a6a7a">Not Started</span></td></tr>
+<tr><td>DA-O&M-BIO-010</td><td>Biomedical O &amp; M Manuals</td><td>110d</td><td>2026-02-23</td><td>2026-06-30</td><td>48d</td><td><span class="tag" style="background:#e8edf2;color:#5a6a7a">Not Started</span></td></tr>
+<tr><td>DA-ABD-BIO-10</td><td>Biomedical As-Built Drawings</td><td>90d</td><td>2026-03-10</td><td>2026-06-22</td><td>104d</td><td><span class="tag" style="background:#e8edf2;color:#5a6a7a">Not Started</span></td></tr>
+<tr><td>DA-SN&DS-BIO-10</td><td>Biomedical O &amp; M Manuals</td><td>90d</td><td>2026-03-10</td><td>2026-06-22</td><td>104d</td><td><span class="tag" style="background:#e8edf2;color:#5a6a7a">Not Started</span></td></tr>
+<tr><td>DA-WAR-BIO-010</td><td>Biomedical Warranty Snagging &amp; De Snagging</td><td>90d</td><td>2026-03-10</td><td>2026-06-22</td><td>104d</td><td><span class="tag" style="background:#e8edf2;color:#5a6a7a">Not Started</span></td></tr>
+<tr><td>DA-SN&DS-MECH-10</td><td>Mechanical O &amp; M Manuals</td><td>91d</td><td>2026-03-12</td><td>2026-06-25</td><td>48d</td><td><span class="tag" style="background:#e8edf2;color:#5a6a7a">Not Started</span></td></tr>
+
+</tbody>
+</table>
+</div>
+<div class="sb-bar"><span><span class="sbb-name">Eng. Obieda Omari</span> — Sr. Planning & Cost Control Engineer</span><span class="sbb-ref">DAH-BL-R01</span></div>
+<div class="pg">11 / 13</div>
+</div>
+
+<div class="page">
+<div class="pad">
+<h2><span class="on">12</span> Key Milestones</h2>
+<div style="font-size:9px;color:#6a7a8a;margin-bottom:10px">12 contractual and key milestones tracking project completion.</div>
+<table>
+<thead><tr><th>Activity ID</th><th>Milestone Description</th><th>Planned Date</th><th>Days to Finish</th></tr></thead>
+<tbody>
+<tr><td style="font-weight:600;color:#0b1a2e">DA-KMS-010</td><td>Project Start</td><td>2024-07-15</td><td>-</td></tr><tr><td style="font-weight:600;color:#0b1a2e">DA-KMS-020</td><td>Mobilization Completion</td><td>2024-08-05</td><td>-</td></tr><tr><td style="font-weight:600;color:#0b1a2e">DA-KMS-030</td><td>Mock-Up Rooms</td><td>2024-10-14</td><td>-</td></tr><tr><td style="font-weight:600;color:#0b1a2e">DA-KMS-040</td><td>Submissions And  Approvals Of Shop Drawings Completion</td><td>2025-04-13</td><td>-</td></tr><tr><td style="font-weight:600;color:#0b1a2e">DA-KMS-110</td><td>Submission and Approval of Material Submittals for Long Lead Items Completion</td><td>2025-04-28</td><td>-</td></tr><tr><td style="font-weight:600;color:#0b1a2e">DA-KMS-120</td><td>Issuing a Purchase Order (PO) for long lead items</td><td>2025-05-15</td><td>-</td></tr><tr><td style="font-weight:600;color:#0b1a2e">DA-KMS-100</td><td>Main Building Concrete Slabs Finish Date</td><td>2025-09-30</td><td>-</td></tr><tr><td style="font-weight:600;color:#0b1a2e">DA-KMS-050</td><td>Delivery of Long Lead Items Completion</td><td>2026-03-21</td><td>-</td></tr><tr><td style="font-weight:600;color:#0b1a2e">DA-KMS-080</td><td>Testing, Commissioning, and Hand Over of Systems Completion</td><td>2026-07-07</td><td>-</td></tr><tr><td style="font-weight:600;color:#0b1a2e">DA-KMS-150</td><td>Closing Documents</td><td>2026-07-07</td><td>-</td></tr><tr><td style="font-weight:600;color:#0b1a2e">DA-KMS-090</td><td>Project Finish</td><td>2026-07-14</td><td>-</td></tr><tr><td style="font-weight:600;color:#0b1a2e">DA-KMS-140</td><td>Initial Handing Over of Project Completion</td><td>2026-07-14</td><td>-</td></tr>
+</tbody>
+</table>
+</div>
+<div class="sb-bar"><span><span class="sbb-name">Eng. Obieda Omari</span> — Sr. Planning & Cost Control Engineer</span><span class="sbb-ref">DAH-BL-R01</span></div>
+<div class="pg">12 / 13</div>
+</div>
+
+<div class="page">
+<div class="sig-wrap">
+<h2>Schedule Extract Certification</h2>
+<div class="sig-sub">DAH-BL-R01 — Dallah Hospital Medical Complex Baseline Schedule</div>
+<div style="background:#f8f9fc;border-radius:4px;padding:12px 16px;margin-bottom:16px;font-size:10px;color:#3a4a5a">
+<strong>Notes:</strong><br>
+• This extract is from the project baseline schedule developed in Oracle Primavera P6<br>
+• Schedule basis: 24-month construction program from Jul 2024 to Jul 2026<br>
+• Critical path defined as Total Float = 0 using P6 default calendar (YMCO-8Hx6D)<br>
+• All activities use Fixed Duration & Physical Completion % type<br>
+• Data Date: September 3, 2025 — reflecting baseline only (no progress updates applied)<br>
+• Total activities: 4,880 | Relationships: 46,444 | WBS nodes: 2,257
+</div>
+<div class="sig-boxes">
+<div class="sb"><div class="sb-name">Eng. Obieda Omari</div><div class="sb-line"></div><div class="sb-role">Sr. Planning & Cost Control Engineer</div></div>
+<div class="sb"><div class="sb-name">Project Controls</div><div class="sb-line"></div><div class="sb-role">Planning Department — SACCO</div></div>
+</div>
+<div class="sig-footer">DAH-BL-R01 | Rev. A | Confidential — This report contains project schedule data</div>
+</div>
+<div class="pg">13 / 13</div>
+</div>
+<div class="fixed-foot"><div class="f-sig"><div class="f-dot"></div><strong>Eng. Obieda Omari</strong> — Sr. Planning & Cost Control Engineer</div><span>DAH-BL-R01 • Confidential</span></div>
+</body>
+</html>
