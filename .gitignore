@@ -13,16 +13,19 @@ node_modules/
 *.tmp
 
 # Raw project data & archives
-Protofolio/Projects/
-Protofolio/Reports/
+portfolio/Projects/
+portfolio/Reports/
 
 # Portfolio binaries
-/Protofolio/*.pdf
-/Protofolio/*.pbix
-/Protofolio/*.png
-/Protofolio/*.jpg
+/portfolio/*.pdf
+/portfolio/*.pbix
+/portfolio/*.png
+/portfolio/*.jpg
 
 # Old CV PDFs (track only the current ones)
 /CV/*.pdf
 !/CV/Obieda_Omari_CV_ATS.pdf
 !/CV/Obieda_Omari_Senior_Planning_Lead_CV.pdf
+
+# Products (business templates)
+/products/
