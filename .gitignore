@@ -18,6 +18,7 @@ portfolio/Reports/
 
 # Portfolio binaries
 /portfolio/*.pdf
+!/portfolio/Portfolio_Sample_Working_Engr_Obieda_Omari.pdf
 /portfolio/*.pbix
 /portfolio/*.png
 /portfolio/*.jpg
